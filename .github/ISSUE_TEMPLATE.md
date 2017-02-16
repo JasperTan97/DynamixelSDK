@@ -1,7 +1,7 @@
 To give our customers the best support services, we are asking detailed information that brings the issue, such as development environments and situations.
 
 
-[PLEASE NOTE] Here only deals with the issues related with the DynamixelSDK sources, the situations occurred by using the Dynamixel with the DynamixelSDK. Some questions that can be seen as very hardware-dependent issues or too-much-customized source issues will make the answer be delayed or be linked to another customer service division, or even be ignored. The issue which is overlapped with another previous issues will be linked to the same previous issues, or even be ignored. Check if there are the same issues in the github issue or the [FAQ](https://github.com/ROBOTIS-GIT/DynamixelSDK/wiki/Frequently-Asked-Questions%28FAQ%29) before putting your issue.
+[PLEASE NOTE] Here only deals with the issues related with the `DynamixelSDK sources`, `the situations` occurred by using the Dynamixel with the DynamixelSDK. Some questions that can be seen as very `hardware-dependent issues` or `too-much-customized source issues` will make the answer be `delayed` or be `linked` to another customer service division, or even be `ignored`. The issue which is `overlapped` with another `previous issues` will be linked to the same previous issues, or even be ignored. Check if there are the same issues in the `github issue` or the [FAQ](https://github.com/ROBOTIS-GIT/DynamixelSDK/wiki/Frequently-Asked-Questions%28FAQ%29) before putting your issue.
 
 If you have an idea related with the DynamixelSDK sources, please give it to us through [Pull Requests](https://github.com/ROBOTIS-GIT/DynamixelSDK/pulls)
 
