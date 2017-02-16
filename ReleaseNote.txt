@@ -1,4 +1,13 @@
 ==============================================
+    Dynamixel SDK v3.4.3 (Protocol 1.0/2.0)
+==============================================
+
+- 02.17.2017
+
+* DynamixelSDK C++ ver. and ROS ver. in Windows platform now can use the port number of over then 10 #45
+* Some readme.md and ReleaseNote.txt edits
+
+==============================================
     Dynamixel SDK v3.4.2 (Protocol 1.0/2.0)
 ==============================================
 
