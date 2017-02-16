@@ -30,6 +30,7 @@
 | (C++ ver. Library binded)¹| C++|  | C++|
 | | | | ROS |
 | | | | Arduino |
+| | | | (Coming sooon) |
 
 #####¹ C++ ver. Library is not optimized in binding other languages. Please use C ver. Library instead.  
 ---------------------------------------------------------------------------
