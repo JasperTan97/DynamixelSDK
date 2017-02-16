@@ -16,8 +16,8 @@ Please fill out the questionaire to give you the best support service.
 
 - Any PICTURES or VIDEOS?
 
-  ![](Link the PICTURES or VIDEOS here, if necessary)
+  ![](　Link the PICTURES or VIDEOS here, if necessary　)
 
 - Any SOURCE SAMPLES?
 
-  [](Link the SOURCE SAMPLES here, if necessary)
+  [](　Link the SOURCE SAMPLES here, if necessary　)
