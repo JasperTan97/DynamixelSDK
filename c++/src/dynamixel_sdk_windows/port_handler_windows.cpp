@@ -54,7 +54,7 @@ PortHandlerWindows::PortHandlerWindows(const char *port_name)
   is_using_ = false;
 
   char buffer[15];
-  sprintf_s(buffer, sizeof(buffer), "\\\\.\\", port_name);
+  sprintf_s(buffer, sizeof(buffer), "\\\\.\\%s", port_name);
   setPortName(buffer);
 }
 
