@@ -71,95 +71,88 @@ Protocol2PacketHandler *Protocol2PacketHandler::unique_instance_ = new Protocol2
 
 Protocol2PacketHandler::Protocol2PacketHandler() { }
 
-void Protocol2PacketHandler::printTxRxResult(int result)
+const char *Protocol2PacketHandler::getTxRxResult(int result)
 {
   switch(result)
   {
     case COMM_SUCCESS:
-      printf("[TxRxResult] Communication success.\n");
-      break;
+      return "[TxRxResult] Communication success.";
 
     case COMM_PORT_BUSY:
-      printf("[TxRxResult] Port is in use!\n");
-      break;
+      return "[TxRxResult] Port is in use!";
 
     case COMM_TX_FAIL:
-      printf("[TxRxResult] Failed transmit instruction packet!\n");
-      break;
+      return "[TxRxResult] Failed transmit instruction packet!";
 
     case COMM_RX_FAIL:
-      printf("[TxRxResult] Failed get status packet from device!\n");
-      break;
+      return "[TxRxResult] Failed get status packet from device!";
 
     case COMM_TX_ERROR:
-      printf("[TxRxResult] Incorrect instruction packet!\n");
-      break;
+      return "[TxRxResult] Incorrect instruction packet!";
 
     case COMM_RX_WAITING:
-      printf("[TxRxResult] Now recieving status packet!\n");
-      break;
+      return "[TxRxResult] Now recieving status packet!";
 
     case COMM_RX_TIMEOUT:
-      printf("[TxRxResult] There is no status packet!\n");
-      break;
+      return "[TxRxResult] There is no status packet!";
 
     case COMM_RX_CORRUPT:
-      printf("[TxRxResult] Incorrect status packet!\n");
-      break;
+      return "[TxRxResult] Incorrect status packet!";
 
     case COMM_NOT_AVAILABLE:
-      printf("[TxRxResult] Protocol does not support This function!\n");
-      break;
+      return "[TxRxResult] Protocol does not support This function!";
 
     default:
-      break;
+      return "";
   }
 }
 
-void Protocol2PacketHandler::printRxPacketError(uint8_t error)
+void Protocol2PacketHandler::printTxRxResult(int result)
+{
+  printf("%s\n", getTxRxResult(result));
+}
+
+const char *Protocol2PacketHandler::getRxPacketError(uint8_t error)
 {
   if (error & ERRBIT_ALERT)
-    printf("[RxPacketError] Hardware error occurred. Check the error at Control Table (Hardware Error Status)!\n");
+    return "[RxPacketError] Hardware error occurred. Check the error at Control Table (Hardware Error Status)!";
 
   int not_alert_error = error & ~ERRBIT_ALERT;
 
   switch(not_alert_error)
   {
     case 0:
-      break;
+      return "";
 
     case ERRNUM_RESULT_FAIL:
-      printf("[RxPacketError] Failed to process the instruction packet!\n");
-      break;
+      return "[RxPacketError] Failed to process the instruction packet!";
 
     case ERRNUM_INSTRUCTION:
-      printf("[RxPacketError] Undefined instruction or incorrect instruction!\n");
-      break;
+      return "[RxPacketError] Undefined instruction or incorrect instruction!";
 
     case ERRNUM_CRC:
-      printf("[RxPacketError] CRC doesn't match!\n");
-      break;
+      return "[RxPacketError] CRC doesn't match!";
 
     case ERRNUM_DATA_RANGE:
-      printf("[RxPacketError] The data value is out of range!\n");
-      break;
+      return "[RxPacketError] The data value is out of range!";
 
     case ERRNUM_DATA_LENGTH:
-      printf("[RxPacketError] The data length does not match as expected!\n");
-      break;
+      return "[RxPacketError] The data length does not match as expected!";
 
     case ERRNUM_DATA_LIMIT:
-      printf("[RxPacketError] The data value exceeds the limit value!\n");
-      break;
+      return "[RxPacketError] The data value exceeds the limit value!";
 
     case ERRNUM_ACCESS:
-      printf("[RxPacketError] Writing or Reading is not available to target address!\n");
-      break;
+      return "[RxPacketError] Writing or Reading is not available to target address!";
 
     default:
-      printf("[RxPacketError] Unknown error code!\n");
-      break;
+      return "[RxPacketError] Unknown error code!";
   }
+}
+
+void Protocol2PacketHandler::printRxPacketError(uint8_t error)
+{
+  printf("%s\n", getRxPacketError(error));
 }
 
 unsigned short Protocol2PacketHandler::updateCRC(uint16_t crc_accum, uint8_t *data_blk_ptr, uint16_t data_blk_size)

@@ -90,7 +90,9 @@ class WINDECLSPEC PacketHandler
 
   virtual float   getProtocolVersion() = 0;
 
+  virtual const char *getTxRxResult(int result) = 0;
   virtual void    printTxRxResult(int result) = 0;
+  virtual const char *getRxPacketError(uint8_t error) = 0;
   virtual void    printRxPacketError(uint8_t error) = 0;
 
   virtual int txPacket        (PortHandler *port, uint8_t *txpacket) = 0;
