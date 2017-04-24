@@ -2,6 +2,21 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.3 (2017-02-17)
+-----------
+* DynamixelSDK C++ ver. and ROS ver. in Windows platform now can use the port number of over then 10 #45
+* Contributors: leon
+
+3.4.2 (2016-02-16)
+-----------
+* fprintf output in GrouBulkRead of C++ removed
+* MATLAB library compiler error solving
+* Makefile for build example sources in SBC added
+* build files of windows c and c++ SDK rebuilt by using renewed SDK libraries
+* example source of dxl_monitor - c and cpp ver modified #50
+* Solved issue : #31, #34, #36, #50
+* Contributors: leon
+
 3.4.1 (2016-08-22)
 -----------
 * added ROS package folder for ROS users
