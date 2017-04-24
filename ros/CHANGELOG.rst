@@ -7,7 +7,7 @@ Changelog for package dynamixel_sdk
 * DynamixelSDK C++ ver. and ROS ver. in Windows platform now can use the port number of over then 10 #45
 * Contributors: leon
 
-3.4.2 (2016-02-16)
+3.4.2 (2017-02-16)
 -----------
 * fprintf output in GrouBulkRead of C++ removed
 * MATLAB library compiler error solving
