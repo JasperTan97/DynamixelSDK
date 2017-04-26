@@ -1,11 +1,18 @@
 ==============================================
+    Dynamixel SDK v3.4.4 (Protocol 1.0/2.0)
+==============================================
+
+- 04.26.2017
+
+* hotfix - return delay time is changed from 4 into 8 due to the Ubuntu update 16.04.2
+
+==============================================
     Dynamixel SDK v3.4.3 (Protocol 1.0/2.0)
 ==============================================
 
 - 02.17.2017
 
 * DynamixelSDK C++ ver. and ROS ver. in Windows platform now can use the port number of over then 10 #45
-
 
 ==============================================
     Dynamixel SDK v3.4.2 (Protocol 1.0/2.0)
