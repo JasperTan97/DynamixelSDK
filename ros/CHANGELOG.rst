@@ -2,6 +2,11 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.5 (2017-05-23)
+-----------
+* added option to check if the id of rxpacket is the same as the id of txpacket.
+* Contributors: Leon, Zerom
+
 3.4.4 (2017-04-26)
 -----------
 * hotfix - return delay time is changed from 4 into 8 due to the Ubuntu update 16.04.2
