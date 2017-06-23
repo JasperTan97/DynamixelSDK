@@ -577,16 +577,30 @@ uint16_t read2ByteTxRx1(int port_num, uint8_t id, uint16_t address)
 
 void read4ByteTx1(int port_num, uint8_t id, uint16_t address)
 {
-  packetData[port_num].communication_result = COMM_NOT_AVAILABLE;
+  readTx1(port_num, id, address, 4);
 }
 uint32_t read4ByteRx1(int port_num)
 {
-  packetData[port_num].communication_result = COMM_NOT_AVAILABLE;
+  packetData[port_num].data_read = (uint8_t *)realloc(packetData[port_num].data_read, 4 * sizeof(uint8_t));
+  packetData[port_num].data_read[0] = 0;
+  packetData[port_num].data_read[1] = 0;
+  packetData[port_num].data_read[2] = 0;
+  packetData[port_num].data_read[3] = 0;
+  readRx1(port_num, 4);
+  if (packetData[port_num].communication_result == COMM_SUCCESS)
+    return DXL_MAKEDWORD(DXL_MAKEWORD(packetData[port_num].data_read[0], packetData[port_num].data_read[1]), DXL_MAKEWORD(packetData[port_num].data_read[2], packetData[port_num].data_read[3]));
   return 0;
 }
 uint32_t read4ByteTxRx1(int port_num, uint8_t id, uint16_t address)
 {
-  packetData[port_num].communication_result = COMM_NOT_AVAILABLE;
+  packetData[port_num].data_read = (uint8_t *)realloc(packetData[port_num].data_read, 4 * sizeof(uint8_t));
+  packetData[port_num].data_read[0] = 0;
+  packetData[port_num].data_read[1] = 0;
+  packetData[port_num].data_read[2] = 0;
+  packetData[port_num].data_read[3] = 0;
+  readTxRx1(port_num, id, address, 4);
+  if (packetData[port_num].communication_result == COMM_SUCCESS)
+    return DXL_MAKEDWORD(DXL_MAKEWORD(packetData[port_num].data_read[0], packetData[port_num].data_read[1]), DXL_MAKEWORD(packetData[port_num].data_read[2], packetData[port_num].data_read[3]));
   return 0;
 }
 
@@ -664,11 +678,21 @@ void write2ByteTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t data)
 
 void write4ByteTxOnly1(int port_num, uint8_t id, uint16_t address, uint32_t data)
 {
-  packetData[port_num].communication_result = COMM_NOT_AVAILABLE;
+  packetData[port_num].data_write = (uint8_t *)realloc(packetData[port_num].data_write, 4 * sizeof(uint8_t));
+  packetData[port_num].data_write[0] = DXL_LOBYTE(DXL_LOWORD(data));
+  packetData[port_num].data_write[1] = DXL_HIBYTE(DXL_LOWORD(data));
+  packetData[port_num].data_write[2] = DXL_LOBYTE(DXL_HIWORD(data));
+  packetData[port_num].data_write[3] = DXL_HIBYTE(DXL_HIWORD(data));
+  writeTxOnly1(port_num, id, address, 4);
 }
 void write4ByteTxRx1(int port_num, uint8_t id, uint16_t address, uint32_t data)
 {
-  packetData[port_num].communication_result = COMM_NOT_AVAILABLE;
+  packetData[port_num].data_write = (uint8_t *)realloc(packetData[port_num].data_write, 4 * sizeof(uint8_t));
+  packetData[port_num].data_write[0] = DXL_LOBYTE(DXL_LOWORD(data));
+  packetData[port_num].data_write[1] = DXL_HIBYTE(DXL_LOWORD(data));
+  packetData[port_num].data_write[2] = DXL_LOBYTE(DXL_HIWORD(data));
+  packetData[port_num].data_write[3] = DXL_HIBYTE(DXL_HIWORD(data));
+  writeTxRx1(port_num, id, address, 4);
 }
 
 void regWriteTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
