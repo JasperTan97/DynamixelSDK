@@ -528,7 +528,7 @@ int Protocol1PacketHandler::read4ByteTx(PortHandler *port, uint8_t id, uint16_t 
 int Protocol1PacketHandler::read4ByteRx(PortHandler *port, uint8_t id, uint32_t *data, uint8_t *error)
 {
   uint8_t data_read[4] = {0};
-  int result = readRx(port, 4, data_read, error);
+  int result = readRx(port, id, 4, data_read, error);
   if (result == COMM_SUCCESS)
     *data = DXL_MAKEDWORD(DXL_MAKEWORD(data_read[0], data_read[1]), DXL_MAKEWORD(data_read[2], data_read[3]));
   return result;
