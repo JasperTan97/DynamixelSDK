@@ -4,7 +4,7 @@
 
 - 07.07.2017
 
-* hotfix - now protocol1.0 supports read/write 4Byte (for XM series)
+* hotfix - now DynamixelSDK for protocol1.0 supports read/write 4Byte (for XM series)
 
 ==============================================
     Dynamixel SDK 3.4.5 (Protocol 1.0/2.0)
