@@ -65,73 +65,76 @@ Protocol1PacketHandler *Protocol1PacketHandler::unique_instance_ = new Protocol1
 
 Protocol1PacketHandler::Protocol1PacketHandler() { }
 
-void Protocol1PacketHandler::printTxRxResult(int result)
+const char *Protocol1PacketHandler::getTxRxResult(int result)
 {
   switch(result)
   {
-  case COMM_SUCCESS:
-    printf("[TxRxResult] Communication success.\n");
-    break;
+    case COMM_SUCCESS:
+      return "[TxRxResult] Communication success.";
 
-  case COMM_PORT_BUSY:
-    printf("[TxRxResult] Port is in use!\n");
-    break;
+    case COMM_PORT_BUSY:
+      return "[TxRxResult] Port is in use!";
 
-  case COMM_TX_FAIL:
-    printf("[TxRxResult] Failed transmit instruction packet!\n");
-    break;
+    case COMM_TX_FAIL:
+      return "[TxRxResult] Failed transmit instruction packet!";
 
-  case COMM_RX_FAIL:
-    printf("[TxRxResult] Failed get status packet from device!\n");
-    break;
+    case COMM_RX_FAIL:
+      return "[TxRxResult] Failed get status packet from device!";
 
-  case COMM_TX_ERROR:
-    printf("[TxRxResult] Incorrect instruction packet!\n");
-    break;
+    case COMM_TX_ERROR:
+      return "[TxRxResult] Incorrect instruction packet!";
 
-  case COMM_RX_WAITING:
-    printf("[TxRxResult] Now recieving status packet!\n");
-    break;
+    case COMM_RX_WAITING:
+      return "[TxRxResult] Now recieving status packet!";
 
-  case COMM_RX_TIMEOUT:
-    printf("[TxRxResult] There is no status packet!\n");
-    break;
+    case COMM_RX_TIMEOUT:
+      return "[TxRxResult] There is no status packet!";
 
-  case COMM_RX_CORRUPT:
-    printf("[TxRxResult] Incorrect status packet!\n");
-    break;
+    case COMM_RX_CORRUPT:
+      return "[TxRxResult] Incorrect status packet!";
 
-  case COMM_NOT_AVAILABLE:
-    printf("[TxRxResult] Protocol does not support This function!\n");
-    break;
+    case COMM_NOT_AVAILABLE:
+      return "[TxRxResult] Protocol does not support This function!";
 
-  default:
-    break;
+    default:
+      return "";
   }
+}
+
+void Protocol1PacketHandler::printTxRxResult(int result)
+{
+  printf("%s\n", getTxRxResult(result));
+}
+
+const char *Protocol1PacketHandler::getRxPacketError(uint8_t error)
+{
+  if (error & ERRBIT_VOLTAGE)
+    return "[RxPacketError] Input voltage error!";
+
+  if (error & ERRBIT_ANGLE)
+    return "[RxPacketError] Angle limit error!";
+
+  if (error & ERRBIT_OVERHEAT)
+    return "[RxPacketError] Overheat error!";
+
+  if (error & ERRBIT_RANGE)
+    return "[RxPacketError] Out of range error!";
+
+  if (error & ERRBIT_CHECKSUM)
+    return "[RxPacketError] Checksum error!";
+
+  if (error & ERRBIT_OVERLOAD)
+    return "[RxPacketError] Overload error!";
+
+  if (error & ERRBIT_INSTRUCTION)
+    return "[RxPacketError] Instruction code error!";
+
+  return "";
 }
 
 void Protocol1PacketHandler::printRxPacketError(uint8_t error)
 {
-  if (error & ERRBIT_VOLTAGE)
-    printf("[RxPacketError] Input voltage error!\n");
-
-  if (error & ERRBIT_ANGLE)
-    printf("[RxPacketError] Angle limit error!\n");
-
-  if (error & ERRBIT_OVERHEAT)
-    printf("[RxPacketError] Overheat error!\n");
-
-  if (error & ERRBIT_RANGE)
-    printf("[RxPacketError] Out of range error!\n");
-
-  if (error & ERRBIT_CHECKSUM)
-    printf("[RxPacketError] Checksum error!\n");
-
-  if (error & ERRBIT_OVERLOAD)
-    printf("[RxPacketError] Overload error!\n");
-
-  if (error & ERRBIT_INSTRUCTION)
-    printf("[RxPacketError] Instruction code error!\n");
+  printf("%s\n", getRxPacketError(error));
 }
 
 int Protocol1PacketHandler::txPacket(PortHandler *port, uint8_t *txpacket)
