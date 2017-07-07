@@ -57,10 +57,10 @@ class WINDECLSPEC Protocol2PacketHandler : public PacketHandler
 
   float   getProtocolVersion() { return 2.0; }
 
-  const char *getTxRxResult(int result);
-  void    printTxRxResult(int result);
-  const char *getRxPacketError(uint8_t error);
-  void    printRxPacketError(uint8_t error);
+  const char *getTxRxResult     (int result);
+  void printTxRxResult          (int result);
+  const char *getRxPacketError  (uint8_t error);
+  void printRxPacketError       (uint8_t error);
 
   int txPacket        (PortHandler *port, uint8_t *txpacket);
   int rxPacket        (PortHandler *port, uint8_t *rxpacket);
