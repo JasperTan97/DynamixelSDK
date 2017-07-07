@@ -1,5 +1,21 @@
 ==============================================
-    Dynamixel SDK v3.4.4 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.4.6 (Protocol 1.0/2.0)
+==============================================
+
+- 07.07.2017
+
+* hotfix - now DynamixelSDK for protocol1.0 supports read/write 4Byte (for XM series)
+
+==============================================
+    Dynamixel SDK 3.4.5 (Protocol 1.0/2.0)
+==============================================
+
+- 05.23.2017
+
+* Merge branch 'kinetic-devel' of github.com:ROBOTIS-GIT/DynamixelSDK into kinetic-devel
+
+==============================================
+    Dynamixel SDK 3.4.4 (Protocol 1.0/2.0)
 ==============================================
 
 - 04.26.2017
@@ -7,7 +23,7 @@
 * hotfix - return delay time is changed from 4 into 8 due to the Ubuntu update 16.04.2
 
 ==============================================
-    Dynamixel SDK v3.4.3 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.4.3 (Protocol 1.0/2.0)
 ==============================================
 
 - 02.17.2017
@@ -15,12 +31,12 @@
 * DynamixelSDK C++ ver. and ROS ver. in Windows platform now can use the port number of over then 10 #45
 
 ==============================================
-    Dynamixel SDK v3.4.2 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.4.2 (Protocol 1.0/2.0)
 ==============================================
 
 - 02.16.2017
 
-* fprintf output in GrouBulkRead of C++ removed
+* fprintf output in GroupBulkRead of C++ removed
 * MATLAB library compiler error solving
 * Makefile for build example sources in SBC added
 * build files of windows c and c++ SDK rebuilt by using renewed SDK libraries
@@ -29,7 +45,7 @@
 * Solved issue : #31, #34, #36, #50
 
 ==============================================
-    Dynamixel SDK v3.4.1 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.4.1 (Protocol 1.0/2.0)
 ==============================================
 
 - 08.22.2016
@@ -38,7 +54,7 @@
 * Modified c++'s original header files for ROS package
 
 ==============================================
-    Dynamixel SDK v3.4.0 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.4.0 (Protocol 1.0/2.0)
 ==============================================
 
 - 08.12.2016
@@ -46,7 +62,7 @@
 * Added a ROS package information for ROS users
 
 ==============================================
-    Dynamixel SDK v3.3.3 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.3.3 (Protocol 1.0/2.0)
 ==============================================
 
 - 08.03.2016
@@ -63,7 +79,7 @@
 
 
 ==============================================
-    Dynamixel SDK v3.3.2 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.3.2 (Protocol 1.0/2.0)
 ==============================================
 
 - 06.30.2016
@@ -73,7 +89,7 @@
 * Solved issue : #3, #8
 
 ==============================================
-    Dynamixel SDK v3.3.1 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.3.1 (Protocol 1.0/2.0)
 ==============================================
 
 - 06.30.2016
@@ -83,7 +99,7 @@
 * Solved issue : #3, #8
 
 ==============================================
-    Dynamixel SDK v3.3.0 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.3.0 (Protocol 1.0/2.0)
 ==============================================
 
 - 06.28.2016
@@ -98,7 +114,7 @@
 * Solved issue : #3, #8
 
 ==============================================
-    Dynamixel SDK v3.2.0 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.2.0 (Protocol 1.0/2.0)
 ==============================================
 
 - 06.07.2016
@@ -109,7 +125,7 @@
 * Solved issue : #3
 
 ==============================================
-    Dynamixel SDK v3.1.0 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.1.0 (Protocol 1.0/2.0)
 ==============================================
 
 - 05.31.2016
@@ -121,7 +137,7 @@
 * Solved issue : #3
 
 ==============================================
-    Dynamixel SDK v3.0.0 (Protocol 1.0/2.0)
+    Dynamixel SDK 3.0.0 (Protocol 1.0/2.0)
 ==============================================
 
 - 03.08.2016
