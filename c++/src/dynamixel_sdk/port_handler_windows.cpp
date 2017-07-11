@@ -34,7 +34,7 @@
 #define WINDLLEXPORT
 #endif
 
-#include "dynamixel_sdk_windows/port_handler_windows.h"
+#include "dynamixel_sdk/port_handler_windows.h"
 
 #include <stdio.h>
 #include <string.h>

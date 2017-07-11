@@ -37,11 +37,11 @@
 #include "dynamixel_sdk/port_handler.h"
 
 #ifdef __linux__
-  #include "dynamixel_sdk_linux/port_handler_linux.h"
+  #include "dynamixel_sdk/port_handler_linux.h"
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
-  #include "dynamixel_sdk_windows/port_handler_windows.h"
+  #include "dynamixel_sdk/port_handler_windows.h"
 #endif
 
 using namespace dynamixel;

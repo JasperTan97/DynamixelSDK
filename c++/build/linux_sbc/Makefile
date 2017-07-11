@@ -55,7 +55,7 @@ SOURCES  = src/dynamixel_sdk/group_bulk_read.cpp \
            src/dynamixel_sdk/port_handler.cpp \
            src/dynamixel_sdk/protocol1_packet_handler.cpp \
            src/dynamixel_sdk/protocol2_packet_handler.cpp \
-           src/dynamixel_sdk_linux/port_handler_linux.cpp \
+           src/dynamixel_sdk/port_handler_linux.cpp \
 
 
 OBJECTS=$(addsuffix .o,$(addprefix $(DIR_OBJS)/,$(basename $(notdir $(SOURCES)))))
@@ -82,8 +82,8 @@ install: $(TARGET)
 	-$(SYMLINK) "$(INSTALL_ROOT)/lib/$(TARGET)" "$(INSTALL_ROOT)/lib/$(TARGET3)"
 
     # copy the headers into the include directory
-	@$(CHK_DIR_EXISTS) $(INSTALL_ROOT)/include || $(MKDIR) $(INSTALL_ROOT)/include
-	$(CP_ALL) $(DIR_DXL)/include/* $(INSTALL_ROOT)/include/
+	@$(CHK_DIR_EXISTS) $(INSTALL_ROOT)/include/dynamixel_sdk || $(MKDIR) $(INSTALL_ROOT)/include/dynamixel_sdk
+	$(CP_ALL) $(DIR_DXL)/include/dynamixel_sdk/* $(INSTALL_ROOT)/include/dynamixel_sdk/
 
 	$(LD_CONFIG)
 
@@ -93,8 +93,8 @@ uninstall:
 	$(RM) $(INSTALL_ROOT)/lib/$(TARGET2)
 	$(RM) $(INSTALL_ROOT)/lib/$(TARGET3)
 
-	$(RM) $(INSTALL_ROOT)/include/dynamixel_sdk.h
-	$(RM_ALL) $(INSTALL_ROOT)/include/dynamixel_sdk*
+	$(RM) $(INSTALL_ROOT)/include/dynamixel_sdk/dynamixel_sdk.h
+	$(RM_ALL) $(INSTALL_ROOT)/include/dynamixel_sdk/*
 
 reinstall: uninstall install
 
@@ -109,10 +109,10 @@ $(DIR_OBJS)/%.o: $(DIR_DXL)/src/dynamixel_sdk/%.c
 $(DIR_OBJS)/%.o: $(DIR_DXL)/src/dynamixel_sdk/%.cpp
 	$(CX) $(CXFLAGS) -c $? -o $@
 
-$(DIR_OBJS)/%.o: $(DIR_DXL)/src/dynamixel_sdk_linux/%.c
+$(DIR_OBJS)/%.o: $(DIR_DXL)/src/dynamixel_sdk/%.c
 	$(CC) $(CCFLAGS) -c $? -o $@
 
-$(DIR_OBJS)/%.o: $(DIR_DXL)/src/dynamixel_sdk_linux/%.cpp
+$(DIR_OBJS)/%.o: $(DIR_DXL)/src/dynamixel_sdk/%.cpp
 	$(CX) $(CXFLAGS) -c $? -o $@
 
 #---------------------------------------------------------------------
