@@ -31,7 +31,7 @@ catkin_package(
 # Build
 ################################################################################
 include_directories(
-  include
+  include/dynamixel_sdk
   ${catkin_INCLUDE_DIRS}
 )
 

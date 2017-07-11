@@ -34,14 +34,14 @@
 #define WINDLLEXPORT
 #endif
 
-#include "dynamixel_sdk/port_handler.h"
+#include "port_handler.h"
 
 #ifdef __linux__
-  #include "dynamixel_sdk/port_handler_linux.h"
+  #include "port_handler_linux.h"
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
-  #include "dynamixel_sdk/port_handler_windows.h"
+  #include "port_handler_windows.h"
 #endif
 
 using namespace dynamixel;

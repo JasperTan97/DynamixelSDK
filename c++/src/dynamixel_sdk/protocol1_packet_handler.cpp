@@ -36,7 +36,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "dynamixel_sdk/protocol1_packet_handler.h"
+#include "protocol1_packet_handler.h"
 
 #define TXPACKET_MAX_LEN    (250)
 #define RXPACKET_MAX_LEN    (250)

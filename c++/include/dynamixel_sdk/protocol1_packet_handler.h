@@ -34,7 +34,7 @@
 #define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PROTOCOL1PACKETHANDLER_H_
 
 
-#include "dynamixel_sdk/packet_handler.h"
+#include "packet_handler.h"
 
 namespace dynamixel
 {

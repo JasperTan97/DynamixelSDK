@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 #include <algorithm>
-#include "dynamixel_sdk/group_bulk_read.h"
+#include "group_bulk_read.h"
 
 using namespace dynamixel;
 

@@ -36,8 +36,8 @@
 
 #include <map>
 #include <vector>
-#include "dynamixel_sdk/port_handler.h"
-#include "dynamixel_sdk/packet_handler.h"
+#include "port_handler.h"
+#include "packet_handler.h"
 
 namespace dynamixel
 {
