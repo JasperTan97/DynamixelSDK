@@ -41,14 +41,5 @@
 #include "dynamixel_sdk/packet_handler.h"
 #include "dynamixel_sdk/port_handler.h"
 
-// Test if works in MATLAB/LabVIEW/Python/Java
-// #ifdef __linux__
-//   #include "dynamixel_sdk/port_handler_linux.h"
-// #endif
-//
-// #if defined(_WIN32) || defined(_WIN64)
-//   #include "dynamixel_sdk/port_handler_windows.h"
-// #endif
-
 
 #endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_DYNAMIXELSDK_H_ */
