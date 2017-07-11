@@ -36,7 +36,11 @@
 
 #include <stdio.h>
 #include <algorithm>
+#if defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/group_bulk_read.h"
+#else
 #include "group_bulk_read.h"
+#endif
 
 using namespace dynamixel;
 

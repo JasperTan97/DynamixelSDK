@@ -53,9 +53,9 @@
 #include "dynamixel_sdk.h"                                  // Uses Dynamixel SDK library
 
 // Control table address
-#define ADDR_MX_TORQUE_ENABLE           24                  // Control table address is different in Dynamixel model
-#define ADDR_MX_GOAL_POSITION           30
-#define ADDR_MX_PRESENT_POSITION        36
+#define ADDR_MX_TORQUE_ENABLE           64                  // Control table address is different in Dynamixel model
+#define ADDR_MX_GOAL_POSITION           116
+#define ADDR_MX_PRESENT_POSITION        132
 
 // Protocol version
 #define PROTOCOL_VERSION                1.0                 // See which protocol version is used in the Dynamixel
@@ -139,7 +139,7 @@ int main()
   int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE};         // Goal position
 
   uint8_t dxl_error = 0;                          // Dynamixel error
-  uint16_t dxl_present_position = 0;              // Present position
+  uint32_t dxl_present_position = 0;              // Present position
 
   // Open port
   if (portHandler->openPort())
@@ -189,7 +189,7 @@ int main()
       break;
 
     // Write goal position
-    dxl_comm_result = packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index], &dxl_error);
+    dxl_comm_result = packetHandler->write4ByteTxRx(portHandler, DXL_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index], &dxl_error);
     if (dxl_comm_result != COMM_SUCCESS)
     {
       packetHandler->printTxRxResult(dxl_comm_result);
@@ -202,7 +202,7 @@ int main()
     do
     {
       // Read present position
-      dxl_comm_result = packetHandler->read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION, &dxl_present_position, &dxl_error);
+      dxl_comm_result = packetHandler->read4ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION, &dxl_present_position, &dxl_error);
       if (dxl_comm_result != COMM_SUCCESS)
       {
         packetHandler->printTxRxResult(dxl_comm_result);

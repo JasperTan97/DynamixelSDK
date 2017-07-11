@@ -34,9 +34,15 @@
 #define WINDLLEXPORT
 #endif
 
+#if defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/packet_handler.h"
+#include "../../include/dynamixel_sdk/protocol1_packet_handler.h"
+#include "../../include/dynamixel_sdk/protocol2_packet_handler.h"
+#else
 #include "packet_handler.h"
 #include "protocol1_packet_handler.h"
 #include "protocol2_packet_handler.h"
+#endif
 
 using namespace dynamixel;
 

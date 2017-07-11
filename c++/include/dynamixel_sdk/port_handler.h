@@ -36,11 +36,13 @@
 #ifdef __linux__
 #define WINDECLSPEC
 #elif defined(_WIN32) || defined(_WIN64)
-#ifdef WINDLLEXPORT
-#define WINDECLSPEC __declspec(dllexport)
-#else
-#define WINDECLSPEC __declspec(dllimport)
-#endif
+  #ifdef WINDLLEXPORT
+  #define WINDECLSPEC __declspec(dllexport)
+  #else
+  #define WINDECLSPEC __declspec(dllimport)
+  #endif
+#elif defined(__OPENCR__)
+#define WINDECLSPEC
 #endif
 
 #include <stdint.h>

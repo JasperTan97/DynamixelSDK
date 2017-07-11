@@ -34,14 +34,15 @@
 #define WINDLLEXPORT
 #endif
 
-#include "port_handler.h"
-
 #ifdef __linux__
-  #include "port_handler_linux.h"
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-  #include "port_handler_windows.h"
+#include "port_handler.h"
+#include "port_handler_linux.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#include "port_handler.h"
+#include "port_handler_windows.h"
+#elif defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/port_handler.h"
+#include "../../include/dynamixel_sdk/port_handler_arduino.h"
 #endif
 
 using namespace dynamixel;
@@ -50,9 +51,9 @@ PortHandler *PortHandler::getPortHandler(const char *port_name)
 {
 #ifdef __linux__
   return (PortHandler *)(new PortHandlerLinux(port_name));
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
+#elif defined(_WIN32) || defined(_WIN64)
   return (PortHandler *)(new PortHandlerWindows(port_name));
+#elif defined(__OPENCR__)
+  return (PortHandler *)(new PortHandlerArduino(port_name));
 #endif
 }

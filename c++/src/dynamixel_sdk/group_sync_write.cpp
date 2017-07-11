@@ -35,7 +35,11 @@
 #endif
 
 #include <algorithm>
+#if defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/group_sync_write.h"
+#else
 #include "group_sync_write.h"
+#endif
 
 using namespace dynamixel;
 

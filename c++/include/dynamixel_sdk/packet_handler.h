@@ -33,6 +33,12 @@
 #ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PACKETHANDLER_H_
 #define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PACKETHANDLER_H_
 
+#if defined(__OPENCR__)
+#include <Arduino.h>
+#define ERROR_PRINT  SerialBT2.print
+#else
+#define ERROR_PRINT  printf
+#endif
 
 #include <stdio.h>
 #include <vector>
