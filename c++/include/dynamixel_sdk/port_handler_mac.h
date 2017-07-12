@@ -28,62 +28,60 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 
-/* Author: zerom, Ryu Woon Jung (Leon) */
+/* Author: Ryu Woon Jung (Leon) */
 
-#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_H_
-#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_H_
+#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERLINUX_H_
+#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERLINUX_H_
 
-#if defined(__linux__)
-#define WINDECLSPEC
-#elif defined(__APPLE__)
-#define WINDECLSPEC
-#elif defined(_WIN32) || defined(_WIN64)
-  #ifdef WINDLLEXPORT
-  #define WINDECLSPEC __declspec(dllexport)
-  #else
-  #define WINDECLSPEC __declspec(dllimport)
-  #endif
-#elif defined(__OPENCR__)
-#define WINDECLSPEC
-#endif
 
-#include <stdint.h>
+#include "port_handler.h"
 
 namespace dynamixel
 {
 
-class WINDECLSPEC PortHandler
+class PortHandlerMac : public PortHandler
 {
+ private:
+  int     socket_fd_;
+  int     baudrate_;
+  char    port_name_[30];
+
+  double  packet_start_time_;
+  double  packet_timeout_;
+  double  tx_time_per_byte;
+
+  bool    setupPort(const int cflag_baud);
+  bool    setCustomBaudrate(int speed);
+  int     getCFlagBaud(const int baudrate);
+
+  double  getCurrentTime();
+  double  getTimeSinceStart();
+
  public:
-  static const int DEFAULT_BAUDRATE_ = 1000000;
+  PortHandlerMac(const char *port_name);
+  virtual ~PortHandlerMac() { closePort(); }
 
-  static PortHandler *getPortHandler(const char *port_name);
+  bool    openPort();
+  void    closePort();
+  void    clearPort();
 
-  bool   is_using_;
+  void    setPortName(const char *port_name);
+  char   *getPortName();
 
-  virtual ~PortHandler() { }
+  bool    setBaudRate(const int baudrate);
+  int     getBaudRate();
 
-  virtual bool    openPort() = 0;
-  virtual void    closePort() = 0;
-  virtual void    clearPort() = 0;
+  int     getBytesAvailable();
 
-  virtual void    setPortName(const char* port_name) = 0;
-  virtual char   *getPortName() = 0;
+  int     readPort(uint8_t *packet, int length);
+  int     writePort(uint8_t *packet, int length);
 
-  virtual bool    setBaudRate(const int baudrate) = 0;
-  virtual int     getBaudRate() = 0;
-
-  virtual int     getBytesAvailable() = 0;
-
-  virtual int     readPort(uint8_t *packet, int length) = 0;
-  virtual int     writePort(uint8_t *packet, int length) = 0;
-
-  virtual void    setPacketTimeout(uint16_t packet_length) = 0;
-  virtual void    setPacketTimeout(double msec) = 0;
-  virtual bool    isPacketTimeout() = 0;
+  void    setPacketTimeout(uint16_t packet_length);
+  void    setPacketTimeout(double msec);
+  bool    isPacketTimeout();
 };
 
 }
 
 
-#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_H_ */
+#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERLINUX_H_ */

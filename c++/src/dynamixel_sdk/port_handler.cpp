@@ -30,9 +30,12 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#ifdef __linux__
+#if defined(__linux__)
 #include "port_handler.h"
 #include "port_handler_linux.h"
+#elif defined(__APPLE__)
+#include "port_handler.h"
+#include "port_handler_mac.h"
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
 #include "port_handler.h"
@@ -46,8 +49,10 @@ using namespace dynamixel;
 
 PortHandler *PortHandler::getPortHandler(const char *port_name)
 {
-#ifdef __linux__
+#if defined(__linux__)
   return (PortHandler *)(new PortHandlerLinux(port_name));
+#elif defined(__APPLE__)
+  return (PortHandler *)(new PortHandlerMac(port_name));
 #elif defined(_WIN32) || defined(_WIN64)
   return (PortHandler *)(new PortHandlerWindows(port_name));
 #elif defined(__OPENCR__)

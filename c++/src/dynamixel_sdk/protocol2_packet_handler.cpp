@@ -30,7 +30,9 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#ifdef __linux__
+#if defined(__linux__)
+#include "protocol2_packet_handler.h"
+#elif defined(__APPLE__)
 #include "protocol2_packet_handler.h"
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT

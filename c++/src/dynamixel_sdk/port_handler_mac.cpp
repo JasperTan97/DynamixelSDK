@@ -28,9 +28,9 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 
-/* Author: zerom, Ryu Woon Jung (Leon) */
+/* Author: Ryu Woon Jung (Leon) */
 
-#if defined(__linux__)
+#if defined(__APPLE__)
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -40,15 +40,14 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
-#include <linux/serial.h>
 
-#include "port_handler_linux.h"
+#include "port_handler_mac.h"
 
-#define LATENCY_TIMER   8  // msec (USB latency timer) [was changed from 4 due to the Ubuntu update 16.04.2]
+#define LATENCY_TIMER   8  // msec (USB latency timer)
 
 using namespace dynamixel;
 
-PortHandlerLinux::PortHandlerLinux(const char *port_name)
+PortHandlerMac::PortHandlerMac(const char *port_name)
   : socket_fd_(-1),
     baudrate_(DEFAULT_BAUDRATE_),
     packet_start_time_(0.0),
@@ -59,35 +58,35 @@ PortHandlerLinux::PortHandlerLinux(const char *port_name)
   setPortName(port_name);
 }
 
-bool PortHandlerLinux::openPort()
+bool PortHandlerMac::openPort()
 {
   return setBaudRate(baudrate_);
 }
 
-void PortHandlerLinux::closePort()
+void PortHandlerMac::closePort()
 {
   if(socket_fd_ != -1)
     close(socket_fd_);
   socket_fd_ = -1;
 }
 
-void PortHandlerLinux::clearPort()
+void PortHandlerMac::clearPort()
 {
   tcflush(socket_fd_, TCIOFLUSH);
 }
 
-void PortHandlerLinux::setPortName(const char *port_name)
+void PortHandlerMac::setPortName(const char *port_name)
 {
   strcpy(port_name_, port_name);
 }
 
-char *PortHandlerLinux::getPortName()
+char *PortHandlerMac::getPortName()
 {
   return port_name_;
 }
 
 // TODO: baud number ??
-bool PortHandlerLinux::setBaudRate(const int baudrate)
+bool PortHandlerMac::setBaudRate(const int baudrate)
 {
   int baud = getCFlagBaud(baudrate);
 
@@ -106,41 +105,41 @@ bool PortHandlerLinux::setBaudRate(const int baudrate)
   }
 }
 
-int PortHandlerLinux::getBaudRate()
+int PortHandlerMac::getBaudRate()
 {
   return baudrate_;
 }
 
-int PortHandlerLinux::getBytesAvailable()
+int PortHandlerMac::getBytesAvailable()
 {
   int bytes_available;
   ioctl(socket_fd_, FIONREAD, &bytes_available);
   return bytes_available;
 }
 
-int PortHandlerLinux::readPort(uint8_t *packet, int length)
+int PortHandlerMac::readPort(uint8_t *packet, int length)
 {
   return read(socket_fd_, packet, length);
 }
 
-int PortHandlerLinux::writePort(uint8_t *packet, int length)
+int PortHandlerMac::writePort(uint8_t *packet, int length)
 {
   return write(socket_fd_, packet, length);
 }
 
-void PortHandlerLinux::setPacketTimeout(uint16_t packet_length)
+void PortHandlerMac::setPacketTimeout(uint16_t packet_length)
 {
   packet_start_time_  = getCurrentTime();
   packet_timeout_     = (tx_time_per_byte * (double)packet_length) + (LATENCY_TIMER * 2.0) + 2.0;
 }
 
-void PortHandlerLinux::setPacketTimeout(double msec)
+void PortHandlerMac::setPacketTimeout(double msec)
 {
   packet_start_time_  = getCurrentTime();
   packet_timeout_     = msec;
 }
 
-bool PortHandlerLinux::isPacketTimeout()
+bool PortHandlerMac::isPacketTimeout()
 {
   if(getTimeSinceStart() > packet_timeout_)
   {
@@ -150,14 +149,14 @@ bool PortHandlerLinux::isPacketTimeout()
   return false;
 }
 
-double PortHandlerLinux::getCurrentTime()
+double PortHandlerMac::getCurrentTime()
 {
 	struct timespec tv;
 	clock_gettime( CLOCK_REALTIME, &tv);
 	return ((double)tv.tv_sec*1000.0 + (double)tv.tv_nsec*0.001*0.001);
 }
 
-double PortHandlerLinux::getTimeSinceStart()
+double PortHandlerMac::getTimeSinceStart()
 {
   double time;
 
@@ -168,25 +167,27 @@ double PortHandlerLinux::getTimeSinceStart()
   return time;
 }
 
-bool PortHandlerLinux::setupPort(int cflag_baud)
+bool PortHandlerMac::setupPort(int cflag_baud)
 {
   struct termios newtio;
 
   socket_fd_ = open(port_name_, O_RDWR|O_NOCTTY|O_NONBLOCK);
   if(socket_fd_ < 0)
   {
-    printf("[PortHandlerLinux::SetupPort] Error opening serial port!\n");
+    printf("[PortHandlerMac::SetupPort] Error opening serial port!\n");
     return false;
   }
 
   bzero(&newtio, sizeof(newtio)); // clear struct for new port settings
 
-  newtio.c_cflag = cflag_baud | CS8 | CLOCAL | CREAD;
+  newtio.c_cflag = CS8 | CLOCAL | CREAD;
   newtio.c_iflag = IGNPAR;
   newtio.c_oflag      = 0;
   newtio.c_lflag      = 0;
   newtio.c_cc[VTIME]  = 0;
   newtio.c_cc[VMIN]   = 0;
+  cfsetispeed(&newtio, cflag_baud);
+  cfsetospeed(&newtio, cflag_baud);
 
   // clean the buffer and activate the settings for the port
   tcflush(socket_fd_, TCIFLUSH);
@@ -196,37 +197,13 @@ bool PortHandlerLinux::setupPort(int cflag_baud)
   return true;
 }
 
-bool PortHandlerLinux::setCustomBaudrate(int speed)
+bool PortHandlerMac::setCustomBaudrate(int speed)
 {
-  // try to set a custom divisor
-  struct serial_struct ss;
-  if(ioctl(socket_fd_, TIOCGSERIAL, &ss) != 0)
-  {
-    printf("[PortHandlerLinux::SetCustomBaudrate] TIOCGSERIAL failed!\n");
-    return false;
-  }
-
-  ss.flags = (ss.flags & ~ASYNC_SPD_MASK) | ASYNC_SPD_CUST;
-  ss.custom_divisor = (ss.baud_base + (speed / 2)) / speed;
-  int closest_speed = ss.baud_base / ss.custom_divisor;
-
-  if(closest_speed < speed * 98 / 100 || closest_speed > speed * 102 / 100)
-  {
-    printf("[PortHandlerLinux::SetCustomBaudrate] Cannot set speed to %d, closest is %d \n", speed, closest_speed);
-    return false;
-  }
-
-  if(ioctl(socket_fd_, TIOCSSERIAL, &ss) < 0)
-  {
-    printf("[PortHandlerLinux::SetCustomBaudrate] TIOCSSERIAL failed!\n");
-    return false;
-  }
-
-  tx_time_per_byte = (1000.0 / (double)speed) * 10.0;
-  return true;
+  printf("[PortHandlerMac::SetCustomBaudrate] Not supported on Mac!\n");
+  return false;
 }
 
-int PortHandlerLinux::getCFlagBaud(int baudrate)
+int PortHandlerMac::getCFlagBaud(int baudrate)
 {
   switch(baudrate)
   {

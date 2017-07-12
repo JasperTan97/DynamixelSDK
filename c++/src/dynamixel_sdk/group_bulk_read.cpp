@@ -33,7 +33,9 @@
 #include <stdio.h>
 #include <algorithm>
 
-#ifdef __linux__
+#if defined(__linux__)
+#include "group_bulk_read.h"
+#elif defined(__APPLE__)
 #include "group_bulk_read.h"
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT

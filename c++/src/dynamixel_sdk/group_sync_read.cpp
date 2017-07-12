@@ -32,7 +32,9 @@
 
 #include <algorithm>
 
-#ifdef __linux__
+#if defined(__linux__)
+#include "group_sync_read.h"
+#elif defined(__APPLE__)
 #include "group_sync_read.h"
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT

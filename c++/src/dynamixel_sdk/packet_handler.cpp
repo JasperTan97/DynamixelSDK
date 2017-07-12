@@ -30,7 +30,11 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#ifdef __linux__
+#if defined(__linux__)
+#include "packet_handler.h"
+#include "protocol1_packet_handler.h"
+#include "protocol2_packet_handler.h"
+#elif defined(__APPLE__)
 #include "packet_handler.h"
 #include "protocol1_packet_handler.h"
 #include "protocol2_packet_handler.h"
