@@ -147,9 +147,9 @@ int main()
 
   int index = 0;
   int dxl_comm_result = COMM_TX_FAIL;             // Communication result
-  uint8_t dxl_addparam_result = False;               // AddParam result
-  uint8_t dxl_getdata_result = False;                // GetParam result
-  int dxl_goal_position[2] = { DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE };         // Goal position
+  uint8_t dxl_addparam_result = False;            // AddParam result
+  uint8_t dxl_getdata_result = False;             // GetParam result
+  int dxl_goal_position[2] = { DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE };  // Goal position
 
   uint8_t dxl_error = 0;                          // Dynamixel error
   uint8_t dxl_led_value[2] = { 0x00, 0xFF };      // Dynamixel LED value for write

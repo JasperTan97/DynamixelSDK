@@ -74,7 +74,7 @@
 #define TORQUE_ENABLE                   1                   // Value for enabling the torque
 #define TORQUE_DISABLE                  0                   // Value for disabling the torque
 #define DXL_MINIMUM_POSITION_VALUE      100                 // Dynamixel will rotate between this value
-#define DXL_MAXIMUM_POSITION_VALUE      4000                // and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
+#define DXL_MAXIMUM_POSITION_VALUE      1000                // and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
 #define DXL_MOVING_STATUS_THRESHOLD     10                  // Dynamixel moving status threshold
 
 #define ESC_ASCII_VALUE                 0x1b
@@ -144,12 +144,12 @@ int main()
 
   int index = 0;
   int dxl_comm_result = COMM_TX_FAIL;             // Communication result
-  bool dxl_addparam_result = false;                // addParam result
-  int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE};         // Goal position
+  bool dxl_addparam_result = false;               // addParam result
+  int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE};  // Goal position
 
   uint8_t dxl_error = 0;                          // Dynamixel error
   uint8_t param_goal_position[2];
-  uint16_t dxl1_present_position = 0, dxl2_present_position = 0;              // Present position
+  uint16_t dxl1_present_position = 0, dxl2_present_position = 0;                        // Present position
 
   // Open port
   if (portHandler->openPort())

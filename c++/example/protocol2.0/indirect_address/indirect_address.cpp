@@ -161,7 +161,7 @@ int main()
   int dxl_comm_result = COMM_TX_FAIL;             // Communication result
   bool dxl_addparam_result = false;               // addParam result
   bool dxl_getdata_result = false;                // GetParam result
-  int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE};         // Goal position
+  int dxl_goal_position[2] = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE};  // Goal position
 
   uint8_t dxl_error = 0;                          // Dynamixel error
   uint8_t dxl_moving = 0;                         // Dynamixel moving status

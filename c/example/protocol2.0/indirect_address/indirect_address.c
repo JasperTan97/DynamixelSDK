@@ -155,17 +155,17 @@ int main()
   int groupread_num = groupSyncRead(port_num, PROTOCOL_VERSION, ADDR_PRO_INDIRECTDATA_FOR_READ, LEN_PRO_INDIRECTDATA_FOR_READ);
 
   int index = 0;
-  int dxl_comm_result = COMM_TX_FAIL;             // Communication result
-  uint8_t dxl_addparam_result = False;               // AddParam result
-  uint8_t dxl_getdata_result = False;                // GetParam result
-  int dxl_goal_position[2] = { DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE };         // Goal position
+  int dxl_comm_result = COMM_TX_FAIL;                 // Communication result
+  uint8_t dxl_addparam_result = False;                // AddParam result
+  uint8_t dxl_getdata_result = False;                 // GetParam result
+  int dxl_goal_position[2] = { DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE };  // Goal position
 
-  uint8_t dxl_error = 0;                          // Dynamixel error
-  uint8_t dxl_moving = 0;                         // Dynamixel moving status
-  uint8_t dxl_led_value[2] = { 0x00, 0xFF };      // Dynamixel LED value
-  int32_t dxl_present_position = 0;               // Present position
+  uint8_t dxl_error = 0;                              // Dynamixel error
+  uint8_t dxl_moving = 0;                             // Dynamixel moving status
+  uint8_t dxl_led_value[2] = { 0x00, 0xFF };          // Dynamixel LED value
+  int32_t dxl_present_position = 0;                   // Present position
 
-                                                    // Open port
+  // Open port
   if (openPort(port_num))
   {
     printf("Succeeded to open the port!\n");

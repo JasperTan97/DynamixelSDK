@@ -136,10 +136,10 @@ int main()
 
   int index = 0;
   int dxl_comm_result = COMM_TX_FAIL;             // Communication result
-  int dxl_goal_position[2] = { DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE };         // Goal position
+  int dxl_goal_position[2] = { DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE };  // Goal position
 
   uint8_t dxl_error = 0;                          // Dynamixel error
-  int32_t dxl1_present_position = 0, dxl2_present_position = 0;              // Present position
+  int32_t dxl1_present_position = 0, dxl2_present_position = 0;                           // Present position
 
   // Open port1
   if (openPort(port_num1))

@@ -117,7 +117,7 @@ int main()
   // Initialize PacketHandler Structs
   packetHandler();
 
-  int dxl_comm_result = COMM_TX_FAIL;             // Communication result
+  int dxl_comm_result = COMM_TX_FAIL; // Communication result
   int id;
 
   // Open port
