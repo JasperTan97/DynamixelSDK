@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "dynamixel_sdk_windows/port_handler_windows.h"
+#include "port_handler_windows.h"
 
 #define LATENCY_TIMER  16 // msec (USB latency timer)
 

@@ -35,7 +35,7 @@
 #endif
 
 #include <stdlib.h>
-#include "dynamixel_sdk/group_sync_write.h"
+#include "group_sync_write.h"
 
 
 typedef struct

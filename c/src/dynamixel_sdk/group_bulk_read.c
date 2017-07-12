@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "dynamixel_sdk/group_bulk_read.h"
+#include "group_bulk_read.h"
 
 
 typedef struct

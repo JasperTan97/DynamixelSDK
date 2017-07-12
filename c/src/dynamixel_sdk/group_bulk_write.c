@@ -35,7 +35,7 @@
 #endif
 
 #include <stdlib.h>
-#include "dynamixel_sdk/group_bulk_write.h"
+#include "group_bulk_write.h"
 
 
 typedef struct

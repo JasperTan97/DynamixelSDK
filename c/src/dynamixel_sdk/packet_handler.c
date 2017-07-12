@@ -35,9 +35,9 @@
 #endif
 
 #include <stdlib.h>
-#include "dynamixel_sdk/packet_handler.h"
-#include "dynamixel_sdk/protocol1_packet_handler.h"
-#include "dynamixel_sdk/protocol2_packet_handler.h"
+#include "packet_handler.h"
+#include "protocol1_packet_handler.h"
+#include "protocol2_packet_handler.h"
 
 void packetHandler()
 {

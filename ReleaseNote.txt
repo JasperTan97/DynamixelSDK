@@ -4,9 +4,10 @@
 
 -
 
+* Standardizes folder structure of c, c++, ROS and Arduino c++ languages
 * Fixes : Inconvenient way of getting meaning of packet result and error value #67
 * Fixes : Misleading indentation warning in group_sync_read.c #91
-* Standardize folder structure of c++, ROS and Arduino
+* Alternative : Include port_handler.h through relative path. #90
 
 ==============================================
     Dynamixel SDK 3.4.6 (Protocol 1.0/2.0)

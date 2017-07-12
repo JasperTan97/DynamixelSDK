@@ -30,17 +30,34 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_DYNAMIXELSDK_C_H_
-#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_DYNAMIXELSDK_C_H_
+#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_WINDOWS_PORTHANDLERWINDOWS_C_H_
+#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_WINDOWS_PORTHANDLERWINDOWS_C_H_
 
+#include <Windows.h>
+#include "port_handler.h"
 
-#include "dynamixel_sdk/robotis_def.h"
-#include "dynamixel_sdk/group_bulk_read.h"
-#include "dynamixel_sdk/group_bulk_write.h"
-#include "dynamixel_sdk/group_sync_read.h"
-#include "dynamixel_sdk/group_sync_write.h"
-#include "dynamixel_sdk/packet_handler.h"
-#include "dynamixel_sdk/port_handler.h"
+WINDECLSPEC uint8_t setupPortWindows            (int port_num, const int baudrate);
 
+WINDECLSPEC double  getCurrentTimeWindows       (int port_num);
+WINDECLSPEC double  getTimeSinceStartWindows    (int port_num);
 
-#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_DYNAMIXELSDK_C_H_ */
+WINDECLSPEC int     portHandlerWindows          (const char *port_name);
+
+WINDECLSPEC uint8_t openPortWindows             (int port_num);
+WINDECLSPEC void    closePortWindows            (int port_num);
+WINDECLSPEC void    clearPortWindows            (int port_num);
+
+WINDECLSPEC void    setPortNameWindows          (int port_num, const char* port_name);
+WINDECLSPEC char   *getPortNameWindows          (int port_num);
+
+WINDECLSPEC uint8_t setBaudRateWindows          (int port_num, const int baudrate);
+WINDECLSPEC int     getBaudRateWindows          (int port_num);
+
+WINDECLSPEC int     readPortWindows             (int port_num, uint8_t *packet, int length);
+WINDECLSPEC int     writePortWindows            (int port_num, uint8_t *packet, int length);
+
+WINDECLSPEC void    setPacketTimeoutWindows     (int port_num, uint16_t packet_length);
+WINDECLSPEC void    setPacketTimeoutMSecWindows (int port_num, double msec);
+WINDECLSPEC uint8_t isPacketTimeoutWindows      (int port_num);
+
+#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERWINDOWS_C_H_ */

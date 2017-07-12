@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "dynamixel_sdk/protocol2_packet_handler.h"
+#include "protocol2_packet_handler.h"
 
 #define TXPACKET_MAX_LEN    (4*1024)
 #define RXPACKET_MAX_LEN    (4*1024)

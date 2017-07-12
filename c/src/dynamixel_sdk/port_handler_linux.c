@@ -41,7 +41,7 @@
 #include <sys/ioctl.h>
 #include <linux/serial.h>
 
-#include "dynamixel_sdk_linux/port_handler_linux.h"
+#include "port_handler_linux.h"
 
 #define LATENCY_TIMER   8  // msec (USB latency timer) [was changed from 4 due to the Ubuntu update 16.04.2]
 
