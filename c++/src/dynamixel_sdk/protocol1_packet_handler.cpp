@@ -30,13 +30,17 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef __linux__
+#include "protocol1_packet_handler.h"
+#elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
+#include "protocol1_packet_handler.h"
+#elif defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/protocol1_packet_handler.h"
 #endif
 
 #include <string.h>
 #include <stdlib.h>
-#include "protocol1_packet_handler.h"
 
 #define TXPACKET_MAX_LEN    (250)
 #define RXPACKET_MAX_LEN    (250)

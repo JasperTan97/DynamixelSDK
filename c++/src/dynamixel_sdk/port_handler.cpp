@@ -30,14 +30,11 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #ifdef __linux__
 #include "port_handler.h"
 #include "port_handler_linux.h"
 #elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
 #include "port_handler.h"
 #include "port_handler_windows.h"
 #elif defined(__OPENCR__)

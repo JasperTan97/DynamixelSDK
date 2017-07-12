@@ -30,6 +30,8 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
+#ifdef __linux__
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
@@ -324,3 +326,5 @@ int getCFlagBaud(int baudrate)
       return -1;
   }
 }
+
+#endif

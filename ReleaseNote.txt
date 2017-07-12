@@ -8,7 +8,7 @@
 * Fixes : Inconvenient way of getting meaning of packet result and error value #67
 * Fixes : Misleading indentation warning in group_sync_read.c #91
 * Alternative : Include port_handler.h through relative path. #90
-* Changes : Indent correction / Example tests
+* Changes : Indent correction / Example tests / OS IFDEF
 
 ==============================================
     Dynamixel SDK 3.4.6 (Protocol 1.0/2.0)

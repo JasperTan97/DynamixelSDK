@@ -30,15 +30,15 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include <algorithm>
-#if defined(__OPENCR__)
-#include "../../include/dynamixel_sdk/group_bulk_write.h"
-#else
+
+#ifdef __linux__
 #include "group_bulk_write.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "group_bulk_write.h"
+#elif defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/group_bulk_write.h"
 #endif
 
 using namespace dynamixel;

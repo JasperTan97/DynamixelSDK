@@ -30,18 +30,19 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
-#if defined(__OPENCR__)
-#include "../../include/dynamixel_sdk/packet_handler.h"
-#include "../../include/dynamixel_sdk/protocol1_packet_handler.h"
-#include "../../include/dynamixel_sdk/protocol2_packet_handler.h"
-#else
+#ifdef __linux__
 #include "packet_handler.h"
 #include "protocol1_packet_handler.h"
 #include "protocol2_packet_handler.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "packet_handler.h"
+#include "protocol1_packet_handler.h"
+#include "protocol2_packet_handler.h"
+#elif defined(__OPENCR__)
+#include "../../include/dynamixel_sdk/packet_handler.h"
+#include "../../include/dynamixel_sdk/protocol1_packet_handler.h"
+#include "../../include/dynamixel_sdk/protocol2_packet_handler.h"
 #endif
 
 using namespace dynamixel;

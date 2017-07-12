@@ -30,21 +30,11 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include "port_handler.h"
 
 #ifdef __linux__
 #include "port_handler_linux.h"
-#endif
 
-#if defined(_WIN32) || defined(_WIN64)
-#include "port_handler_windows.h"
-#endif
-
-#ifdef __linux__
 int     portHandler         (const char *port_name) { return portHandlerLinux(port_name); }
 
 uint8_t openPort            (int port_num) { return openPortLinux(port_num); }
@@ -68,6 +58,9 @@ uint8_t isPacketTimeout     (int port_num) { return isPacketTimeoutLinux(port_nu
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "port_handler_windows.h"
+
 int     portHandler         (const char *port_name) { return portHandlerWindows(port_name); }
 
 uint8_t openPort            (int port_num) { return openPortWindows(port_num); }

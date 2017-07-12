@@ -32,7 +32,6 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
-#endif
 
 #include "port_handler_windows.h"
 
@@ -238,3 +237,5 @@ DXL_HAL_OPEN_ERROR:
   closePort();
   return false;
 }
+
+#endif

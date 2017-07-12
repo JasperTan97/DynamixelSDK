@@ -30,6 +30,8 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
+#if defined(__OPENCR__)
+
 #include <Arduino.h>
 
 
@@ -233,3 +235,5 @@ void PortHandlerArduino::setTxDisable()
 {
   drv_dxl_tx_enable(FALSE);
 }
+
+#endif

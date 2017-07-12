@@ -32,7 +32,6 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
-#endif
 
 #include <stdio.h>
 #include <string.h>
@@ -285,3 +284,5 @@ uint8_t setupPortWindows(int port_num, const int baudrate)
 
   return False;
 }
+
+#endif
