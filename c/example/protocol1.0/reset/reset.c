@@ -122,9 +122,9 @@ int kbhit(void)
 void msecSleep(int waitTime)
 {
 #ifdef __linux__
-    usleep(waitTime * 1000);
+  usleep(waitTime * 1000);
 #elif defined(_WIN32) || defined(_WIN64)
-    Sleep(waitTime);
+  _sleep(waitTime);
 #endif
 }
 

@@ -18,6 +18,32 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\dynamixel_sdk.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_read.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_write.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_read.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_write.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\packet_handler.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_linux.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_windows.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol1_packet_handler.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol2_packet_handler.h" />
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\robotis_def.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_bulk_read.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_bulk_write.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_sync_read.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_sync_write.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\packet_handler.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_linux.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_windows.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol1_packet_handler.c" />
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol2_packet_handler.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C0B6653F-59E2-471E-ABB1-DA84EB5AFFE6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -117,7 +143,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;DXL_X86_C_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include\dynamixel_sdk</AdditionalIncludeDirectories>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
@@ -144,30 +170,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_bulk_read.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_bulk_write.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_sync_read.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\group_sync_write.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\packet_handler.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol1_packet_handler.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol2_packet_handler.c" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk_windows\port_handler_windows.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_read.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_write.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_read.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_write.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\packet_handler.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol1_packet_handler.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol2_packet_handler.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\robotis_def.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk_windows\port_handler_windows.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
