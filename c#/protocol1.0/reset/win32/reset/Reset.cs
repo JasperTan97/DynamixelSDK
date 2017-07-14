@@ -62,7 +62,7 @@ namespace reset
     public const int DXL_ID                          = 1;                   // Dynamixel ID: 1
     public const int BAUDRATE                        = 57600;
     public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
-                                                                            // ex) "COM1"   Linux: "/dev/ttyUSB0"
+                                                                            // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     public const int FACTORYRST_DEFAULTBAUDRATE      = 57600;               // Dynamixel baudrate set by factoryreset
     public const int NEW_BAUDNUM                     = 1;                   // New baudnum to recover Dynamixel baudrate as it was

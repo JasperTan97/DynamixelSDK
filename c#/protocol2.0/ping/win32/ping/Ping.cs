@@ -54,7 +54,7 @@ namespace ping
     public const int DXL_ID                          = 1;                   // Dynamixel ID: 1
     public const int BAUDRATE                        = 57600;
     public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
-                                                                            // ex) "COM1"   Linux: "/dev/ttyUSB0"
+                                                                            // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     public const byte ESC_ASCII_VALUE                = 0x1b;
 

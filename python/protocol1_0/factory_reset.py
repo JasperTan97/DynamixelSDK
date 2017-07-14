@@ -80,7 +80,7 @@ PROTOCOL_VERSION            = 1                             # See which protocol
 DXL_ID                      = 1                             # Dynamixel ID: 1
 BAUDRATE                    = 57600
 DEVICENAME                  = "/dev/ttyUSB0".encode("utf-8")# Check which port is being used on your controller
-                                                            # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
+                                                            # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
 FACTORYRST_DEFAULTBAUDRATE  = 57600                         # Dynamixel baudrate set by factoryreset
 NEW_BAUDNUM                 = 1                             # New baudnum to recover Dynamixel baudrate as it was

@@ -52,7 +52,7 @@ public class BroadcastPing
     // Default setting
     int BAUDRATE                        = 57600;
     String DEVICENAME                   = "/dev/ttyUSB0";      // Check which port is being used on your controller
-                                                               // ex) "COM1"   Linux: "/dev/ttyUSB0"
+                                                               // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     int MAX_ID                          = 252;                 // Maximum ID value
     int COMM_SUCCESS                    = 0;                   // Communication Success result value

@@ -67,7 +67,7 @@ PROTOCOL_VERSION                = 1.0;          % See which protocol version is 
 DXL_ID                          = 1;            % Dynamixel ID: 1
 BAUDRATE                        = 57600;
 DEVICENAME                      = 'COM1';       % Check which port is being used on your controller
-                                                % ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
+                                                % ex) Windows: 'COM1'   Linux: '/dev/ttyUSB0' Mac: '/dev/tty.usbserial-*'
 
 COMM_SUCCESS                    = 0;            % Communication Success result value
 COMM_TX_FAIL                    = -1001;        % Communication Tx Failed

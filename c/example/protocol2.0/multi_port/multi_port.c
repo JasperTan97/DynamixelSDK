@@ -65,7 +65,7 @@
 #define DXL2_ID                         2                   // Dynamixel#2 ID: 2
 #define BAUDRATE                        57600
 #define DEVICENAME1                     "/dev/ttyUSB0"      // Check which port is being used on your controller
-#define DEVICENAME2                     "/dev/ttyUSB1"      // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
+#define DEVICENAME2                     "/dev/ttyUSB1"      // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
 #define TORQUE_ENABLE                   1                   // Value for enabling the torque
 #define TORQUE_DISABLE                  0                   // Value for disabling the torque

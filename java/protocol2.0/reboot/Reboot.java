@@ -53,7 +53,7 @@ public class Reboot
     byte DXL_ID                         = 1;                   // Dynamixel ID: 1
     int BAUDRATE                        = 57600;
     String DEVICENAME                   = "/dev/ttyUSB0";      // Check which port is being used on your controller
-                                                               // ex) "COM1"   Linux: "/dev/ttyUSB0"
+                                                               // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     int COMM_SUCCESS                    = 0;                   // Communication Success result value
     int COMM_TX_FAIL                    = -1001;               // Communication Tx Failed
