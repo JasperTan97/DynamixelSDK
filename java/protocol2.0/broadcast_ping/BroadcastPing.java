@@ -37,7 +37,7 @@
 // Available Dynamixel model on this example : All models using Protocol 2.0
 // This example is designed for using a Dynamixel PRO 54-200, and an USB2DYNAMIXEL.
 // To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below variables yourself.
-// Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 3 (Baudrate : 1000000 [1M])
+// Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 57600)
 //
 
 import java.util.Scanner;
@@ -50,7 +50,7 @@ public class BroadcastPing
     int PROTOCOL_VERSION                = 2;                   // See which protocol version is used in the Dynamixel
 
     // Default setting
-    int BAUDRATE                        = 1000000;
+    int BAUDRATE                        = 57600;
     String DEVICENAME                   = "/dev/ttyUSB0";      // Check which port is being used on your controller
                                                                // ex) "COM1"   Linux: "/dev/ttyUSB0"
 

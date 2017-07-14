@@ -42,12 +42,6 @@
     <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h">
       <Filter>Header Files\dynamixel_sdk</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_arduino.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_linux.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_windows.h">
       <Filter>Header Files\dynamixel_sdk</Filter>
     </ClInclude>
@@ -75,12 +69,6 @@
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler.cpp">
-      <Filter>Source Files\dynamixel_sdk</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_arduino.cpp">
-      <Filter>Source Files\dynamixel_sdk</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_linux.cpp">
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_windows.cpp">

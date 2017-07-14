@@ -37,7 +37,7 @@
 // Available Dynamixel model on this example : MX or X series set to Protocol 1.0
 // This example is designed for using two Dynamixel MX-28, and an USB2DYNAMIXEL.
 // To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below variables yourself.
-// Be sure that Dynamixel MX properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 1000000)
+// Be sure that Dynamixel MX properties are already set as %% ID : 1 / Baudnum : 34 (Baudrate : 57600)
 //
 
 using System;
@@ -64,7 +64,7 @@ namespace bulk_read
     // Default setting
     public const int DXL1_ID                         = 1;                   // Dynamixel ID: 1
     public const int DXL2_ID                         = 2;                   // Dynamixel ID: 2
-    public const int BAUDRATE                        = 1000000;
+    public const int BAUDRATE                        = 57600;
     public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
                                                                             // ex) "COM1"   Linux: "/dev/ttyUSB0"
 

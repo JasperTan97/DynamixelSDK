@@ -43,7 +43,7 @@
 %
 % Available Dynamixel model on this example : All models using Protocol 1.0 and 2.0
 % This example is tested with a Dynamixel MX-28, a Dynamixel PRO 54-200 and an USB2DYNAMIXEL
-% Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 1 (Baudrate : 1000000) , PRO - ID : 1 / Baudnum : 3 (Baudrate : 1000000)
+% Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 34 (Baudrate : 57600) , PRO - ID : 1 / Baudnum : 1 (Baudrate : 57600)
 %
 
 % Be aware that:
@@ -87,7 +87,7 @@ PROTOCOL_VERSION2               = 2.0;
 % Default setting
 DXL1_ID                         = 1;              % Dynamixel#1 ID: 1
 DXL2_ID                         = 2;              % Dynamixel#2 ID: 2
-BAUDRATE                        = 1000000;
+BAUDRATE                        = 57600;
 DEVICENAME                      = 'COM1';         % Check which port is being used on your controller
                                                   % ex) Windows: 'COM1'   Linux: '/dev/ttyUSB0'
 

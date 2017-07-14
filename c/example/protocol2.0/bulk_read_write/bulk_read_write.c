@@ -37,7 +37,7 @@
 // Available Dynamixel model on this example : All models using Protocol 2.0
 // This example is designed for using two Dynamixel PRO 54-200, and an USB2DYNAMIXEL.
 // To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below "#define"d variables yourself.
-// Be sure that Dynamixel PRO properties are already set as %% ID : 1 and 2 / Baudnum : 3 (Baudrate : 1000000 [1M])
+// Be sure that Dynamixel PRO properties are already set as %% ID : 1 and 2 / Baudnum : 1 (Baudrate : 57600)
 //
 
 #ifdef __linux__
@@ -69,7 +69,7 @@
 // Default setting
 #define DXL1_ID                         1                   // Dynamixel#1 ID: 1
 #define DXL2_ID                         2                   // Dynamixel#2 ID: 2
-#define BAUDRATE                        1000000
+#define BAUDRATE                        57600
 #define DEVICENAME                      "/dev/ttyUSB0"      // Check which port is being used on your controller
                                                             // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
 

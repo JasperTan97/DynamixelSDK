@@ -39,9 +39,6 @@
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler.c">
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_linux.c">
-      <Filter>Source Files\dynamixel_sdk</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_windows.c">
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
@@ -72,9 +69,6 @@
       <Filter>Header Files\dynamixel_sdk</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_linux.h">
       <Filter>Header Files\dynamixel_sdk</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_windows.h">

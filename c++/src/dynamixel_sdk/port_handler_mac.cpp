@@ -219,6 +219,7 @@ int PortHandlerMac::getCFlagBaud(int baudrate)
       return B115200;
     case 230400:
       return B230400;
+    // Mac OS doesn't support over B230400
     // case 460800:
     //   return B460800;
     // case 500000:

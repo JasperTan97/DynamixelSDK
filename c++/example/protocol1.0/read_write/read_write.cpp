@@ -36,7 +36,7 @@
 //
 // Available DXL model on this example : All models using Protocol 1.0
 // This example is tested with a DXL MX-28, and an USB2DYNAMIXEL
-// Be sure that DXL MX properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 1000000)
+// Be sure that DXL MX properties are already set as %% ID : 1 / Baudnum : 34 (Baudrate : 57600)
 //
 
 #if defined(__linux__) || defined(__APPLE__)
@@ -62,7 +62,7 @@
 
 // Default setting
 #define DXL_ID                          1                   // Dynamixel ID: 1
-#define BAUDRATE                        1000000
+#define BAUDRATE                        57600
 #define DEVICENAME                      "/dev/ttyUSB0"      // Check which port is being used on your controller
                                                             // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
 

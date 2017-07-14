@@ -25,8 +25,6 @@
     <ClCompile Include="..\..\..\src\dynamixel_sdk\group_sync_write.cpp" />
     <ClCompile Include="..\..\..\src\dynamixel_sdk\packet_handler.cpp" />
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler.cpp" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_arduino.cpp" />
-    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_linux.cpp" />
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_windows.cpp" />
     <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol1_packet_handler.cpp" />
     <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol2_packet_handler.cpp" />
@@ -39,8 +37,6 @@
     <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_write.h" />
     <ClInclude Include="..\..\..\include\dynamixel_sdk\packet_handler.h" />
     <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_arduino.h" />
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_linux.h" />
     <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_windows.h" />
     <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol1_packet_handler.h" />
     <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol2_packet_handler.h" />

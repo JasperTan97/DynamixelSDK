@@ -10,6 +10,7 @@
 * Fixes : Misleading indentation warning in group_sync_read.c #91
 * Alternative : Include port_handler.h through relative path. #90
 * Changes : Indent correction / Example tests & refresh / OS IFDEF
+* Changes : Default Baudrate from 1000000(1M) bps to 57600 bps
 
 ==============================================
     Dynamixel SDK 3.4.6 (Protocol 1.0/2.0)

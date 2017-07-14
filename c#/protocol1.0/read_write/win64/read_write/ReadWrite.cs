@@ -37,7 +37,7 @@
 // Available DXL model on this example : All models using Protocol 1.0
 // This example is designed for using a Dynamixel MX-28, and an USB2DYNAMIXEL.
 // To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below variables yourself.
-// Be sure that Dynamixel MX properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 1000000 [1M])
+// Be sure that Dynamixel MX properties are already set as %% ID : 1 / Baudnum : 34 (Baudrate : 57600)
 //
 
 using System;
@@ -57,7 +57,7 @@ namespace read_write
 
     // Default setting
     public const int DXL_ID                          = 1;                   // Dynamixel ID: 1
-    public const int BAUDRATE                        = 1000000;
+    public const int BAUDRATE                        = 57600;
     public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
                                                                             // ex) "COM1"   Linux: "/dev/ttyUSB0"
 

@@ -36,7 +36,7 @@
 //
 // Available Dynamixel model on this example : All models using Protocol 1.0 and 2.0
 // This example is tested with a Dynamixel MX-28, a Dynamixel PRO 54-200 and an USB2DYNAMIXEL
-// Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 1 (Baudrate : 1000000) , PRO - ID : 1 / Baudnum : 3 (Baudrate : 1000000)
+// Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 34 (Baudrate : 57600) , PRO - ID : 1 / Baudnum : 1 (Baudrate : 57600)
 //
 
 #if defined(__linux__) || defined(__APPLE__)
@@ -130,7 +130,7 @@ void help()
   printf(" \n");
   printf(" help|h|?                    :Displays help information\n");
   printf(" baud [BAUD_RATE]            :Changes baudrate to [BAUD_RATE] \n");
-  printf("                               ex) baud 2400 (2400 bps) \n");
+  printf("                               ex) baud 57600 (57600 bps) \n");
   printf("                               ex) baud 1000000 (1 Mbps)  \n");
   printf(" exit                        :Exit this program\n");
   printf(" scan                        :Outputs the current status of all Dynamixels\n");
