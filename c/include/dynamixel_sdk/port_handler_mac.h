@@ -30,50 +30,38 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_C_H_
-#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_C_H_
-
-#if defined(__linux__)
-#define WINDECLSPEC
-#elif defined(__APPLE__)
-#define WINDECLSPEC
-#elif defined(_WIN32) || defined(_WIN64)
-  #ifdef WINDLLEXPORT
-  #define WINDECLSPEC __declspec(dllexport)
-  #else
-  #define WINDECLSPEC __declspec(dllimport)
-  #endif
-#endif
-
-#include "robotis_def.h"
-
-static const int DEFAULT_BAUDRATE = 57600;
-
-int     g_used_port_num;
-uint8_t    *g_is_using;
-
-WINDECLSPEC int     portHandler             (const char *port_name);
-
-WINDECLSPEC uint8_t openPort                (int port_num);
-WINDECLSPEC void    closePort               (int port_num);
-WINDECLSPEC void    clearPort               (int port_num);
-
-WINDECLSPEC void    setPortName             (int port_num, const char* port_name);
-WINDECLSPEC char   *getPortName             (int port_num);
-
-WINDECLSPEC uint8_t setBaudRate             (int port_num, const int baudrate);
-WINDECLSPEC int     getBaudRate             (int port_num);
-
-#if defined(__linux__) || defined(__APPLE__)
-WINDECLSPEC int     getBytesAvailable       (int port_num);
-#endif
-
-WINDECLSPEC int     readPort                (int port_num, uint8_t *packet, int length);
-WINDECLSPEC int     writePort               (int port_num, uint8_t *packet, int length);
-
-WINDECLSPEC void    setPacketTimeout        (int port_num, uint16_t packet_length);
-WINDECLSPEC void    setPacketTimeoutMSec    (int port_num, double msec);
-WINDECLSPEC uint8_t isPacketTimeout         (int port_num);
+#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_MAC_PORTHANDLERMAC_C_H_
+#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_MAC_PORTHANDLERMAC_C_H_
 
 
-#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_C_H_ */
+#include "port_handler.h"
+
+int portHandlerMac            (const char *port_name);
+
+uint8_t setupPortMac          (int port_num, const int cflag_baud);
+uint8_t setCustomBaudrateMac  (int port_num, int speed);
+int     getCFlagBaud            (const int baudrate);
+
+double  getCurrentTimeMac     ();
+double  getTimeSinceStartMac  (int port_num);
+
+uint8_t openPortMac           (int port_num);
+void    closePortMac          (int port_num);
+void    clearPortMac          (int port_num);
+
+void    setPortNameMac        (int port_num, const char *port_name);
+char   *getPortNameMac        (int port_num);
+
+uint8_t setBaudRateMac        (int port_num, const int baudrate);
+int     getBaudRateMac        (int port_num);
+
+int     getBytesAvailableMac  (int port_num);
+
+int     readPortMac           (int port_num, uint8_t *packet, int length);
+int     writePortMac          (int port_num, uint8_t *packet, int length);
+
+void    setPacketTimeoutMac     (int port_num, uint16_t packet_length);
+void    setPacketTimeoutMSecMac (int port_num, double msec);
+uint8_t isPacketTimeoutMac      (int port_num);
+
+#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_MAC_PORTHANDLERMAC_C_H_ */

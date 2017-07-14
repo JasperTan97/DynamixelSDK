@@ -30,7 +30,7 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#if defined(__linux__)
+#if defined(__APPLE__)
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -41,9 +41,8 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
-#include <linux/serial.h>
 
-#include "port_handler_linux.h"
+#include "port_handler_mac.h"
 
 #define LATENCY_TIMER   8  // msec (USB latency timer) [was changed from 4 due to the Ubuntu update 16.04.2]
 
@@ -60,7 +59,7 @@ typedef struct
 
 static PortData *portData;
 
-int portHandlerLinux(const char *port_name)
+int portHandlerMac(const char *port_name)
 {
   int port_num;
 
@@ -108,17 +107,17 @@ int portHandlerLinux(const char *port_name)
 
   g_is_using[port_num] = False;
 
-  setPortNameLinux(port_num, port_name);
+  setPortNameMac(port_num, port_name);
 
   return port_num;
 }
 
-uint8_t openPortLinux(int port_num)
+uint8_t openPortMac(int port_num)
 {
-  return setBaudRateLinux(port_num, portData[port_num].baudrate);
+  return setBaudRateMac(port_num, portData[port_num].baudrate);
 }
 
-void closePortLinux(int port_num)
+void closePortMac(int port_num)
 {
   if (portData[port_num].socket_fd != -1)
   {
@@ -127,77 +126,77 @@ void closePortLinux(int port_num)
   }
 }
 
-void clearPortLinux(int port_num)
+void clearPortMac(int port_num)
 {
   tcflush(portData[port_num].socket_fd, TCIOFLUSH);
 }
 
-void setPortNameLinux(int port_num, const char *port_name)
+void setPortNameMac(int port_num, const char *port_name)
 {
   strcpy(portData[port_num].port_name, port_name);
 }
 
-char *getPortNameLinux(int port_num)
+char *getPortNameMac(int port_num)
 {
   return portData[port_num].port_name;
 }
 
-uint8_t setBaudRateLinux(int port_num, const int baudrate)
+uint8_t setBaudRateMac(int port_num, const int baudrate)
 {
   int baud = getCFlagBaud(baudrate);
 
-  closePortLinux(port_num);
+  closePortMac(port_num);
 
   if (baud <= 0)   // custom baudrate
   {
-    setupPortLinux(port_num, B38400);
+    setupPortMac(port_num, B38400);
     portData[port_num].baudrate = baudrate;
-    return setCustomBaudrateLinux(port_num, baudrate);
+    return setCustomBaudrateMac(port_num, baudrate);
   }
   else
   {
     portData[port_num].baudrate = baudrate;
-    return setupPortLinux(port_num, baud);
+    return setupPortMac(port_num, baud);
   }
 }
 
-int getBaudRateLinux(int port_num)
+int getBaudRateMac(int port_num)
 {
   return portData[port_num].baudrate;
 }
 
-int getBytesAvailableLinux(int port_num)
+int getBytesAvailableMac(int port_num)
 {
   int bytes_available;
   ioctl(portData[port_num].socket_fd, FIONREAD, &bytes_available);
   return bytes_available;
 }
 
-int readPortLinux(int port_num, uint8_t *packet, int length)
+int readPortMac(int port_num, uint8_t *packet, int length)
 {
   return read(portData[port_num].socket_fd, packet, length);
 }
 
-int writePortLinux(int port_num, uint8_t *packet, int length)
+int writePortMac(int port_num, uint8_t *packet, int length)
 {
   return write(portData[port_num].socket_fd, packet, length);
 }
 
-void setPacketTimeoutLinux(int port_num, uint16_t packet_length)
+void setPacketTimeoutMac(int port_num, uint16_t packet_length)
 {
-  portData[port_num].packet_start_time = getCurrentTimeLinux();
+  portData[port_num].packet_start_time = getCurrentTimeMac();
   portData[port_num].packet_timeout = (portData[port_num].tx_time_per_byte * (double)packet_length) + (LATENCY_TIMER * 2.0) + 2.0;
 }
 
-void setPacketTimeoutMSecLinux(int port_num, double msec)
+void setPacketTimeoutMSecMac(int port_num, double msec)
 {
-  portData[port_num].packet_start_time = getCurrentTimeLinux();
+  portData[port_num].packet_start_time = getCurrentTimeMac();
   portData[port_num].packet_timeout = msec;
 }
 
-uint8_t isPacketTimeoutLinux(int port_num)
+uint8_t isPacketTimeoutMac(int port_num)
 {
-  if (getTimeSinceStartLinux(port_num) > portData[port_num].packet_timeout)
+  if (getTimeSinceStartMac(port_num) > portData[port_num].packet_timeout)
   {
     portData[port_num].packet_timeout = 0;
     return True;
@@ -205,25 +204,25 @@ uint8_t isPacketTimeoutLinux(int port_num)
   return False;
 }
 
-double getCurrentTimeLinux()
+double getCurrentTimeMac()
 {
   struct timespec tv;
   clock_gettime(CLOCK_REALTIME, &tv);
   return ((double)tv.tv_sec*1000.0 + (double)tv.tv_nsec*0.001*0.001);
 }
 
-double getTimeSinceStartLinux(int port_num)
+double getTimeSinceStartMac(int port_num)
 {
   double time_since_start;
 
-  time_since_start = getCurrentTimeLinux() - portData[port_num].packet_start_time;
+  time_since_start = getCurrentTimeMac() - portData[port_num].packet_start_time;
   if (time_since_start < 0.0)
-    portData[port_num].packet_start_time = getCurrentTimeLinux();
+    portData[port_num].packet_start_time = getCurrentTimeMac();
 
   return time_since_start;
 }
 
-uint8_t setupPortLinux(int port_num, int cflag_baud)
+uint8_t setupPortMac(int port_num, int cflag_baud)
 {
   struct termios newtio;
 
@@ -231,18 +230,20 @@ uint8_t setupPortLinux(int port_num, int cflag_baud)
 
   if (portData[port_num].socket_fd < 0)
   {
-    printf("[PortHandlerLinux::SetupPort] Error opening serial port!\n");
+    printf("[PortHandlerMac::SetupPort] Error opening serial port!\n");
     return False;
   }
 
   bzero(&newtio, sizeof(newtio)); // clear struct for new port settings
 
-  newtio.c_cflag = cflag_baud | CS8 | CLOCAL | CREAD;
+  newtio.c_cflag = CS8 | CLOCAL | CREAD;
   newtio.c_iflag = IGNPAR;
   newtio.c_oflag = 0;
   newtio.c_lflag = 0;
   newtio.c_cc[VTIME] = 0;
   newtio.c_cc[VMIN] = 0;
+  cfsetispeed(&newtio, cflag_baud);
+  cfsetospeed(&newtio, cflag_baud);
 
   // clean the buffer and activate the settings for the port
   tcflush(portData[port_num].socket_fd, TCIFLUSH);
@@ -252,34 +253,10 @@ uint8_t setupPortLinux(int port_num, int cflag_baud)
   return True;
 }
 
-uint8_t setCustomBaudrateLinux(int port_num, int speed)
+uint8_t setCustomBaudrateMac(int port_num, int speed)
 {
-  // try to set a custom divisor
-  struct serial_struct ss;
-  if (ioctl(portData[port_num].socket_fd, TIOCGSERIAL, &ss) != 0)
-  {
-    printf("[PortHandlerLinux::SetCustomBaudrate] TIOCGSERIAL failed!\n");
-    return False;
-  }
-
-  ss.flags = (ss.flags & ~ASYNC_SPD_MASK) | ASYNC_SPD_CUST;
-  ss.custom_divisor = (ss.baud_base + (speed / 2)) / speed;
-  int closest_speed = ss.baud_base / ss.custom_divisor;
-
-  if (closest_speed < speed * 98 / 100 || closest_speed > speed * 102 / 100)
-  {
-    printf("[PortHandlerLinux::setCustomBaudrate] Cannot set speed to %d, closest is %d \n", speed, closest_speed);
-    return False;
-  }
-
-  if (ioctl(portData[port_num].socket_fd, TIOCSSERIAL, &ss) < 0)
-  {
-    printf("[PortHandlerLinux::setCustomBaudrate] TIOCSSERIAL failed!\n");
-    return False;
-  }
-
-  portData[port_num].tx_time_per_byte = (1000.0 / (double)speed) * 10.0;
-  return True;
+  printf("[PortHandlerMac::SetCustomBaudrate] Not supported on Mac!\n");
+  return False;
 }
 
 int getCFlagBaud(int baudrate)
@@ -298,30 +275,31 @@ int getCFlagBaud(int baudrate)
       return B115200;
     case 230400:
       return B230400;
-    case 460800:
-      return B460800;
-    case 500000:
-      return B500000;
-    case 576000:
-      return B576000;
-    case 921600:
-      return B921600;
-    case 1000000:
-      return B1000000;
-    case 1152000:
-      return B1152000;
-    case 1500000:
-      return B1500000;
-    case 2000000:
-      return B2000000;
-    case 2500000:
-      return B2500000;
-    case 3000000:
-      return B3000000;
-    case 3500000:
-      return B3500000;
-    case 4000000:
-      return B4000000;
+    // Mac OS doesn't support over B230400
+    // case 460800:
+    //   return B460800;
+    // case 500000:
+    //   return B500000;
+    // case 576000:
+    //   return B576000;
+    // case 921600:
+    //   return B921600;
+    // case 1000000:
+    //   return B1000000;
+    // case 1152000:
+    //   return B1152000;
+    // case 1500000:
+    //   return B1500000;
+    // case 2000000:
+    //   return B2000000;
+    // case 2500000:
+    //   return B2500000;
+    // case 3000000:
+    //   return B3000000;
+    // case 3500000:
+    //   return B3500000;
+    // case 4000000:
+    //   return B4000000;
     default:
       return -1;
   }

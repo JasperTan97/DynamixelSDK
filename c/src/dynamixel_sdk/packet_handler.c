@@ -30,15 +30,22 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#ifdef __linux__
-#elif defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include <stdlib.h>
+
+#if defined(__linux__)
 #include "packet_handler.h"
 #include "protocol1_packet_handler.h"
 #include "protocol2_packet_handler.h"
+#elif defined(__APPLE__)
+#include "packet_handler.h"
+#include "protocol1_packet_handler.h"
+#include "protocol2_packet_handler.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "packet_handler.h"
+#include "protocol1_packet_handler.h"
+#include "protocol2_packet_handler.h"
+#endif
 
 void packetHandler()
 {

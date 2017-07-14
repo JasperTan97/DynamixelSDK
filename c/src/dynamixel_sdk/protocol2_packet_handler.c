@@ -30,15 +30,18 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#ifdef __linux__
+#if defined(__linux__)
+#include "protocol2_packet_handler.h"
+#elif defined(__APPLE__)
+#include "protocol2_packet_handler.h"
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
+#include "protocol2_packet_handler.h"
 #endif
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "protocol2_packet_handler.h"
 
 #define TXPACKET_MAX_LEN    (4*1024)
 #define RXPACKET_MAX_LEN    (4*1024)

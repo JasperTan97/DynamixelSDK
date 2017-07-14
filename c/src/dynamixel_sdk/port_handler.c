@@ -30,10 +30,17 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
+#if defined(__linux__)
 #include "port_handler.h"
-
-#ifdef __linux__
 #include "port_handler_linux.h"
+#elif defined(__APPLE__)
+#include "port_handler.h"
+#include "port_handler_mac.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "port_handler.h"
+#include "port_handler_windows.h"
+#endif
 
 int     portHandler         (const char *port_name) { return portHandlerLinux(port_name); }
 

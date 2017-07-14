@@ -30,14 +30,16 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#ifdef __linux__
+#include <stdlib.h>
+
+#if defined(__linux__)
+#include "group_sync_read.h"
+#elif defined(__APPLE__)
+#include "group_sync_read.h"
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
-#endif
-
-#include <stdlib.h>
 #include "group_sync_read.h"
-
+#endif
 
 typedef struct
 {
