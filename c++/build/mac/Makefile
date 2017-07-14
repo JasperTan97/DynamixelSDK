@@ -40,11 +40,6 @@ CXFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall -c $(INCLUDES) $(FORMAT) -fPIC -g
 INCLUDES    += -I$(DIR_DXL)/include/dynamixel_sdk
 
 #---------------------------------------------------------------------
-# Required external libraries
-#---------------------------------------------------------------------
-# LIBRARIES  += -lrt
-
-#---------------------------------------------------------------------
 # SDK Files
 #---------------------------------------------------------------------
 SOURCES  = src/dynamixel_sdk/group_bulk_read.cpp \

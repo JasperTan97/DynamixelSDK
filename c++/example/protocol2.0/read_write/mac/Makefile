@@ -36,14 +36,12 @@ CCFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall $(INCLUDES) -g
 CXFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall $(INCLUDES) -g
 LNKCC       = $(CX)
 LNKFLAGS    = $(CXFLAGS) #-Wl,-rpath,$(DIR_THOR)/lib
-# FORMAT      = -m64
 
 #---------------------------------------------------------------------
 # Core components (all of these are likely going to be needed)
 #---------------------------------------------------------------------
 INCLUDES   += -I$(DIR_DXL)/include/dynamixel_sdk
 LIBRARIES  += -ldxl_mac_cpp
-# LIBRARIES  += -lrt
 
 #---------------------------------------------------------------------
 # Files
