@@ -42,6 +42,8 @@ elseif strcmp(computer, 'GLNX86')
   lib_name = 'libdxl_x86_c';
 elseif strcmp(computer, 'GLNXA64')
   lib_name = 'libdxl_x64_c';
+elseif strcmp(computer, 'MAC')
+  lib_name = 'libdxl_mac_c';
 end
 
 calllib(lib_name, 'setDataWrite', port_num, protocol_version, data_length, data_pos, data);
