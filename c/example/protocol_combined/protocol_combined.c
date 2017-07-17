@@ -44,9 +44,9 @@
 //
 
 #if defined(__linux__) || defined(__APPLE__)
-#include <unistd.h>
 #include <fcntl.h>
 #include <termios.h>
+#define STDIN_FILENO 0
 #elif defined(_WIN32) || defined(_WIN64)
 #include <conio.h>
 #endif
