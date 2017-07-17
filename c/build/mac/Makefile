@@ -49,7 +49,7 @@ SOURCES  = src/dynamixel_sdk/group_bulk_read.c \
            src/dynamixel_sdk/port_handler.c \
            src/dynamixel_sdk/protocol1_packet_handler.c \
            src/dynamixel_sdk/protocol2_packet_handler.c \
-           src/dynamixel_sdk/port_handler_linux.c \
+           src/dynamixel_sdk/port_handler_mac.c \
 
 
 OBJECTS=$(addsuffix .o,$(addprefix $(DIR_OBJS)/,$(basename $(notdir $(SOURCES)))))

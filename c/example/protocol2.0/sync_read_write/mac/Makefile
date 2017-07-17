@@ -57,7 +57,7 @@ OBJECTS  = $(addsuffix .o,$(addprefix $(DIR_OBJS)/,$(basename $(notdir $(SOURCES
 # Compiling Rules
 #---------------------------------------------------------------------
 $(TARGET): make_directory $(OBJECTS)
-	$(LNKCC) $(LNKFLAGS) $(OBJECTS) -o $(TARGET)
+	$(LNKCC) $(LNKFLAGS) $(OBJECTS) -o $(TARGET) $(LIBRARIES)
 
 all: $(TARGET)
 

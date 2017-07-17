@@ -32,8 +32,8 @@ DIR_OBJS   = .objects
 # compiler options
 CC          = gcc
 CX          = g++
-CCFLAGS     = -O2 -O3 -DLINUX -D_GNU_SOURCE -Wall $(INCLUDES) -g
-CXFLAGS     = -O2 -O3 -DLINUX -D_GNU_SOURCE -Wall $(INCLUDES) -g
+CCFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall $(INCLUDES) -g
+CXFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall $(INCLUDES) -g
 LNKCC       = $(CX)
 LNKFLAGS    = $(CXFLAGS) #-Wl,-rpath,$(DIR_THOR)/lib
 
@@ -57,7 +57,7 @@ OBJECTS  = $(addsuffix .o,$(addprefix $(DIR_OBJS)/,$(basename $(notdir $(SOURCES
 # Compiling Rules
 #---------------------------------------------------------------------
 $(TARGET): make_directory $(OBJECTS)
-	$(LNKCC) $(LNKFLAGS) $(OBJECTS) -o $(TARGET)
+	$(LNKCC) $(LNKFLAGS) $(OBJECTS) -o $(TARGET) $(LIBRARIES)
 
 all: $(TARGET)
 
