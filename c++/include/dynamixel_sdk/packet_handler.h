@@ -34,9 +34,7 @@
 #define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PACKETHANDLER_H_
 
 #if defined(__OPENCR__)
-#define ERROR_PRINT  SerialBT2.print
-#else
-#define ERROR_PRINT  printf
+#include <Arduino.h>
 #endif
 
 #include <stdio.h>

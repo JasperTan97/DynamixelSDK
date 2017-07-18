@@ -183,11 +183,11 @@ int main()
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
   else
   {
@@ -198,11 +198,11 @@ int main()
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
   else
   {
@@ -235,29 +235,29 @@ int main()
     dxl_comm_result = packetHandler->write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index], &dxl_error);
     if (dxl_comm_result != COMM_SUCCESS)
     {
-      packetHandler->printTxRxResult(dxl_comm_result);
+      printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     }
     else if (dxl_error != 0)
     {
-      packetHandler->printRxPacketError(dxl_error);
+      printf("%s\n", packetHandler->getRxPacketError(dxl_error));
     }
 
     // Write Dynamixel#2 goal position
     dxl_comm_result = packetHandler->write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index], &dxl_error);
     if (dxl_comm_result != COMM_SUCCESS)
     {
-      packetHandler->printTxRxResult(dxl_comm_result);
+      printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     }
     else if (dxl_error != 0)
     {
-      packetHandler->printRxPacketError(dxl_error);
+      printf("%s\n", packetHandler->getRxPacketError(dxl_error));
     }
 
     do
     {
       // Bulkread present position and moving status
       dxl_comm_result = groupBulkRead.txRxPacket();
-      if (dxl_comm_result != COMM_SUCCESS) packetHandler->printTxRxResult(dxl_comm_result);
+      if (dxl_comm_result != COMM_SUCCESS) printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
 
       dxl_getdata_result = groupBulkRead.isAvailable(DXL1_ID, ADDR_MX_PRESENT_POSITION, LEN_MX_PRESENT_POSITION);
       if (dxl_getdata_result != true)
@@ -298,22 +298,22 @@ int main()
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
 
   // Disable Dynamixel#2 Torque
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
 
   // Close port

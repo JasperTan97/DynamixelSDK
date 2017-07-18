@@ -115,7 +115,13 @@ const char *Protocol2PacketHandler::getTxRxResult(int result)
 
 void Protocol2PacketHandler::printTxRxResult(int result)
 {
+#if defined(__OPENCR__)
+  Serial.print("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.print(getTxRxResult(result));
+#else
+  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
   printf("%s\n", getTxRxResult(result));
+#endif
 }
 
 const char *Protocol2PacketHandler::getRxPacketError(uint8_t error)
@@ -158,7 +164,13 @@ const char *Protocol2PacketHandler::getRxPacketError(uint8_t error)
 
 void Protocol2PacketHandler::printRxPacketError(uint8_t error)
 {
+#if defined(__OPENCR__)
+  Serial.print("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.print(getRxPacketError(error));
+#else
+  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
   printf("%s\n", getRxPacketError(error));
+#endif
 }
 
 unsigned short Protocol2PacketHandler::updateCRC(uint16_t crc_accum, uint8_t *data_blk_ptr, uint16_t data_blk_size)

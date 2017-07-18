@@ -232,12 +232,12 @@ void write(dynamixel::PortHandler *portHandler, dynamixel::PacketHandler *packet
 
   if (dxl_comm_result == COMM_SUCCESS)
   {
-    if (dxl_error != 0) packetHandler->printRxPacketError(dxl_error);
+    if (dxl_error != 0) printf("%s\n", packetHandler->getRxPacketError(dxl_error));
     fprintf(stderr, "\n Success to write\n\n");
   }
   else
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
@@ -267,7 +267,7 @@ void read(dynamixel::PortHandler *portHandler, dynamixel::PacketHandler *packetH
 
   if (dxl_comm_result == COMM_SUCCESS)
   {
-    if (dxl_error != 0) packetHandler->printRxPacketError(dxl_error);
+    if (dxl_error != 0) printf("%s\n", packetHandler->getRxPacketError(dxl_error));
 
     if (length == 1)
     {
@@ -284,7 +284,7 @@ void read(dynamixel::PortHandler *portHandler, dynamixel::PacketHandler *packetH
   }
   else
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     fprintf(stderr, "\n Fail to read! \n\n");
   }
 }
@@ -299,7 +299,7 @@ void dump(dynamixel::PortHandler *portHandler, dynamixel::PacketHandler *packetH
   if (dxl_comm_result == COMM_SUCCESS)
   {
     if (dxl_error != 0)
-      packetHandler->printRxPacketError(dxl_error);
+      printf("%s\n", packetHandler->getRxPacketError(dxl_error));
 
     if (id != BROADCAST_ID)
     {
@@ -311,7 +311,7 @@ void dump(dynamixel::PortHandler *portHandler, dynamixel::PacketHandler *packetH
   }
   else
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     fprintf(stderr, "\n Fail to read! \n\n");
   }
 

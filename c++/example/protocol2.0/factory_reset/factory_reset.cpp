@@ -181,12 +181,14 @@ int main()
   if (dxl_comm_result != COMM_SUCCESS)
   {
     printf("Aborted\n");
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     return 0;
   }
   else if (dxl_error != 0)
-    packetHandler->printRxPacketError(dxl_error);
-
+  {
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
+  }
+  
   // Wait for reset
   printf("Wait for reset...\n");
   msecSleep(2000);
@@ -210,11 +212,11 @@ int main()
   dxl_comm_result = packetHandler->read1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_BAUDRATE, &dxl_baudnum_read, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
   else
   {
@@ -225,11 +227,11 @@ int main()
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_BAUDRATE, NEW_BAUDNUM, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
   else
   {
@@ -255,11 +257,11 @@ int main()
   dxl_comm_result = packetHandler->read1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_BAUDRATE, &dxl_baudnum_read, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
   else
   {

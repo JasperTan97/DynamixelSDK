@@ -152,7 +152,7 @@ int main()
 
   // Try to broadcast ping the Dynamixel
   dxl_comm_result = packetHandler->broadcastPing(portHandler, vec);
-  if (dxl_comm_result != COMM_SUCCESS) packetHandler->printTxRxResult(dxl_comm_result);
+  if (dxl_comm_result != COMM_SUCCESS) printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
 
   printf("Detected Dynamixel : \n");
   for (int i = 0; i < (int)vec.size(); i++)

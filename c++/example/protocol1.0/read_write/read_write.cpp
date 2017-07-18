@@ -171,11 +171,11 @@ int main()
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
   else
   {
@@ -192,11 +192,11 @@ int main()
     dxl_comm_result = packetHandler->write2ByteTxRx(portHandler, DXL_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index], &dxl_error);
     if (dxl_comm_result != COMM_SUCCESS)
     {
-      packetHandler->printTxRxResult(dxl_comm_result);
+      printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
     }
     else if (dxl_error != 0)
     {
-      packetHandler->printRxPacketError(dxl_error);
+      printf("%s\n", packetHandler->getRxPacketError(dxl_error));
     }
 
     do
@@ -205,11 +205,11 @@ int main()
       dxl_comm_result = packetHandler->read2ByteTxRx(portHandler, DXL_ID, ADDR_MX_PRESENT_POSITION, &dxl_present_position, &dxl_error);
       if (dxl_comm_result != COMM_SUCCESS)
       {
-        packetHandler->printTxRxResult(dxl_comm_result);
+        printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
       }
       else if (dxl_error != 0)
       {
-        packetHandler->printRxPacketError(dxl_error);
+        printf("%s\n", packetHandler->getRxPacketError(dxl_error));
       }
 
       printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL_ID, dxl_goal_position[index], dxl_present_position);
@@ -231,11 +231,11 @@ int main()
   dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, DXL_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS)
   {
-    packetHandler->printTxRxResult(dxl_comm_result);
+    printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
   }
   else if (dxl_error != 0)
   {
-    packetHandler->printRxPacketError(dxl_error);
+    printf("%s\n", packetHandler->getRxPacketError(dxl_error));
   }
 
   // Close port
