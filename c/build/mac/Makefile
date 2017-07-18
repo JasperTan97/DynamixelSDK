@@ -14,7 +14,7 @@ MAJ_VERSION = 2
 MIN_VERSION = 0
 REV_VERSION = 0
 
-TARGET      = libdxl_mac_c.so
+TARGET      = libdxl_mac_c.dylib
 TARGET1     = $(TARGET).$(MAJ_VERSION)
 TARGET2     = $(TARGET).$(MAJ_VERSION).$(MIN_VERSION)
 TARGET3     = $(TARGET).$(MAJ_VERSION).$(MIN_VERSION).$(REV_VERSION)
@@ -34,8 +34,8 @@ SYMLINK     = ln -s
 MKDIR       = mkdir
 CC          = gcc
 CX          = g++
-CCFLAGS     = -O2 -O3 -DLINUX -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC -g
-CXFLAGS     = -O2 -O3 -DLINUX -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC -g
+CCFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC -g
+CXFLAGS     = -O2 -O3 -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC -g
 INCLUDES    += -I$(DIR_DXL)/include/dynamixel_sdk
 
 #---------------------------------------------------------------------

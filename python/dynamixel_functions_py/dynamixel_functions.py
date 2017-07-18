@@ -39,7 +39,7 @@ dxl_lib = cdll.LoadLibrary("../../c/build/win32/output/dxl_x86_c.dll")  # for wi
 # dxl_lib = cdll.LoadLibrary("../../c/build/linux32/libdxl_x86_c.so")     # for linux 32bit
 # dxl_lib = cdll.LoadLibrary("../../c/build/linux64/libdxl_x64_c.so")     # for linux 64bit
 # dxl_lib = cdll.LoadLibrary("../../c/build/linux_sbc/libdxl_sbc_c.so")   # for SBC linux
-# dxl_lib = cdll.LoadLibrary("../../c/build/mac/libdxl_mac_c.so")         # for Mac OS
+# dxl_lib = cdll.LoadLibrary("../../c/build/mac/libdxl_mac_c.dylib")      # for Mac OS
 
 # port_handler
 portHandler = dxl_lib.portHandler
