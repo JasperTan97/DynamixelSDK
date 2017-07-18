@@ -2,6 +2,16 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.7 (2017-07-18)
+-----------
+* hotfix - Bug in Dynamixel group control is solved temporarily
+* Contributors: Leon, Zerom
+
+3.4.6 (2017-07-07)
+-----------
+* hotfix - now DynamixelSDK for protocol1.0 supports read/write 4Byte (for XM series)
+* Contributors: Leon
+
 3.4.5 (2017-05-23)
 -----------
 * added option to check if the id of rxpacket is the same as the id of txpacket.
