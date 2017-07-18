@@ -67,6 +67,17 @@ void packetHandler()
   }
 }
 
+const char *getTxRxResult(int protocol_version, int result)
+{
+  if (protocol_version == 1)
+  {
+    return getTxRxResult1(result);
+  }
+  else
+  {
+    return getTxRxResult2(result);
+  }
+}
 void printTxRxResult(int protocol_version, int result)
 {
   if (protocol_version == 1)
@@ -76,6 +87,17 @@ void printTxRxResult(int protocol_version, int result)
   else
   {
     printTxRxResult2(result);
+  }
+}
+const char *getRxPacketError(int protocol_version, uint8_t error)
+{
+  if (protocol_version == 1)
+  {
+    return getRxPacketError1(error);
+  }
+  else
+  {
+    return getRxPacketError2(error);
   }
 }
 void printRxPacketError(int protocol_version, uint8_t error)

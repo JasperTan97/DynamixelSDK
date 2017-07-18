@@ -179,12 +179,12 @@ int main()
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
     printf("Aborted\n");
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     return 0;
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
 
   // Wait for reset
@@ -210,11 +210,11 @@ int main()
   dxl_baudnum_read = read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_PRO_BAUDRATE);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {
@@ -225,11 +225,11 @@ int main()
   write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_PRO_BAUDRATE, NEW_BAUDNUM);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {
@@ -255,11 +255,11 @@ int main()
   dxl_baudnum_read = read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_PRO_BAUDRATE);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {

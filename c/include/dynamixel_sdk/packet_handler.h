@@ -90,7 +90,9 @@ PacketData *packetData;
 
 WINDECLSPEC void        packetHandler       ();
 
+WINDECLSPEC const char *getTxRxResult       (int protocol_version, int result);
 WINDECLSPEC void        printTxRxResult     (int protocol_version, int result);
+WINDECLSPEC const char *getRxPacketError    (int protocol_version, uint8_t error);
 WINDECLSPEC void        printRxPacketError  (int protocol_version, uint8_t error);
 
 WINDECLSPEC int         getLastTxRxResult   (int port_num, int protocol_version);

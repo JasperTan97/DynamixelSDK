@@ -149,7 +149,7 @@ int main()
   // Try to broadcast ping the Dynamixel
   broadcastPing(port_num, PROTOCOL_VERSION);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 
   printf("Detected Dynamixel : \n");
   for (id = 0; id < MAX_ID; id++)

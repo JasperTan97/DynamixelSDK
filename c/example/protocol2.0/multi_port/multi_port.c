@@ -197,11 +197,11 @@ int main()
   write1ByteTxRx(port_num1, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num1, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num1, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {
@@ -212,11 +212,11 @@ int main()
   write1ByteTxRx(port_num2, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num2, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num2, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {
@@ -233,22 +233,22 @@ int main()
     write4ByteTxRx(port_num1, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_GOAL_POSITION, dxl_goal_position[index]);
     if ((dxl_comm_result = getLastTxRxResult(port_num1, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = getLastRxPacketError(port_num1, PROTOCOL_VERSION)) != 0)
     {
-      printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
 
     // Write Dynamixel#2 goal position
     write4ByteTxRx(port_num2, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_GOAL_POSITION, dxl_goal_position[index]);
     if ((dxl_comm_result = getLastTxRxResult(port_num2, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = getLastRxPacketError(port_num2, PROTOCOL_VERSION)) != 0)
     {
-      printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
 
     do
@@ -257,22 +257,22 @@ int main()
     	dxl1_present_position = read4ByteTxRx(port_num1, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_PRESENT_POSITION);
       if ((dxl_comm_result = getLastTxRxResult(port_num1, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = getLastRxPacketError(port_num1, PROTOCOL_VERSION)) != 0)
       {
-        printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
 
       // Read Dynamixel#2 present position
       dxl2_present_position = read4ByteTxRx(port_num2, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_PRESENT_POSITION);
       if ((dxl_comm_result = getLastTxRxResult(port_num2, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = getLastRxPacketError(port_num2, PROTOCOL_VERSION)) != 0)
       {
-        printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
 
       printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\t[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL1_ID, dxl_goal_position[index], dxl1_present_position, DXL2_ID, dxl_goal_position[index], dxl2_present_position);
@@ -294,22 +294,22 @@ int main()
   write1ByteTxRx(port_num1, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num1, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num1, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
 
   // Disable Dynamixel#2 Torque
   write1ByteTxRx(port_num2, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num2, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num2, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
 
   // Close port1

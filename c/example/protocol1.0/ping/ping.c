@@ -154,11 +154,11 @@ int main()
   dxl_model_number = pingGetModelNum(port_num, PROTOCOL_VERSION, DXL_ID);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
 
   printf("[ID:%03d] ping Succeeded. Dynamixel model number : %d\n", DXL_ID, dxl_model_number);

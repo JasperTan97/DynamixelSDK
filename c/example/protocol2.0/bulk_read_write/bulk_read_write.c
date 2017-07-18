@@ -186,11 +186,11 @@ int main()
   write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {
@@ -201,11 +201,11 @@ int main()
   write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
   else
   {
@@ -253,7 +253,7 @@ int main()
     // Bulkwrite goal position and LED value
     groupBulkWriteTxPacket(groupwrite_num);
     if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-      printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 
     // Clear bulkwrite parameter storage
     groupBulkWriteClearParam(groupwrite_num);
@@ -263,7 +263,7 @@ int main()
       // Bulkread present position and LED status
       groupBulkReadTxRxPacket(groupread_num);
       if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-        printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 
       // Check if groupbulkread data of Dynamixel#1 is available
       dxl_getdata_result = groupBulkReadIsAvailable(groupread_num, DXL1_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION);
@@ -306,22 +306,22 @@ int main()
   write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
 
   // Disable Dynamixel#2 Torque
   write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
   if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
   {
-    printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
   }
   else if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
   {
-    printRxPacketError(PROTOCOL_VERSION, dxl_error);
+    printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
 
   // Close port

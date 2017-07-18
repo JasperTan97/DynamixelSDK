@@ -232,12 +232,12 @@ void writeNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t add
   if ((dxl_comm_result = getLastTxRxResult(port_num, protocol_version)) == COMM_SUCCESS)
   {
     if ((dxl_error = getLastRxPacketError(port_num, protocol_version)) != 0)
-			printRxPacketError(protocol_version, dxl_error);
+			printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
     fprintf(stderr, "\n Success to write\n\n");
   }
   else
   {
-    printTxRxResult(protocol_version, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
@@ -267,7 +267,7 @@ void readNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t addr
   if ((dxl_comm_result = getLastTxRxResult(port_num, protocol_version)) == COMM_SUCCESS)
   {
     if ((dxl_error = getLastRxPacketError(port_num, protocol_version)) != 0)
-			printRxPacketError(protocol_version, dxl_error);
+			printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
 
     if (length == 1)
     {
@@ -284,7 +284,7 @@ void readNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t addr
   }
   else
   {
-    printTxRxResult(protocol_version, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
