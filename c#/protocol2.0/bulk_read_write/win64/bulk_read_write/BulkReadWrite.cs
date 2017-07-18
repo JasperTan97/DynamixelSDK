@@ -41,6 +41,7 @@
 //
 
 using System;
+using System.Runtime.InteropServices;
 using dynamixel_sdk;
 
 namespace bulk_read_write
@@ -66,7 +67,7 @@ namespace bulk_read_write
     public const int DXL1_ID                         = 1;                   // Dynamixel ID: 1
     public const int DXL2_ID                         = 2;                   // Dynamixel ID: 2
     public const int BAUDRATE                        = 57600;
-    public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
+    public const string DEVICENAME                   = "COM1";              // Check which port is being used on your controller
                                                                             // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     public const int TORQUE_ENABLE                   = 1;                   // Value for enabling the torque
@@ -137,11 +138,11 @@ namespace bulk_read_write
       dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
       else
       {
@@ -152,11 +153,11 @@ namespace bulk_read_write
       dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
       else
       {
@@ -204,7 +205,7 @@ namespace bulk_read_write
         // Bulkwrite goal position and LED value
         dynamixel.groupBulkWriteTxPacket(groupwrite_num);
         if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-          Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+          Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
 
         // Clear bulkwrite parameter storage
         dynamixel.groupBulkWriteClearParam(groupwrite_num);
@@ -214,7 +215,7 @@ namespace bulk_read_write
           // Bulkread present position and moving status
           dynamixel.groupBulkReadTxRxPacket(groupread_num);
           if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-            Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+            Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
 
           dxl_getdata_result = dynamixel.groupBulkReadIsAvailable(groupread_num, DXL1_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION);
           if (dxl_getdata_result != true)
@@ -255,22 +256,22 @@ namespace bulk_read_write
       dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
 
       // Disable Dynamixel#2 Torque
       dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
 
       // Close port

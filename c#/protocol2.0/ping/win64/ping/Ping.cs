@@ -41,6 +41,7 @@
 //
 
 using System;
+using System.Runtime.InteropServices;
 using dynamixel_sdk;
 
 namespace ping
@@ -53,7 +54,7 @@ namespace ping
     // Default setting
     public const int DXL_ID                          = 1;                   // Dynamixel ID: 1
     public const int BAUDRATE                        = 57600;
-    public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
+    public const string DEVICENAME                   = "COM1";              // Check which port is being used on your controller
                                                                             // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     public const byte ESC_ASCII_VALUE                = 0x1b;
@@ -107,11 +108,11 @@ namespace ping
       dxl_model_number = dynamixel.pingGetModelNum(port_num, PROTOCOL_VERSION, DXL_ID);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
 
       Console.WriteLine("[ID: {0}] ping Succeeded. Dynamixel model number : {1}", DXL_ID, dxl_model_number);
