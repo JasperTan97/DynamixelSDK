@@ -124,12 +124,12 @@ namespace factory_reset
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
         Console.WriteLine("Aborted");
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
         return;
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
 
       // Wait for reset
@@ -155,11 +155,11 @@ namespace factory_reset
       dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_PRO_BAUDRATE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
       else
       {
@@ -170,11 +170,11 @@ namespace factory_reset
       dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_PRO_BAUDRATE, NEW_BAUDNUM);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
       else
       {
@@ -200,11 +200,11 @@ namespace factory_reset
       dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_PRO_BAUDRATE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
       else
       {

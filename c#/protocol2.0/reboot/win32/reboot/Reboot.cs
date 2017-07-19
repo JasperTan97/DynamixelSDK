@@ -111,11 +111,11 @@ namespace reboot
       dynamixel.reboot(port_num, PROTOCOL_VERSION, DXL_ID);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
 
       Console.WriteLine("[ID: {0}] reboot Succeeded", DXL_ID);
