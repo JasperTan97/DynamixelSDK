@@ -108,8 +108,9 @@ end
 
 % Try to broadcast ping the Dynamixel
 broadcastPing(port_num, PROTOCOL_VERSION);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION, getLastTxRxResult(port_num, PROTOCOL_VERSION));
+dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION);
+if dxl_comm_result ~= COMM_SUCCESS
+    fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 end
 
 fprintf('Detected Dynamixel : \n');

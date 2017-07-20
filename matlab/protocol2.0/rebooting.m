@@ -113,10 +113,12 @@ fprintf('See the Dynamixel LED flickering\n');
 % Try reboot
 % Dynamixel LED will flicker while it reboots
 reboot(port_num, PROTOCOL_VERSION, DXL_ID);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION, getLastTxRxResult(port_num, PROTOCOL_VERSION));
-elseif getLastRxPacketError(port_num, PROTOCOL_VERSION) ~= 0
-    printRxPacketError(PROTOCOL_VERSION, getLastRxPacketError(port_num, PROTOCOL_VERSION));
+dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION);
+dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION);
+if dxl_comm_result ~= COMM_SUCCESS
+    fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+elseif dxl_error ~= 0
+    fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION, dxl_error));
 end
 
 fprintf('[ID:%03d] reboot Succeeded\n', DXL_ID);

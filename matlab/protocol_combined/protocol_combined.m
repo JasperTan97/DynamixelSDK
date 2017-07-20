@@ -149,20 +149,24 @@ end
 
 % Enable Dynamixel#1 torque
 write1ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION1) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION1, getLastTxRxResult(port_num, PROTOCOL_VERSION1));
-elseif getLastRxPacketError(port_num, PROTOCOL_VERSION1) ~= 0
-    printRxPacketError(PROTOCOL_VERSION1, getLastRxPacketError(port_num, PROTOCOL_VERSION1));
+dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION1);
+dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION1);
+if dxl_comm_result ~= COMM_SUCCESS
+    fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result));
+elseif dxl_error ~= 0
+    fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION1, dxl_error));
 else
     fprintf('Dynamixel #%d has been successfully connected \n', DXL1_ID);
 end
 
 % Enable Dynamixel#2 torque
 write1ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION2) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION2, getLastTxRxResult(port_num, PROTOCOL_VERSION2));
-elseif getLastRxPacketError(port_num, PROTOCOL_VERSION2) ~= 0
-    printRxPacketError(PROTOCOL_VERSION2, getLastRxPacketError(port_num, PROTOCOL_VERSION2));
+dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2);
+dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION2);
+if dxl_comm_result ~= COMM_SUCCESS
+    fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
+elseif dxl_error ~= 0
+    fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION2, dxl_error));
 else
     fprintf('Dynamixel #%d has been successfully connected \n', DXL2_ID);
 end
@@ -175,35 +179,43 @@ while 1
 
     % Write Dynamixel#1 goal position
     write2ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_GOAL_POSITION, dxl1_goal_position(index));
-    if getLastTxRxResult(port_num, PROTOCOL_VERSION1) ~= COMM_SUCCESS
-        printTxRxResult(PROTOCOL_VERSION1, getLastTxRxResult(port_num, PROTOCOL_VERSION1));
-    elseif getLastRxPacketError(port_num, PROTOCOL_VERSION1) ~= 0
-        printRxPacketError(PROTOCOL_VERSION1, getLastRxPacketError(port_num, PROTOCOL_VERSION1));
+    dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION1);
+    dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION1);
+    if dxl_comm_result ~= COMM_SUCCESS
+        fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result));
+    elseif dxl_error ~= 0
+        fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION1, dxl_error));
     end
 
     % Write Dynamixel#2 goal position
     write4ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_GOAL_POSITION, typecast(int32(dxl2_goal_position(index)), 'uint32'));
-    if getLastTxRxResult(port_num, PROTOCOL_VERSION2) ~= COMM_SUCCESS
-        printTxRxResult(PROTOCOL_VERSION2, getLastTxRxResult(port_num, PROTOCOL_VERSION2));
-    elseif getLastRxPacketError(port_num, PROTOCOL_VERSION2) ~= 0
-        printRxPacketError(PROTOCOL_VERSION2, getLastRxPacketError(port_num, PROTOCOL_VERSION2));
+    dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2);
+    dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION2);
+    if dxl_comm_result ~= COMM_SUCCESS
+        fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
+    elseif dxl_error ~= 0
+        fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION2, dxl_error));
     end
 
     while 1
       % Read Dynamixel#1 present position
     	dxl1_present_position = read2ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_PRESENT_POSITION);
-      if getLastTxRxResult(port_num, PROTOCOL_VERSION1) ~= COMM_SUCCESS
-          printTxRxResult(PROTOCOL_VERSION1, getLastTxRxResult(port_num, PROTOCOL_VERSION1));
-      elseif getLastRxPacketError(port_num, PROTOCOL_VERSION1) ~= 0
-          printRxPacketError(PROTOCOL_VERSION1, getLastRxPacketError(port_num, PROTOCOL_VERSION1));
+      dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION1);
+      dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION1);
+      if dxl_comm_result ~= COMM_SUCCESS
+          fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result));
+      elseif dxl_error ~= 0
+          fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION1, dxl_error));
       end
 
       % Read Dynamixel#2 present position
       dxl2_present_position = read4ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_PRESENT_POSITION);
-      if getLastTxRxResult(port_num, PROTOCOL_VERSION2) ~= COMM_SUCCESS
-          printTxRxResult(PROTOCOL_VERSION2, getLastTxRxResult(port_num, PROTOCOL_VERSION2));
-      elseif getLastRxPacketError(port_num, PROTOCOL_VERSION2) ~= 0
-          printRxPacketError(PROTOCOL_VERSION2, getLastRxPacketError(port_num, PROTOCOL_VERSION2));
+      dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2);
+      dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION2);
+      if dxl_comm_result ~= COMM_SUCCESS
+          fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
+      elseif dxl_error ~= 0
+          fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION2, dxl_error));
       end
 
       fprintf('[ID:%03d] GoalPos:%03d  PresPos:%03d [ID:%03d] GoalPos:%03d  PresPos:%03d\n', DXL1_ID, dxl1_goal_position(index), dxl1_present_position, DXL2_ID, dxl2_goal_position(index), typecast(uint32(dxl2_present_position), 'int32'));
@@ -223,18 +235,22 @@ end
 
   % Disable Dynamixel#1 Torque
   write1ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION1) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION1, getLastTxRxResult(port_num, PROTOCOL_VERSION1));
-elseif getLastRxPacketError(port_num, PROTOCOL_VERSION1) ~= 0
-    printRxPacketError(PROTOCOL_VERSION1, getLastRxPacketError(port_num, PROTOCOL_VERSION1));
+  dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION1);
+  dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION1);
+  if dxl_comm_result ~= COMM_SUCCESS
+      fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result));
+  elseif dxl_error ~= 0
+      fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION1, dxl_error));
 end
 
   % Disable Dynamixel#2 Torque
   write1ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION2) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION2, getLastTxRxResult(port_num, PROTOCOL_VERSION2));
-elseif getLastRxPacketError(port_num, PROTOCOL_VERSION2) ~= 0
-    printRxPacketError(PROTOCOL_VERSION2, getLastRxPacketError(port_num, PROTOCOL_VERSION2));
+  dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2);
+  dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION2);
+  if dxl_comm_result ~= COMM_SUCCESS
+      fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
+  elseif dxl_error ~= 0
+      fprintf('%s\n', getRxPacketError(PROTOCOL_VERSION2, dxl_error));
 end
 
 
