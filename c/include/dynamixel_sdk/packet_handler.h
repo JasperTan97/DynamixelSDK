@@ -35,6 +35,7 @@
 
 
 #include <stdio.h>
+#include <stdint.h>
 #include "robotis_def.h"
 #include "port_handler.h"
 
@@ -42,12 +43,12 @@
 #define MAX_ID              0xFC    // 252
 
 /* Macro for Control Table Value */
-#define DXL_MAKEWORD(a, b)  ((unsigned short)(((unsigned char)(((unsigned long)(a)) & 0xff)) | ((unsigned short)((unsigned char)(((unsigned long)(b)) & 0xff))) << 8))
-#define DXL_MAKEDWORD(a, b) ((unsigned int)(((unsigned short)(((unsigned long)(a)) & 0xffff)) | ((unsigned int)((unsigned short)(((unsigned long)(b)) & 0xffff))) << 16))
-#define DXL_LOWORD(l)       ((unsigned short)(((unsigned long)(l)) & 0xffff))
-#define DXL_HIWORD(l)       ((unsigned short)((((unsigned long)(l)) >> 16) & 0xffff))
-#define DXL_LOBYTE(w)       ((unsigned char)(((unsigned long)(w)) & 0xff))
-#define DXL_HIBYTE(w)       ((unsigned char)((((unsigned long)(w)) >> 8) & 0xff))
+#define DXL_MAKEWORD(a, b)  ((uint16_t)(((uint8_t)(((uint64_t)(a)) & 0xff)) | ((uint16_t)((uint8_t)(((uint64_t)(b)) & 0xff))) << 8))
+#define DXL_MAKEDWORD(a, b) ((uint32_t)(((uint16_t)(((uint64_t)(a)) & 0xffff)) | ((uint32_t)((uint16_t)(((uint64_t)(b)) & 0xffff))) << 16))
+#define DXL_LOWORD(l)       ((uint16_t)(((uint64_t)(l)) & 0xffff))
+#define DXL_HIWORD(l)       ((uint16_t)((((uint64_t)(l)) >> 16) & 0xffff))
+#define DXL_LOBYTE(w)       ((uint8_t)(((uint64_t)(w)) & 0xff))
+#define DXL_HIBYTE(w)       ((uint8_t)((((uint64_t)(w)) >> 8) & 0xff))
 
 /* Instruction for DXL Protocol */
 #define INST_PING           1

@@ -11,6 +11,7 @@
 * Alternative : Include port_handler.h through relative path. #90
 * Changes : Indent correction / Example tests & refresh / OS IFDEF
 * Changes : Default Baudrate from 1000000(1M) bps to 57600 bps
+* Changes : Macro for control table value changed to uints 
 * Deprecated : printTxRxResult, printRxPacketError function will be unavailable in Dynamixel SDK 3.6.1
 
 ==============================================
