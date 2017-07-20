@@ -104,7 +104,7 @@ public class BroadcastPing
     // Try to broadcast ping the Dynamixel
     dynamixel.broadcastPing(port_num, PROTOCOL_VERSION);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 
     System.out.println("Detected Dynamixel :");
     for (id = 0; id < MAX_ID; id++)

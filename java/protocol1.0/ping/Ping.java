@@ -108,11 +108,11 @@ public class Ping
     dxl_model_number = dynamixel.pingGetModelNum(port_num, PROTOCOL_VERSION, DXL_ID);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
 
     System.out.printf("[ID: %d] ping Succeeded. Dynamixel model number : %d", DXL_ID, dxl_model_number);

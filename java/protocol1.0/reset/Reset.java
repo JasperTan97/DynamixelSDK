@@ -123,12 +123,12 @@ public class Reset
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
       System.out.println("Aborted");
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       return;
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
 
     // Wait for reset
@@ -161,11 +161,11 @@ public class Reset
     dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
     else
     {
@@ -176,11 +176,11 @@ public class Reset
     dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE, NEW_BAUDNUM);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
     else
     {
@@ -213,11 +213,11 @@ public class Reset
     dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
     else
     {

@@ -139,11 +139,11 @@ public class BulkReadWrite
     dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
     else
     {
@@ -154,11 +154,11 @@ public class BulkReadWrite
     dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
     else
     {
@@ -206,7 +206,7 @@ public class BulkReadWrite
       // Bulkwrite goal position and LED value
       dynamixel.groupBulkWriteTxPacket(groupwrite_num);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 
       // Clear bulkwrite parameter storage
       dynamixel.groupBulkWriteClearParam(groupwrite_num);
@@ -216,7 +216,7 @@ public class BulkReadWrite
         // Bulkread present position and moving status
         dynamixel.groupBulkReadTxRxPacket(group_num);
         if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
-          dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+          System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 
         dxl_getdata_result = dynamixel.groupBulkReadIsAvailable(group_num, DXL1_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION);
         if (dxl_getdata_result != true)
@@ -258,22 +258,22 @@ public class BulkReadWrite
     dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
 
     // Disable Dynamixel#2 Torque
     dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE);
     if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
     {
-      dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+      System.out.println(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     }
     else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
     {
-      dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+      System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
 
     // Close port

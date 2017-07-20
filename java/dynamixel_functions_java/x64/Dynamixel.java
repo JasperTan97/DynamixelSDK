@@ -59,7 +59,9 @@ interface LibFunction extends Library
   public void    packetHandler           ();
 
   public void    printTxRxResult         (int protocol_version, int result);
+  public String  getTxRxResult           (int protocol_version, int result);
   public void    printRxPacketError      (int protocol_version, byte error);
+  public String  getRxPacketError        (int protocol_version, byte error);
 
   public int     getLastTxRxResult       (int port_num, int protocol_version);
   public byte    getLastRxPacketError    (int port_num, int protocol_version);
@@ -241,9 +243,17 @@ public class Dynamixel
   {
     libFunction.printTxRxResult(protocol_version, result);
   }
+  public String getTxRxResult(int protocol_version, int result)
+  {
+    return libFunction.getTxRxResult(protocol_version, result);
+  }
   public void printRxPacketError(int protocol_version, byte error)
   {
     libFunction.printRxPacketError(protocol_version, error);
+  }
+  public String getRxPacketError(int protocol_version, byte error)
+  {
+    return libFunction.getRxPacketError(protocol_version, error);
   }
 
   public int getLastTxRxResult(int port_num, int protocol_version)
