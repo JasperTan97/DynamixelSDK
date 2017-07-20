@@ -108,8 +108,9 @@ else:
 
 # Try to broadcast ping the Dynamixel
 dynamixel.broadcastPing(port_num, PROTOCOL_VERSION)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
 
 print("Detected Dynamixel : ")
 for id in range(0, MAX_ID):

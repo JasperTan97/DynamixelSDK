@@ -128,12 +128,13 @@ print("Now the controller baudrate is : %d" % (dynamixel.getBaudRate(port_num)))
 # Try factoryreset
 print("[ID:%03d] Try factoryreset : " % (DXL_ID))
 dynamixel.factoryReset(port_num, PROTOCOL_VERSION, DXL_ID, OPERATION_MODE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION) != COMM_SUCCESS:
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)
+if dxl_comm_result != COMM_SUCCESS:
     print("Aborted")
-    dynamixel.printTxRxResult(PROTOCOL_VERSION, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION))
-    quit()
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION))
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error))
 
 
 # Wait for reset
@@ -152,19 +153,23 @@ else:
 
 # Read Dynamixel baudnum
 dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error))
 else:
   print("[ID:%03d] Dynamixel baudnum is now : %d" % (DXL_ID, dxl_baudnum_read))
 
 # Write new baudnum
 dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE, NEW_BAUDNUM)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error))
 else:
   print("[ID:%03d] Set Dynamixel baudnum to : %d" % (DXL_ID, NEW_BAUDNUM))
 
@@ -180,10 +185,12 @@ sleep(0.2)
 
 # Read Dynamixel baudnum
 dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error))
 else:
   print("[ID:%03d] Dynamixel baudnum is now : %d" % (DXL_ID, dxl_baudnum_read))
 
