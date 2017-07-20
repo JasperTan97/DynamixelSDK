@@ -7,6 +7,7 @@ To use DynamixelSDK ver. c++ in Arduino version,
   * package.xml
 3. Change folder name from "c++" to "DynamixelSDK"
 4. Put newly made "DynamixelSDK" folder into the libraries/ of Arduino IDE
+5. DynamixelSDK example for Arduino can be referred in the [OpenCR Repository](https://github.com/ROBOTIS-GIT/OpenCR/tree/master/arduino/opencr_arduino/opencr/libraries/OpenCR/examples/07.%20DynamixelSDK)
 
 To use DynamixelSDK ver. c++ in ROS package,
 
