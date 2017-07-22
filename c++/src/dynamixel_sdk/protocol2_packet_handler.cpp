@@ -37,7 +37,7 @@
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
 #include "protocol2_packet_handler.h"
-#elif defined(__OPENCR__)
+#elif defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
 #include "../../include/dynamixel_sdk/protocol2_packet_handler.h"
 #endif
 
@@ -115,9 +115,9 @@ const char *Protocol2PacketHandler::getTxRxResult(int result)
 
 void Protocol2PacketHandler::printTxRxResult(int result)
 {
-#if defined(__OPENCR__)
-  Serial.print("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.print(getTxRxResult(result));
+#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.println(getTxRxResult(result));
 #else
   printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
   printf("%s\n", getTxRxResult(result));
@@ -164,9 +164,9 @@ const char *Protocol2PacketHandler::getRxPacketError(uint8_t error)
 
 void Protocol2PacketHandler::printRxPacketError(uint8_t error)
 {
-#if defined(__OPENCR__)
-  Serial.print("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.print(getRxPacketError(error));
+#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.println(getRxPacketError(error));
 #else
   printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
   printf("%s\n", getRxPacketError(error));

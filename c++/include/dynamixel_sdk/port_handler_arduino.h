@@ -30,9 +30,12 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERARDUINO_H_
-#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERARDUINO_H_
+#ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_ARDUINO_PORTHANDLERARDUINO_H_
+#define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_ARDUINO_PORTHANDLERARDUINO_H_
 
+#if defined(ARDUINO) || defined(__OPENCR__) || defined (__OPENCM904__)
+#include <Arduino.h>
+#endif
 
 #include "port_handler.h"
 
@@ -49,6 +52,10 @@ class PortHandlerArduino : public PortHandler
   double  packet_start_time_;
   double  packet_timeout_;
   double  tx_time_per_byte;
+
+#if defined(__OPENCM904__)
+  UARTClass *p_dxl_serial;
+#endif
 
   bool    setupPort(const int cflag_baud);
 
@@ -89,4 +96,4 @@ class PortHandlerArduino : public PortHandler
 }
 
 
-#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_LINUX_PORTHANDLERARDUINO_H_ */
+#endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_ARDUINO_PORTHANDLERARDUINO_H_ */

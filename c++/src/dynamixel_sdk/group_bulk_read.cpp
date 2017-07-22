@@ -40,7 +40,7 @@
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
 #include "group_bulk_read.h"
-#elif defined(__OPENCR__)
+#elif defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
 #include "../../include/dynamixel_sdk/group_bulk_read.h"
 #endif
 

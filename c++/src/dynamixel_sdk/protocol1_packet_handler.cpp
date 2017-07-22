@@ -37,7 +37,7 @@
 #elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
 #include "protocol1_packet_handler.h"
-#elif defined(__OPENCR__)
+#elif defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
 #include "../../include/dynamixel_sdk/protocol1_packet_handler.h"
 #endif
 
@@ -109,9 +109,9 @@ const char *Protocol1PacketHandler::getTxRxResult(int result)
 
 void Protocol1PacketHandler::printTxRxResult(int result)
 {
-#if defined(__OPENCR__)
-  Serial.print("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.print(getTxRxResult(result));
+#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.println(getTxRxResult(result));
 #else
   printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
   printf("%s\n", getTxRxResult(result));
@@ -146,9 +146,9 @@ const char *Protocol1PacketHandler::getRxPacketError(uint8_t error)
 
 void Protocol1PacketHandler::printRxPacketError(uint8_t error)
 {
-#if defined(__OPENCR__)
-  Serial.print("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.print(getRxPacketError(error));
+#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.println(getRxPacketError(error));
 #else
   printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
   printf("%s\n", getRxPacketError(error));
@@ -217,7 +217,7 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
 
       if (idx == 0)   // found at the beginning of the packet
       {
-        if (rxpacket[PKT_ID] > 0xFD ||                   // unavailable ID
+        if (rxpacket[PKT_ID] > 0xFD ||                  // unavailable ID
            rxpacket[PKT_LENGTH] > RXPACKET_MAX_LEN ||   // unavailable Length
            rxpacket[PKT_ERROR] >= 0x64)                 // unavailable Error
         {
