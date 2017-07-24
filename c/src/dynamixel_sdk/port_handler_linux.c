@@ -51,7 +51,7 @@ typedef struct
 {
   int     socket_fd;
   int     baudrate;
-  char    port_name[30];
+  char    port_name[100];
 
   double  packet_start_time;
   double  packet_timeout;

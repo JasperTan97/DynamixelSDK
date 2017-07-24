@@ -50,7 +50,7 @@ class PortHandlerLinux : public PortHandler
  private:
   int     socket_fd_;
   int     baudrate_;
-  char    port_name_[30];
+  char    port_name_[100];
 
   double  packet_start_time_;
   double  packet_timeout_;

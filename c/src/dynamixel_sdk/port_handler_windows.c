@@ -46,7 +46,7 @@ typedef struct
   LARGE_INTEGER freq, counter;
 
   int     baudrate;
-  char    port_name[30];
+  char    port_name[100];
 
   double  packet_start_time;
   double  packet_timeout;

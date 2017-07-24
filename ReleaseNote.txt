@@ -2,15 +2,16 @@
     Dynamixel SDK 3.5.1 (Protocol 1.0/2.0)
 ==============================================
 
--
+- 08.18.2017
 
-* Mac OS supports DynamixelSDK
+* Mac OS supports DynamixelSDK #51
 * DynamixelSDK lib for Arduino (Arduino / OpenCR / OpenCM9.04) uploaded
 * DynamixelSDK example for Arduino uploaded. It can be referred in OpenCR Repository (https://github.com/ROBOTIS-GIT/OpenCR/tree/master/arduino/opencr_arduino/opencr/libraries/OpenCR/examples/07.%20DynamixelSDK)
 * DynamixelSDK LabVIEW can get communication result and Dynamixel error
 * Standardizes folder structure of c, c++, ROS and Arduino c++ languages
 * Fixes : Inconvenient way of getting meaning of packet result and error value #67
 * Fixes : Misleading indentation warning in group_sync_read.c #91
+* Fixes : Maximum length of port name is expanded to 100 #100
 * Alternative : Include port_handler.h through relative path. #90
 * Changes : Indent correction / Example tests & refresh / OS IFDEF
 * Changes : Default Baudrate from 1000000(1M) bps to 57600 bps
