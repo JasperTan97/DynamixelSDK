@@ -157,13 +157,13 @@ int main()
   if (dxl_comm_result != COMM_SUCCESS)
   {
     packetHandler->printTxRxResult(dxl_comm_result);
+    printf("[ID:%03d] ping Succeeded. Dynamixel model number : %d\n", DXL_ID, dxl_model_number);
   }
   else if (dxl_error != 0)
   {
     packetHandler->printRxPacketError(dxl_error);
+    printf("ping Failed\n");
   }
-
-  printf("[ID:%03d] ping Succeeded. Dynamixel model number : %d\n", DXL_ID, dxl_model_number);
 
   // Close port
   portHandler->closePort();
