@@ -156,7 +156,7 @@ int GroupBulkWrite::txPacket()
   if (ph_->getProtocolVersion() == 1.0 || id_list_.size() == 0)
     return COMM_NOT_AVAILABLE;
 
-  if (is_param_changed_ == true)
+  if (is_param_changed_ == true || param_ == 0)
     makeParam();
 
   return ph_->bulkWriteTxOnly(port_, param_, param_length_);

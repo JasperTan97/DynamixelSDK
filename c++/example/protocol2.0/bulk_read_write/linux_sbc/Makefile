@@ -26,7 +26,7 @@
 TARGET      = bulk_read_write
 
 # important directories used by assorted rules and other variables
-DIR_DXL    = ../../..
+DIR_DXL    = ../../../..
 DIR_OBJS   = .objects
 
 # compiler options

@@ -140,7 +140,7 @@ int GroupBulkRead::txPacket()
   if (id_list_.size() == 0)
     return COMM_NOT_AVAILABLE;
 
-  if (is_param_changed_ == true)
+  if (is_param_changed_ == true || param_ == 0)
     makeParam();
 
   if (ph_->getProtocolVersion() == 1.0)

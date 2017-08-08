@@ -517,15 +517,23 @@ int Protocol1PacketHandler::read2ByteTxRx(PortHandler *port, uint8_t id, uint16_
 
 int Protocol1PacketHandler::read4ByteTx(PortHandler *port, uint8_t id, uint16_t address)
 {
-  return COMM_NOT_AVAILABLE;
+  return readTx(port, id, address, 4);
 }
 int Protocol1PacketHandler::read4ByteRx(PortHandler *port, uint32_t *data, uint8_t *error)
 {
-  return COMM_NOT_AVAILABLE;
+  uint8_t data_read[4] = {0};
+  int result = readRx(port, 4, data_read, error);
+  if (result == COMM_SUCCESS)
+    *data = DXL_MAKEDWORD(DXL_MAKEWORD(data_read[0], data_read[1]), DXL_MAKEWORD(data_read[2], data_read[3]));
+  return result;
 }
 int Protocol1PacketHandler::read4ByteTxRx(PortHandler *port, uint8_t id, uint16_t address, uint32_t *data, uint8_t *error)
 {
-  return COMM_NOT_AVAILABLE;
+  uint8_t data_read[4] = {0};
+  int result = readTxRx(port, id, address, 4, data_read, error);
+  if (result == COMM_SUCCESS)
+    *data = DXL_MAKEDWORD(DXL_MAKEWORD(data_read[0], data_read[1]), DXL_MAKEWORD(data_read[2], data_read[3]));
+  return result;
 }
 
 int Protocol1PacketHandler::writeTxOnly(PortHandler *port, uint8_t id, uint16_t address, uint16_t length, uint8_t *data)
@@ -600,11 +608,13 @@ int Protocol1PacketHandler::write2ByteTxRx(PortHandler *port, uint8_t id, uint16
 
 int Protocol1PacketHandler::write4ByteTxOnly(PortHandler *port, uint8_t id, uint16_t address, uint32_t data)
 {
-  return COMM_NOT_AVAILABLE;
+  uint8_t data_write[4] = { DXL_LOBYTE(DXL_LOWORD(data)), DXL_HIBYTE(DXL_LOWORD(data)), DXL_LOBYTE(DXL_HIWORD(data)), DXL_HIBYTE(DXL_HIWORD(data)) };
+  return writeTxOnly(port, id, address, 4, data_write);
 }
 int Protocol1PacketHandler::write4ByteTxRx(PortHandler *port, uint8_t id, uint16_t address, uint32_t data, uint8_t *error)
 {
-  return COMM_NOT_AVAILABLE;
+  uint8_t data_write[4] = { DXL_LOBYTE(DXL_LOWORD(data)), DXL_HIBYTE(DXL_LOWORD(data)), DXL_LOBYTE(DXL_HIWORD(data)), DXL_HIBYTE(DXL_HIWORD(data)) };
+  return writeTxRx(port, id, address, 4, data_write, error);
 }
 
 int Protocol1PacketHandler::regWriteTxOnly(PortHandler *port, uint8_t id, uint16_t address, uint16_t length, uint8_t *data)
