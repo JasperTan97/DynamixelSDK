@@ -42,6 +42,8 @@ elseif strcmp(computer, 'GLNX86')
   lib_name = 'libdxl_x86_c';
 elseif strcmp(computer, 'GLNXA64')
   lib_name = 'libdxl_x64_c';
+elseif strcmp(computer, 'MACI64')
+  lib_name = 'libdxl_mac_c';
 end
 
 calllib(lib_name, 'printTxRxResult', protocol_version, result);

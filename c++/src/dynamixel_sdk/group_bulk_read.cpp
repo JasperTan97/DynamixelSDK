@@ -30,13 +30,19 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include <stdio.h>
 #include <algorithm>
-#include "dynamixel_sdk/group_bulk_read.h"
+
+#if defined(__linux__)
+#include "group_bulk_read.h"
+#elif defined(__APPLE__)
+#include "group_bulk_read.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "group_bulk_read.h"
+#elif defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+#include "../../include/dynamixel_sdk/group_bulk_read.h"
+#endif
 
 using namespace dynamixel;
 

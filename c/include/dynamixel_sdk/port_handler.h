@@ -33,19 +33,21 @@
 #ifndef DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_C_H_
 #define DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_C_H_
 
-#ifdef __linux__
+#if defined(__linux__)
+#define WINDECLSPEC
+#elif defined(__APPLE__)
 #define WINDECLSPEC
 #elif defined(_WIN32) || defined(_WIN64)
-#ifdef WINDLLEXPORT
-#define WINDECLSPEC __declspec(dllexport)
-#else
-#define WINDECLSPEC __declspec(dllimport)
-#endif
+  #ifdef WINDLLEXPORT
+  #define WINDECLSPEC __declspec(dllexport)
+  #else
+  #define WINDECLSPEC __declspec(dllimport)
+  #endif
 #endif
 
 #include "robotis_def.h"
 
-static const int DEFAULT_BAUDRATE = 1000000;
+static const int DEFAULT_BAUDRATE = 57600;
 
 int     g_used_port_num;
 uint8_t    *g_is_using;
@@ -62,7 +64,7 @@ WINDECLSPEC char   *getPortName             (int port_num);
 WINDECLSPEC uint8_t setBaudRate             (int port_num, const int baudrate);
 WINDECLSPEC int     getBaudRate             (int port_num);
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__APPLE__)
 WINDECLSPEC int     getBytesAvailable       (int port_num);
 #endif
 
@@ -72,6 +74,5 @@ WINDECLSPEC int     writePort               (int port_num, uint8_t *packet, int 
 WINDECLSPEC void    setPacketTimeout        (int port_num, uint16_t packet_length);
 WINDECLSPEC void    setPacketTimeoutMSec    (int port_num, double msec);
 WINDECLSPEC uint8_t isPacketTimeout         (int port_num);
-
 
 #endif /* DYNAMIXEL_SDK_INCLUDE_DYNAMIXEL_SDK_PORTHANDLER_C_H_ */

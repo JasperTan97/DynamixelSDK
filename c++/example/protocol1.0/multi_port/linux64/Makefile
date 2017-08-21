@@ -41,7 +41,7 @@ FORMAT      = -m64
 #---------------------------------------------------------------------
 # Core components (all of these are likely going to be needed)
 #---------------------------------------------------------------------
-INCLUDES   += -I$(DIR_DXL)/include
+INCLUDES   += -I$(DIR_DXL)/include/dynamixel_sdk
 LIBRARIES  += -ldxl_x64_cpp
 LIBRARIES  += -lrt
 

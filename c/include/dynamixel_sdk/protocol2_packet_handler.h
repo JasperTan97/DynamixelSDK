@@ -40,7 +40,9 @@ WINDECLSPEC uint16_t    updateCRC           (uint16_t crc_accum, uint8_t *data_b
 WINDECLSPEC void        addStuffing         (uint8_t *packet);
 WINDECLSPEC void        removeStuffing      (uint8_t *packet);
 
+WINDECLSPEC const char *getTxRxResult2      (int result);
 WINDECLSPEC void        printTxRxResult2    (int result);
+WINDECLSPEC const char *getRxPacketError2       (uint8_t error);
 WINDECLSPEC void        printRxPacketError2     (uint8_t error);
 
 WINDECLSPEC int         getLastTxRxResult2  (int port_num);

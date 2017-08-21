@@ -12,9 +12,6 @@
     <Filter Include="Source Files\dynamixel_sdk">
       <UniqueIdentifier>{2f01d241-95e2-4384-ba01-1c7e0bca2546}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\dynamixel_sdk_windows">
-      <UniqueIdentifier>{1ec52016-12e6-48ba-956e-d4416e403e15}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -22,41 +19,6 @@
     <Filter Include="Header Files\dynamixel_sdk">
       <UniqueIdentifier>{f68594af-3dab-4cd7-b2d0-77f94dd4471d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\dynamixel_sdk_windows">
-      <UniqueIdentifier>{c925b595-4c53-40b1-b199-583de2b1f806}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_read.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_write.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_read.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_write.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\packet_handler.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol1_packet_handler.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol2_packet_handler.h">
-      <Filter>Header Files\dynamixel_sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk_windows\port_handler_windows.h">
-      <Filter>Header Files\dynamixel_sdk_windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\dynamixel_sdk.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\dynamixel_sdk\group_bulk_read.cpp">
@@ -77,14 +39,46 @@
     <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler.cpp">
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\dynamixel_sdk\port_handler_windows.cpp">
+      <Filter>Source Files\dynamixel_sdk</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol1_packet_handler.cpp">
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\dynamixel_sdk\protocol2_packet_handler.cpp">
       <Filter>Source Files\dynamixel_sdk</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\dynamixel_sdk_windows\port_handler_windows.cpp">
-      <Filter>Source Files\dynamixel_sdk_windows</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\dynamixel_sdk.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_read.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_bulk_write.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_read.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\group_sync_write.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\packet_handler.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\port_handler_windows.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol1_packet_handler.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dynamixel_sdk\protocol2_packet_handler.h">
+      <Filter>Header Files\dynamixel_sdk</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

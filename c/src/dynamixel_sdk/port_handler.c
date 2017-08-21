@@ -30,21 +30,10 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
+#if defined(__linux__)
+#include "port_handler.h"
+#include "port_handler_linux.h"
 
-#include "dynamixel_sdk/port_handler.h"
-
-#ifdef __linux__
-#include "dynamixel_sdk_linux/port_handler_linux.h"
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-#include "dynamixel_sdk_windows/port_handler_windows.h"
-#endif
-
-#ifdef __linux__
 int     portHandler         (const char *port_name) { return portHandlerLinux(port_name); }
 
 uint8_t openPort            (int port_num) { return openPortLinux(port_num); }
@@ -65,9 +54,37 @@ int     writePort           (int port_num, uint8_t *packet, int length) { return
 void    setPacketTimeout    (int port_num, uint16_t packet_length) { setPacketTimeoutLinux(port_num, packet_length); }
 void    setPacketTimeoutMSec(int port_num, double msec) { setPacketTimeoutMSecLinux(port_num, msec); }
 uint8_t isPacketTimeout     (int port_num) { return isPacketTimeoutLinux(port_num); }
-#endif
 
-#if defined(_WIN32) || defined(_WIN64)
+#elif defined(__APPLE__)
+#include "port_handler.h"
+#include "port_handler_mac.h"
+
+int     portHandler         (const char *port_name) { return portHandlerMac(port_name); }
+
+uint8_t openPort            (int port_num) { return openPortMac(port_num); }
+void    closePort           (int port_num) { closePortMac(port_num); }
+void    clearPort           (int port_num) { clearPortMac(port_num); }
+
+void    setPortName         (int port_num, const char *port_name) { setPortNameMac(port_num, port_name); }
+char   *getPortName         (int port_num) { return getPortNameMac(port_num); }
+
+uint8_t setBaudRate         (int port_num, const int baudrate) { return setBaudRateMac(port_num, baudrate); }
+int     getBaudRate         (int port_num) { return getBaudRateMac(port_num); }
+
+int     getBytesAvailable   (int port_num) { return getBytesAvailableMac(port_num); }
+
+int     readPort            (int port_num, uint8_t *packet, int length) { return readPortMac(port_num, packet, length); }
+int     writePort           (int port_num, uint8_t *packet, int length) { return writePortMac(port_num, packet, length); }
+
+void    setPacketTimeout    (int port_num, uint16_t packet_length) { setPacketTimeoutMac(port_num, packet_length); }
+void    setPacketTimeoutMSec(int port_num, double msec) { setPacketTimeoutMSecMac(port_num, msec); }
+uint8_t isPacketTimeout     (int port_num) { return isPacketTimeoutMac(port_num); }
+
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "port_handler.h"
+#include "port_handler_windows.h"
+
 int     portHandler         (const char *port_name) { return portHandlerWindows(port_name); }
 
 uint8_t openPort            (int port_num) { return openPortWindows(port_num); }
@@ -86,4 +103,5 @@ int     writePort           (int port_num, uint8_t *packet, int length) { return
 void    setPacketTimeout    (int port_num, uint16_t packet_length) { setPacketTimeoutWindows(port_num, packet_length); }
 void    setPacketTimeoutMSec(int port_num, double msec) { setPacketTimeoutMSecWindows(port_num, msec); }
 uint8_t isPacketTimeout     (int port_num) { return isPacketTimeoutWindows(port_num); }
+
 #endif

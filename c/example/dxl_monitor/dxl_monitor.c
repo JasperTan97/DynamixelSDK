@@ -36,14 +36,14 @@
 //
 // Available Dynamixel model on this example : All models using Protocol 1.0 and 2.0
 // This example is tested with a Dynamixel MX-28, a Dynamixel PRO 54-200 and an USB2DYNAMIXEL
-// Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 1 (Baudrate : 1000000) , PRO - ID : 1 / Baudnum : 3 (Baudrate : 1000000)
+// Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 34 (Baudrate : 57600) , PRO - ID : 1 / Baudnum : 1 (Baudrate : 57600)
 //
 
-#ifdef __linux__
-#include <unistd.h>
+#if defined(__linux__) || defined(__APPLE__)
 #include <fcntl.h>
 #include <getopt.h>
 #include <termios.h>
+#define STDIN_FILENO 0
 #elif defined(_WIN32) || defined(_WIN64)
 #include <conio.h>
 #endif
@@ -59,11 +59,11 @@
 
 // Default setting
 #define DEVICENAME                      "/dev/ttyUSB0"      // Check which port is being used on your controller
-                                                            // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
+                                                            // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
 int getch()
 {
-#ifdef __linux__
+#if defined(__linux__) || defined(__APPLE__)
   struct termios oldt, newt;
   int ch;
   tcgetattr(STDIN_FILENO, &oldt);
@@ -80,7 +80,7 @@ int getch()
 
 int kbhit(void)
 {
-#ifdef __linux__
+#if defined(__linux__) || defined(__APPLE__)
   struct termios oldt, newt;
   int ch;
   int oldf;
@@ -128,7 +128,7 @@ void help()
   printf(" \n");
   printf(" help|h|?                    :Displays help information\n");
   printf(" baud [BAUD_RATE]            :Changes baudrate to [BAUD_RATE] \n");
-  printf("                               ex) baud 2400 (2400 bps) \n");
+  printf("                               ex) baud 57600 (57600 bps) \n");
   printf("                               ex) baud 1000000 (1 Mbps)  \n");
   printf(" exit                        :Exit this program\n");
   printf(" scan                        :Outputs the current status of all Dynamixels\n");
@@ -232,12 +232,12 @@ void writeNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t add
   if ((dxl_comm_result = getLastTxRxResult(port_num, protocol_version)) == COMM_SUCCESS)
   {
     if ((dxl_error = getLastRxPacketError(port_num, protocol_version)) != 0)
-			printRxPacketError(protocol_version, dxl_error);
+			printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
     fprintf(stderr, "\n Success to write\n\n");
   }
   else
   {
-    printTxRxResult(protocol_version, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
@@ -267,7 +267,7 @@ void readNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t addr
   if ((dxl_comm_result = getLastTxRxResult(port_num, protocol_version)) == COMM_SUCCESS)
   {
     if ((dxl_error = getLastRxPacketError(port_num, protocol_version)) != 0)
-			printRxPacketError(protocol_version, dxl_error);
+			printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
 
     if (length == 1)
     {
@@ -284,7 +284,7 @@ void readNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t addr
   }
   else
   {
-    printTxRxResult(protocol_version, dxl_comm_result);
+    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
@@ -297,7 +297,7 @@ int main(int argc, char *argv[])
 
   char *dev_name = (char*)DEVICENAME;
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__APPLE__)
   /* parameter parsing */
   while(1)
   {

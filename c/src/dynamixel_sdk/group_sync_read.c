@@ -30,13 +30,16 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include <stdlib.h>
-#include "dynamixel_sdk/group_sync_read.h"
 
+#if defined(__linux__)
+#include "group_sync_read.h"
+#elif defined(__APPLE__)
+#include "group_sync_read.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "group_sync_read.h"
+#endif
 
 typedef struct
 {
@@ -257,15 +260,15 @@ void groupSyncReadRxPacket(int group_num)
     if (groupData[group_num].data_list[data_num].id == NOT_USED_ID)
       continue;
 
-      packetData[port_num].data_read
-        = (uint8_t *)realloc(packetData[port_num].data_read, groupData[group_num].data_length * sizeof(uint8_t));
+    packetData[port_num].data_read
+      = (uint8_t *)realloc(packetData[port_num].data_read, groupData[group_num].data_length * sizeof(uint8_t));
 
-      readRx(groupData[group_num].port_num, groupData[group_num].protocol_version, groupData[group_num].data_length);
-      if (packetData[port_num].communication_result != COMM_SUCCESS)
-        return;
+    readRx(groupData[group_num].port_num, groupData[group_num].protocol_version, groupData[group_num].data_length);
+    if (packetData[port_num].communication_result != COMM_SUCCESS)
+      return;
 
-      for (c = 0; c < groupData[group_num].data_length; c++)
-        groupData[group_num].data_list[data_num].data[c] = packetData[port_num].data_read[c];
+    for (c = 0; c < groupData[group_num].data_length; c++)
+      groupData[group_num].data_list[data_num].data[c] = packetData[port_num].data_read[c];
   }
 
   if (packetData[port_num].communication_result == COMM_SUCCESS)

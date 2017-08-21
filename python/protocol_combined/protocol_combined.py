@@ -39,7 +39,7 @@
 #
 # Available Dynamixel model on this example : All models using Protocol 1.0 and 2.0
 # This example is tested with a Dynamixel MX-28, a Dynamixel PRO 54-200 and an USB2DYNAMIXEL
-# Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 1 (Baudrate : 1000000) , PRO - ID : 1 / Baudnum : 3 (Baudrate : 1000000)
+# Be sure that properties of Dynamixel MX and PRO are already set as %% MX - ID : 1 / Baudnum : 34 (Baudrate : 57600) , PRO - ID : 1 / Baudnum : 1 (Baudrate : 57600)
 #
 
 # Be aware that:
@@ -85,9 +85,9 @@ PROTOCOL_VERSION2           = 2
 # Default setting
 DXL1_ID                     = 1                             # Dynamixel ID: 1
 DXL2_ID                     = 2                             # Dynamixel ID: 2
-BAUDRATE                    = 1000000
+BAUDRATE                    = 57600
 DEVICENAME                  = "/dev/ttyUSB0".encode('utf-8')# Check which port is being used on your controller
-                                                            # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
+                                                            # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
 TORQUE_ENABLE               = 1                             # Value for enabling the torque
 TORQUE_DISABLE              = 0                             # Value for disabling the torque
@@ -141,19 +141,23 @@ else:
 
 # Enable Dynamixel#1 torque
 dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION1, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION1, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION1, dxl_error))
 else:
     print("Dynamixel#%d has been successfully connected" % (DXL1_ID))
 
 # Enable Dynamixel#1 torque
 dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION2, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION2, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION2, dxl_error))
 else:
     print("Dynamixel#%d has been successfully connected" % (DXL2_ID))
 
@@ -165,32 +169,40 @@ while 1:
 
     # Write Dynamixel#1 goal position
     dynamixel.write2ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_GOAL_POSITION, dxl1_goal_position[index])
-    if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1) != COMM_SUCCESS:
-        dynamixel.printTxRxResult(PROTOCOL_VERSION1, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1))
-    elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1) != 0:
-        dynamixel.printRxPacketError(PROTOCOL_VERSION1, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1))
+    dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1)
+    dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1)
+    if dxl_comm_result != COMM_SUCCESS:
+        print(dynamixel.getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result))
+    elif dxl_error != 0:
+        print(dynamixel.getRxPacketError(PROTOCOL_VERSION1, dxl_error))
 
     # Write Dynamixel#1 goal position
     dynamixel.write4ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_GOAL_POSITION, dxl2_goal_position[index])
-    if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2) != COMM_SUCCESS:
-        dynamixel.printTxRxResult(PROTOCOL_VERSION2, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2))
-    elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2) != 0:
-        dynamixel.printRxPacketError(PROTOCOL_VERSION2, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2))
+    dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2)
+    dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2)
+    if dxl_comm_result != COMM_SUCCESS:
+        print(dynamixel.getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result))
+    elif dxl_error != 0:
+        print(dynamixel.getRxPacketError(PROTOCOL_VERSION2, dxl_error))
 
     while 1:
         # Read Dynamixel#1 present position
         dxl1_present_position = dynamixel.read2ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_PRESENT_POSITION)
-        if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1) != COMM_SUCCESS:
-            dynamixel.printTxRxResult(PROTOCOL_VERSION1, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1))
-        elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1) != 0:
-            dynamixel.printRxPacketError(PROTOCOL_VERSION1, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1))
+        dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1)
+        dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1)
+        if dxl_comm_result != COMM_SUCCESS:
+            print(dynamixel.getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result))
+        elif dxl_error != 0:
+            print(dynamixel.getRxPacketError(PROTOCOL_VERSION1, dxl_error))
 
         # Read Dynamixel#2 present position
         dxl2_present_position = dynamixel.read4ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_PRESENT_POSITION)
-        if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2) != COMM_SUCCESS:
-            dynamixel.printTxRxResult(PROTOCOL_VERSION2, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2))
-        elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2) != 0:
-            dynamixel.printRxPacketError(PROTOCOL_VERSION2, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2))
+        dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2)
+        dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2)
+        if dxl_comm_result != COMM_SUCCESS:
+            print(dynamixel.getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result))
+        elif dxl_error != 0:
+            print(dynamixel.getRxPacketError(PROTOCOL_VERSION2, dxl_error))
 
 
         print("[ID:%03d] GoalPos:%03d  PresPos:%03d [ID:%03d] GoalPos:%03d  PresPos:%03d" % (DXL1_ID, dxl1_goal_position[index], dxl1_present_position, DXL2_ID, dxl2_goal_position[index], dxl2_present_position))
@@ -207,17 +219,21 @@ while 1:
 
 # Disable Dynamixel#1 Torque
 dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION1, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION1, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION1, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION1)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION1)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION1, dxl_error))
 
 # Disable Dynamixel#2 Torque
 dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION2, DXL2_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION2, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2))
-elif dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2) != 0:
-    dynamixel.printRxPacketError(PROTOCOL_VERSION2, dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION2)
+dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION2)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result))
+elif dxl_error != 0:
+    print(dynamixel.getRxPacketError(PROTOCOL_VERSION2, dxl_error))
 
 
 # Close port

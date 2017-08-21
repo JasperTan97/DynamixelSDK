@@ -76,11 +76,15 @@ namespace dynamixel_sdk
     #region PacketHandler
     [DllImport(dll_path)]
     public static extern void   packetHandler       ();
-
+    
     [DllImport(dll_path)]
     public static extern void   printTxRxResult     (int protocol_version, int result);
     [DllImport(dll_path)]
+    public static extern IntPtr getTxRxResult       (int protocol_version, int result);
+    [DllImport(dll_path)]
     public static extern void   printRxPacketError  (int protocol_version, byte error);
+    [DllImport(dll_path)]
+    public static extern IntPtr getRxPacketError    (int protocol_version, byte error);
 
     [DllImport(dll_path)]
     public static extern int    getLastTxRxResult   (int port_num, int protocol_version);

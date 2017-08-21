@@ -26,7 +26,7 @@
 TARGET      = multi_port
 
 # important directories used by assorted rules and other variables
-DIR_DXL    = ../../..
+DIR_DXL    = ../../../..
 DIR_OBJS   = .objects
 
 # compiler options
@@ -41,7 +41,7 @@ FORMAT      = -m32
 #---------------------------------------------------------------------
 # Core components (all of these are likely going to be needed)
 #---------------------------------------------------------------------
-INCLUDES   += -I$(DIR_DXL)/include
+INCLUDES   += -I$(DIR_DXL)/include/dynamixel_sdk
 LIBRARIES  += -ldxl_x86_c
 LIBRARIES  += -lrt
 
