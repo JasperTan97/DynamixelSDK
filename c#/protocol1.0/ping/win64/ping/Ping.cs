@@ -114,9 +114,10 @@ namespace ping
       {
         Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
-
-      Console.WriteLine("[ID: {0}] ping Succeeded. Dynamixel model number : {1}", DXL_ID, dxl_model_number);
-
+      else
+      {
+        Console.WriteLine("[ID: {0}] ping Succeeded. Dynamixel model number : {1}", DXL_ID, dxl_model_number);
+      }
       // Close port
       dynamixel.closePort(port_num);
 

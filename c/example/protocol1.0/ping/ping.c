@@ -160,8 +160,10 @@ int main()
   {
     printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
   }
-
-  printf("[ID:%03d] ping Succeeded. Dynamixel model number : %d\n", DXL_ID, dxl_model_number);
+  else
+  {
+    printf("[ID:%03d] ping Succeeded. Dynamixel model number : %d\n", DXL_ID, dxl_model_number);
+  }
 
   // Close port
   closePort(port_num);

@@ -4,7 +4,7 @@
 
 - ..
 
-* 
+* Changes : Ping examples now will not show Dynamixel model number when communication is failed  
 
 
 ==============================================
