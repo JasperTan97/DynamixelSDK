@@ -16,8 +16,8 @@
 | Modularized Structure | X | X | O |
 |||||
 | SDK Languages :  ||||
-| (Protocol 1.0) | C (builds .a) | C (builds .dll)| C / C++ (builds .so & .dll) |
-| (Protocol 2.0) | C++ (builds .so)| C (builds .dll)| C / C++ (builds .so & .dll) |
+| (Protocol 1.0) | C (builds .a) | C (builds .dll)| C / C++ (builds .so & .dll & .dylib) |
+| (Protocol 2.0) | C++ (builds .so)| C (builds .dll)| C / C++ (builds .so & .dll & .dylib) |
 | SDK Examples : | | | |
 | (C ver. Library binded)| C | | C|
 | | | C++| |
