@@ -4,8 +4,8 @@
 
 - 09.18.2017
 
-* Recover : Check if the id of rxpacket is the same as the id of txpacket #82
-* Changes : Ping examples now will not show Dynamixel model number when communication is failed  
+* Recover : Check if the id of rxpacket is the same as the id of txpacket (c++) #82
+* Changes : Ping examples now will not show Dynamixel model number when communication is failed
 
 ==============================================
     Dynamixel SDK 3.5.1 (Protocol 1.0/2.0)
