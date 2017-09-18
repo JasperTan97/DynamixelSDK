@@ -253,7 +253,7 @@ class WINDECLSPEC Protocol2PacketHandler : public PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from Protocol2PacketHandler::rxPacket()
   ////////////////////////////////////////////////////////////////////////////////
-  int readRx          (PortHandler *port, uint16_t length, uint8_t *data, uint8_t *error = 0);
+  int readRx          (PortHandler *port, uint8_t id, uint16_t length, uint8_t *data, uint8_t *error = 0);
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that transmits INST_READ instruction packet, and read data from received packet
@@ -293,7 +293,7 @@ class WINDECLSPEC Protocol2PacketHandler : public PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from Protocol2PacketHandler::readRx()
   ////////////////////////////////////////////////////////////////////////////////
-  int read1ByteRx     (PortHandler *port, uint8_t *data, uint8_t *error = 0);
+  int read1ByteRx     (PortHandler *port, uint8_t id, uint8_t *data, uint8_t *error = 0);
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that calls Protocol2PacketHandler::readTxRx() function for reading 1 byte data
@@ -328,7 +328,7 @@ class WINDECLSPEC Protocol2PacketHandler : public PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from Protocol2PacketHandler::readRx()
   ////////////////////////////////////////////////////////////////////////////////
-  int read2ByteRx     (PortHandler *port, uint16_t *data, uint8_t *error = 0);
+  int read2ByteRx     (PortHandler *port, uint8_t id, uint16_t *data, uint8_t *error = 0);
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that calls Protocol2PacketHandler::readTxRx() function for reading 2 byte data
@@ -363,7 +363,7 @@ class WINDECLSPEC Protocol2PacketHandler : public PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from Protocol2PacketHandler::readRx()
   ////////////////////////////////////////////////////////////////////////////////
-  int read4ByteRx     (PortHandler *port, uint32_t *data, uint8_t *error = 0);
+  int read4ByteRx     (PortHandler *port, uint8_t id, uint32_t *data, uint8_t *error = 0);
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that calls Protocol2PacketHandler::readTxRx() function for reading 4 byte data

@@ -114,8 +114,10 @@ public class Ping
     {
       System.out.println(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
     }
-
-    System.out.printf("[ID: %d] ping Succeeded. Dynamixel model number : %d", DXL_ID, dxl_model_number);
+    else
+    {
+      System.out.printf("[ID: %d] ping Succeeded. Dynamixel model number : %d\n", DXL_ID, dxl_model_number);
+    }
 
     // Close port
     dynamixel.closePort(port_num);

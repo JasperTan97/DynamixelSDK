@@ -43,3 +43,6 @@
 
 # HTML
 *.html
+
+# Mac
+.DS_Store

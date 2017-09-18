@@ -289,7 +289,7 @@ class WINDECLSPEC PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from PacketHandler::rxPacket()
   ////////////////////////////////////////////////////////////////////////////////
-  virtual int readRx          (PortHandler *port, uint16_t length, uint8_t *data, uint8_t *error = 0) = 0;
+  virtual int readRx          (PortHandler *port, uint8_t id, uint16_t length, uint8_t *data, uint8_t *error = 0) = 0;
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that transmits INST_READ instruction packet, and read data from received packet
@@ -329,7 +329,7 @@ class WINDECLSPEC PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from PacketHandler::readRx()
   ////////////////////////////////////////////////////////////////////////////////
-  virtual int read1ByteRx     (PortHandler *port, uint8_t *data, uint8_t *error = 0) = 0;
+  virtual int read1ByteRx     (PortHandler *port, uint8_t id, uint8_t *data, uint8_t *error = 0) = 0;
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that calls PacketHandler::readTxRx() function for reading 1 byte data
@@ -364,7 +364,7 @@ class WINDECLSPEC PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from PacketHandler::readRx()
   ////////////////////////////////////////////////////////////////////////////////
-  virtual int read2ByteRx     (PortHandler *port, uint16_t *data, uint8_t *error = 0) = 0;
+  virtual int read2ByteRx     (PortHandler *port, uint8_t id, uint16_t *data, uint8_t *error = 0) = 0;
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that calls PacketHandler::readTxRx() function for reading 2 byte data
@@ -399,7 +399,7 @@ class WINDECLSPEC PacketHandler
   /// @param error Dynamixel hardware error
   /// @return communication results which come from PacketHandler::readRx()
   ////////////////////////////////////////////////////////////////////////////////
-  virtual int read4ByteRx     (PortHandler *port, uint32_t *data, uint8_t *error = 0) = 0;
+  virtual int read4ByteRx     (PortHandler *port, uint8_t id, uint32_t *data, uint8_t *error = 0) = 0;
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that calls PacketHandler::readTxRx() function for reading 4 byte data

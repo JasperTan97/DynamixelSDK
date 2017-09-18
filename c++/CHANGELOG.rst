@@ -2,6 +2,12 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.5.2 (2017-09-18)
+-----------
+* Recover : Check if the id of rxpacket is the same as the id of txpacket #82
+* Changes : Ping examples now will not show Dynamixel model number when communication is failed
+* Contributors: Leon
+
 3.5.1 (2017-08-18)
 -----------
 * Standardizes folder structure of ROS c++

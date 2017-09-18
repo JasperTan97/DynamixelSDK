@@ -6,8 +6,8 @@
 | Dynamixel SDK Version | 1.X | 2.X | 3.X ([Download](https://github.com/ROBOTIS-GIT/DynamixelSDK/releases)) |
 | ------------- | ------------- | ------------- | ------------- |
 | Release date | 2010.05.16 | 2015.02.10 | 2016.03.08 |
-| Latest version released |||3.5.1|
-| |||(2017.08.18)|
+| Latest version released |||3.5.2|
+| |||(..)|
 | OS | Linux | Windows | Linux + Windows + Mac |
 | Available Dynamixel models | All models | All models | All models |
 |||||
@@ -16,8 +16,8 @@
 | Modularized Structure | X | X | O |
 |||||
 | SDK Languages :  ||||
-| (Protocol 1.0) | C (builds .a) | C (builds .dll)| C / C++ (builds .so & .dll) |
-| (Protocol 2.0) | C++ (builds .so)| C (builds .dll)| C / C++ (builds .so & .dll) |
+| (Protocol 1.0) | C (builds .a) | C (builds .dll)| C / C++ (builds .so & .dll & .dylib) |
+| (Protocol 2.0) | C++ (builds .so)| C (builds .dll)| C / C++ (builds .so & .dll & .dylib) |
 | SDK Examples : | | | |
 | (C ver. Library binded)| C | | C|
 | | | C++| |

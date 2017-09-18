@@ -115,8 +115,8 @@ if dxl_comm_result != COMM_SUCCESS:
     print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
 elif dxl_error != 0:
     print(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error))
-
-print("[ID:%03d] ping Succeeded. Dynamixel model number : %d" % (DXL_ID, dxl_model_number))
+else:
+    print("[ID:%03d] ping Succeeded. Dynamixel model number : %d" % (DXL_ID, dxl_model_number))
 
 # Close port
 dynamixel.closePort(port_num)
