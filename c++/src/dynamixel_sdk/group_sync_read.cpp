@@ -145,7 +145,7 @@ int GroupSyncRead::rxPacket()
   {
     uint8_t id = id_list_[i];
 
-    result = ph_->readRx(port_, data_length_, data_list_[id]);
+    result = ph_->readRx(port_, id, data_length_, data_list_[id]);
     if (result != COMM_SUCCESS)
       return result;
   }
