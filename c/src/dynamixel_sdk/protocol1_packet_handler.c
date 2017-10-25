@@ -30,13 +30,17 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__linux__)
+#include "protocol1_packet_handler.h"
+#elif defined(__APPLE__)
+#include "protocol1_packet_handler.h"
+#elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
+#include "protocol1_packet_handler.h"
 #endif
 
 #include <string.h>
 #include <stdlib.h>
-#include "dynamixel_sdk/protocol1_packet_handler.h"
 
 #define TXPACKET_MAX_LEN    (250)
 #define RXPACKET_MAX_LEN    (250)
@@ -59,74 +63,78 @@
 #define ERRBIT_OVERLOAD         32      // The current load cannot be controlled by the set torque.
 #define ERRBIT_INSTRUCTION      64      // Undefined instruction or delivering the action command without the reg_write command.
 
-
-void printTxRxResult1(int result)
+const char *getTxRxResult1(int result)
 {
   switch (result)
   {
     case COMM_SUCCESS:
-      printf("[TxRxResult] Communication success.\n");
-      break;
+      return "[TxRxResult] Communication success.";
 
     case COMM_PORT_BUSY:
-      printf("[TxRxResult] Port is in use!\n");
-      break;
+      return "[TxRxResult] Port is in use!";
 
     case COMM_TX_FAIL:
-      printf("[TxRxResult] Failed transmit instruction packet!\n");
-      break;
+      return "[TxRxResult] Failed transmit instruction packet!";
 
     case COMM_RX_FAIL:
-      printf("[TxRxResult] Failed get status packet from device!\n");
-      break;
+      return "[TxRxResult] Failed get status packet from device!";
 
     case COMM_TX_ERROR:
-      printf("[TxRxResult] Incorrect instruction packet!\n");
-      break;
+      return "[TxRxResult] Incorrect instruction packet!";
 
     case COMM_RX_WAITING:
-      printf("[TxRxResult] Now recieving status packet!\n");
-      break;
+      return "[TxRxResult] Now recieving status packet!";
 
     case COMM_RX_TIMEOUT:
-      printf("[TxRxResult] There is no status packet!\n");
-      break;
+      return "[TxRxResult] There is no status packet!";
 
     case COMM_RX_CORRUPT:
-      printf("[TxRxResult] Incorrect status packet!\n");
-      break;
+      return "[TxRxResult] Incorrect status packet!";
 
     case COMM_NOT_AVAILABLE:
-      printf("[TxRxResult] Protocol does not support This function!\n");
-      break;
+      return "[TxRxResult] Protocol does not support This function!";
 
     default:
-      break;
+      return "";
   }
+}
+
+void printTxRxResult1(int result)
+{
+  printf("This function is deprecated. Use getTxRxResult instead\n");
+  printf("%s\n", getTxRxResult1(result));
+}
+
+const char *getRxPacketError1(uint8_t error)
+{
+  if (error & ERRBIT_VOLTAGE)
+    return "[RxPacketError] Input voltage error!";
+
+  if (error & ERRBIT_ANGLE)
+    return "[RxPacketError] Angle limit error!";
+
+  if (error & ERRBIT_OVERHEAT)
+    return "[RxPacketError] Overheat error!";
+
+  if (error & ERRBIT_RANGE)
+    return "[RxPacketError] Out of range error!";
+
+  if (error & ERRBIT_CHECKSUM)
+    return "[RxPacketError] Checksum error!";
+
+  if (error & ERRBIT_OVERLOAD)
+    return "[RxPacketError] Overload error!";
+
+  if (error & ERRBIT_INSTRUCTION)
+    return "[RxPacketError] Instruction code error!";
+
+  return "";
 }
 
 void printRxPacketError1(uint8_t error)
 {
-  if (error & ERRBIT_VOLTAGE)
-    printf("[RxPacketError] Input voltage error!\n");
-
-  if (error & ERRBIT_ANGLE)
-    printf("[RxPacketError] Angle limit error!\n");
-
-  if (error & ERRBIT_OVERHEAT)
-    printf("[RxPacketError] Overheat error!\n");
-
-  if (error & ERRBIT_RANGE)
-    printf("[RxPacketError] Out of range error!\n");
-
-  if (error & ERRBIT_CHECKSUM)
-    printf("[RxPacketError] Checksum error!\n");
-
-  if (error & ERRBIT_OVERLOAD)
-    printf("[RxPacketError] Overload error!\n");
-
-  if (error & ERRBIT_INSTRUCTION)
-    printf("[RxPacketError] Instruction code error!\n");
+  printf("This function is deprecated. Use getRxPacketError instead\n");
+  printf("%s\n", getRxPacketError1(error));
 }
 
 int getLastTxRxResult1(int port_num)

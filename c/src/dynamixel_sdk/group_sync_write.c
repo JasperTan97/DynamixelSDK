@@ -30,13 +30,16 @@
 
 /* Author: Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include <stdlib.h>
-#include "dynamixel_sdk/group_sync_write.h"
 
+#if defined(__linux__)
+#include "group_sync_write.h"
+#elif defined(__APPLE__)
+#include "group_sync_write.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "group_sync_write.h"
+#endif
 
 typedef struct
 {

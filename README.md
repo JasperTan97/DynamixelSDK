@@ -6,10 +6,9 @@
 | Dynamixel SDK Version | 1.X | 2.X | 3.X ([Download](https://github.com/ROBOTIS-GIT/DynamixelSDK/releases)) |
 | ------------- | ------------- | ------------- | ------------- |
 | Release date | 2010.05.16 | 2015.02.10 | 2016.03.08 |
-| Latest version released |||3.4.7|
-| |||(2017.07.07)|
-| OS | Linux | Windows | Linux + Windows |
-||||+ MacOSX (coming soon)|
+| Latest version released |||3.5.2|
+| |||(..)|
+| OS | Linux | Windows | Linux + Windows + Mac |
 | Available Dynamixel models | All models | All models | All models |
 |||||
 | Multi Port Control <br> (Controls Dynamixels through <br> more than two ports)| X | X | O |
@@ -17,8 +16,8 @@
 | Modularized Structure | X | X | O |
 |||||
 | SDK Languages :  ||||
-| (Protocol 1.0) | C (builds .a) | C (builds .dll)| C / C++ (builds .so & .dll) |
-| (Protocol 2.0) | C++ (builds .so)| C (builds .dll)| C / C++ (builds .so & .dll) |
+| (Protocol 1.0) | C (builds .a) | C (builds .dll)| C / C++ (builds .so & .dll & .dylib) |
+| (Protocol 2.0) | C++ (builds .so)| C (builds .dll)| C / C++ (builds .so & .dll & .dylib) |
 | SDK Examples : | | | |
 | (C ver. Library binded)| C | | C|
 | | | C++| |
@@ -30,7 +29,7 @@
 | | | | Java |
 | (C++ ver. Library binded)¹| C++|  | C++|
 | | | | ROS |
-| | | | Arduino (coming soon) |
+| | | | Arduino |
 
 ##### ¹ C++ ver. Library is not optimized in binding other languages. Please use C ver. Library instead.  
 ---------------------------------------------------------------------------

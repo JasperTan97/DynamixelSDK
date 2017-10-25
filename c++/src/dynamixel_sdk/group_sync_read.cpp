@@ -30,12 +30,18 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WINDLLEXPORT
-#endif
-
 #include <algorithm>
-#include "dynamixel_sdk/group_sync_read.h"
+
+#if defined(__linux__)
+#include "group_sync_read.h"
+#elif defined(__APPLE__)
+#include "group_sync_read.h"
+#elif defined(_WIN32) || defined(_WIN64)
+#define WINDLLEXPORT
+#include "group_sync_read.h"
+#elif defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+#include "../../include/dynamixel_sdk/group_sync_read.h"
+#endif
 
 using namespace dynamixel;
 
@@ -139,7 +145,7 @@ int GroupSyncRead::rxPacket()
   {
     uint8_t id = id_list_[i];
 
-    result = ph_->readRx(port_, data_length_, data_list_[id]);
+    result = ph_->readRx(port_, id, data_length_, data_list_[id]);
     if (result != COMM_SUCCESS)
       return result;
   }

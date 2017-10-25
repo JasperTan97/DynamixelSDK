@@ -37,7 +37,7 @@
 // Available Dynamixel model on this example : All models using Protocol 1.0
 // This example is designed for using a Dynamixel MX-28, and an USB2DYNAMIXEL.
 // To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below variables yourself.
-// Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 1000000 [1M])
+// Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 34 (Baudrate : 57600)
 //
 
 // Be aware that:
@@ -45,6 +45,7 @@
 //
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using dynamixel_sdk;
 
@@ -60,9 +61,9 @@ namespace reset
 
     // Default setting
     public const int DXL_ID                          = 1;                   // Dynamixel ID: 1
-    public const int BAUDRATE                        = 1000000;
-    public const string DEVICENAME                   = "COM1";      // Check which port is being used on your controller
-                                                                            // ex) "COM1"   Linux: "/dev/ttyUSB0"
+    public const int BAUDRATE                        = 57600;
+    public const string DEVICENAME                   = "COM1";              // Check which port is being used on your controller
+                                                                            // ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
     public const int FACTORYRST_DEFAULTBAUDRATE      = 57600;               // Dynamixel baudrate set by factoryreset
     public const int NEW_BAUDNUM                     = 1;                   // New baudnum to recover Dynamixel baudrate as it was
@@ -121,12 +122,12 @@ namespace reset
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
         Console.WriteLine("Aborted");
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
         return;
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
 
       // Wait for reset
@@ -152,11 +153,11 @@ namespace reset
       dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
       else
       {
@@ -167,11 +168,11 @@ namespace reset
       dynamixel.write1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE, NEW_BAUDNUM);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
       else
       {
@@ -197,11 +198,11 @@ namespace reset
       dxl_baudnum_read = dynamixel.read1ByteTxRx(port_num, PROTOCOL_VERSION, DXL_ID, ADDR_MX_BAUDRATE);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+        Console.WriteLine(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)));
       }
       else
       {

@@ -40,7 +40,7 @@
 # Available Dynamixel model on this example : All models using Protocol 2.0
 # This example is designed for using a Dynamixel PRO 54-200, and an USB2DYNAMIXEL.
 # To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below variables yourself.
-# Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 3 (Baudrate : 1000000 [1M])
+# Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 57600)
 #
 
 import os, ctypes
@@ -70,9 +70,9 @@ PROTOCOL_VERSION            = 2                             # See which protocol
 
 # Default setting
 DXL_ID                      = 1                             # Dynamixel ID: 1
-BAUDRATE                    = 1000000
+BAUDRATE                    = 57600
 DEVICENAME                  = "/dev/ttyUSB0".encode('utf-8')# Check which port is being used on your controller
-                                                            # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
+                                                            # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
 MAX_ID                      = 252                           # Maximum ID value
 COMM_SUCCESS                = 0                             # Communication Success result value
@@ -108,8 +108,9 @@ else:
 
 # Try to broadcast ping the Dynamixel
 dynamixel.broadcastPing(port_num, PROTOCOL_VERSION)
-if dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION) != COMM_SUCCESS:
-    dynamixel.printTxRxResult(PROTOCOL_VERSION, dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION))
+dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)
+if dxl_comm_result != COMM_SUCCESS:
+    print(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result))
 
 print("Detected Dynamixel : ")
 for id in range(0, MAX_ID):

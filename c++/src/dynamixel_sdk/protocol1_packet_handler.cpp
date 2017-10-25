@@ -30,13 +30,19 @@
 
 /* Author: zerom, Ryu Woon Jung (Leon) */
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__linux__)
+#include "protocol1_packet_handler.h"
+#elif defined(__APPLE__)
+#include "protocol1_packet_handler.h"
+#elif defined(_WIN32) || defined(_WIN64)
 #define WINDLLEXPORT
+#include "protocol1_packet_handler.h"
+#elif defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+#include "../../include/dynamixel_sdk/protocol1_packet_handler.h"
 #endif
 
 #include <string.h>
 #include <stdlib.h>
-#include "dynamixel_sdk/protocol1_packet_handler.h"
 
 #define TXPACKET_MAX_LEN    (250)
 #define RXPACKET_MAX_LEN    (250)
@@ -65,73 +71,88 @@ Protocol1PacketHandler *Protocol1PacketHandler::unique_instance_ = new Protocol1
 
 Protocol1PacketHandler::Protocol1PacketHandler() { }
 
-void Protocol1PacketHandler::printTxRxResult(int result)
+const char *Protocol1PacketHandler::getTxRxResult(int result)
 {
   switch(result)
   {
-  case COMM_SUCCESS:
-    printf("[TxRxResult] Communication success.\n");
-    break;
+    case COMM_SUCCESS:
+      return "[TxRxResult] Communication success.";
 
-  case COMM_PORT_BUSY:
-    printf("[TxRxResult] Port is in use!\n");
-    break;
+    case COMM_PORT_BUSY:
+      return "[TxRxResult] Port is in use!";
 
-  case COMM_TX_FAIL:
-    printf("[TxRxResult] Failed transmit instruction packet!\n");
-    break;
+    case COMM_TX_FAIL:
+      return "[TxRxResult] Failed transmit instruction packet!";
 
-  case COMM_RX_FAIL:
-    printf("[TxRxResult] Failed get status packet from device!\n");
-    break;
+    case COMM_RX_FAIL:
+      return "[TxRxResult] Failed get status packet from device!";
 
-  case COMM_TX_ERROR:
-    printf("[TxRxResult] Incorrect instruction packet!\n");
-    break;
+    case COMM_TX_ERROR:
+      return "[TxRxResult] Incorrect instruction packet!";
 
-  case COMM_RX_WAITING:
-    printf("[TxRxResult] Now recieving status packet!\n");
-    break;
+    case COMM_RX_WAITING:
+      return "[TxRxResult] Now recieving status packet!";
 
-  case COMM_RX_TIMEOUT:
-    printf("[TxRxResult] There is no status packet!\n");
-    break;
+    case COMM_RX_TIMEOUT:
+      return "[TxRxResult] There is no status packet!";
 
-  case COMM_RX_CORRUPT:
-    printf("[TxRxResult] Incorrect status packet!\n");
-    break;
+    case COMM_RX_CORRUPT:
+      return "[TxRxResult] Incorrect status packet!";
 
-  case COMM_NOT_AVAILABLE:
-    printf("[TxRxResult] Protocol does not support This function!\n");
-    break;
+    case COMM_NOT_AVAILABLE:
+      return "[TxRxResult] Protocol does not support This function!";
 
-  default:
-    break;
+    default:
+      return "";
   }
+}
+
+void Protocol1PacketHandler::printTxRxResult(int result)
+{
+#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.println(getTxRxResult(result));
+#else
+  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
+  printf("%s\n", getTxRxResult(result));
+#endif
+}
+
+const char *Protocol1PacketHandler::getRxPacketError(uint8_t error)
+{
+  if (error & ERRBIT_VOLTAGE)
+    return "[RxPacketError] Input voltage error!";
+
+  if (error & ERRBIT_ANGLE)
+    return "[RxPacketError] Angle limit error!";
+
+  if (error & ERRBIT_OVERHEAT)
+    return "[RxPacketError] Overheat error!";
+
+  if (error & ERRBIT_RANGE)
+    return "[RxPacketError] Out of range error!";
+
+  if (error & ERRBIT_CHECKSUM)
+    return "[RxPacketError] Checksum error!";
+
+  if (error & ERRBIT_OVERLOAD)
+    return "[RxPacketError] Overload error!";
+
+  if (error & ERRBIT_INSTRUCTION)
+    return "[RxPacketError] Instruction code error!";
+
+  return "";
 }
 
 void Protocol1PacketHandler::printRxPacketError(uint8_t error)
 {
-  if (error & ERRBIT_VOLTAGE)
-    printf("[RxPacketError] Input voltage error!\n");
-
-  if (error & ERRBIT_ANGLE)
-    printf("[RxPacketError] Angle limit error!\n");
-
-  if (error & ERRBIT_OVERHEAT)
-    printf("[RxPacketError] Overheat error!\n");
-
-  if (error & ERRBIT_RANGE)
-    printf("[RxPacketError] Out of range error!\n");
-
-  if (error & ERRBIT_CHECKSUM)
-    printf("[RxPacketError] Checksum error!\n");
-
-  if (error & ERRBIT_OVERLOAD)
-    printf("[RxPacketError] Overload error!\n");
-
-  if (error & ERRBIT_INSTRUCTION)
-    printf("[RxPacketError] Instruction code error!\n");
+#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
+  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
+  Serial.println(getRxPacketError(error));
+#else
+  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
+  printf("%s\n", getRxPacketError(error));
+#endif
 }
 
 int Protocol1PacketHandler::txPacket(PortHandler *port, uint8_t *txpacket)
@@ -196,7 +217,7 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
 
       if (idx == 0)   // found at the beginning of the packet
       {
-        if (rxpacket[PKT_ID] > 0xFD ||                   // unavailable ID
+        if (rxpacket[PKT_ID] > 0xFD ||                  // unavailable ID
            rxpacket[PKT_LENGTH] > RXPACKET_MAX_LEN ||   // unavailable Length
            rxpacket[PKT_ERROR] >= 0x64)                 // unavailable Error
         {
@@ -286,44 +307,47 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
 // NOT for BulkRead instruction
 int Protocol1PacketHandler::txRxPacket(PortHandler *port, uint8_t *txpacket, uint8_t *rxpacket, uint8_t *error)
 {
-    int result = COMM_TX_FAIL;
+  int result = COMM_TX_FAIL;
 
-    // tx packet
-    result = txPacket(port, txpacket);
-    if (result != COMM_SUCCESS)
-      return result;
-
-    // (ID == Broadcast ID && NOT BulkRead) == no need to wait for status packet
-    // (Instruction == action) == no need to wait for status packet
-    if ((txpacket[PKT_ID] == BROADCAST_ID && txpacket[PKT_INSTRUCTION] != INST_BULK_READ) ||
-       (txpacket[PKT_INSTRUCTION] == INST_ACTION))
-    {
-        port->is_using_ = false;
-        return result;
-    }
-
-    // set packet timeout
-    if (txpacket[PKT_INSTRUCTION] == INST_READ)
-    {
-      port->setPacketTimeout((uint16_t)(txpacket[PKT_PARAMETER0+1] + 6));
-    }
-    else
-    {
-      port->setPacketTimeout((uint16_t)6);
-    }
-
-    // rx packet
-    result = rxPacket(port, rxpacket);
-    // check txpacket ID == rxpacket ID
-    if (txpacket[PKT_ID] != rxpacket[PKT_ID])
-      result = rxPacket(port, rxpacket);
-
-    if (result == COMM_SUCCESS && txpacket[PKT_ID] != BROADCAST_ID)
-    {
-      if (error != 0)
-        *error = (uint8_t)rxpacket[PKT_ERROR];
-    }
+  // tx packet
+  result = txPacket(port, txpacket);
+  if (result != COMM_SUCCESS)
     return result;
+
+  // (Instruction == BulkRead) == this function is not available.
+  if(txpacket[PKT_INSTRUCTION] == INST_BULK_READ)
+    result = COMM_NOT_AVAILABLE;
+
+  // (ID == Broadcast ID) == no need to wait for status packet or not available
+  // (Instruction == action) == no need to wait for status packet
+  if (txpacket[PKT_ID] == BROADCAST_ID || txpacket[PKT_INSTRUCTION] == INST_ACTION)
+  {
+    port->is_using_ = false;
+    return result;
+  }
+
+  // set packet timeout
+  if (txpacket[PKT_INSTRUCTION] == INST_READ)
+  {
+    port->setPacketTimeout((uint16_t)(txpacket[PKT_PARAMETER0+1] + 6));
+  }
+  else
+  {
+    port->setPacketTimeout((uint16_t)6); // HEADER0 HEADER1 ID LENGTH ERROR CHECKSUM
+  }
+
+  // rx packet
+  do {
+    result = rxPacket(port, rxpacket);
+  } while (result == COMM_SUCCESS && txpacket[PKT_ID] != rxpacket[PKT_ID]);
+
+  if (result == COMM_SUCCESS && txpacket[PKT_ID] == rxpacket[PKT_ID])
+  {
+    if (error != 0)
+      *error = (uint8_t)rxpacket[PKT_ERROR];
+  }
+
+  return result;
 }
 
 int Protocol1PacketHandler::ping(PortHandler *port, uint8_t id, uint8_t *error)
@@ -413,14 +437,17 @@ int Protocol1PacketHandler::readTx(PortHandler *port, uint8_t id, uint16_t addre
   return result;
 }
 
-int Protocol1PacketHandler::readRx(PortHandler *port, uint16_t length, uint8_t *data, uint8_t *error)
+int Protocol1PacketHandler::readRx(PortHandler *port, uint8_t id, uint16_t length, uint8_t *data, uint8_t *error)
 {
-  int result                 = COMM_TX_FAIL;
-  uint8_t *rxpacket           = (uint8_t *)malloc(RXPACKET_MAX_LEN);//(length+6);
-  //uint8_t *rxpacket           = new uint8_t[length+6];
+  int result                  = COMM_TX_FAIL;
+  uint8_t *rxpacket           = (uint8_t *)malloc(RXPACKET_MAX_LEN); //(length+6);
+  //uint8_t *rxpacket         = new uint8_t[length+6];
 
-  result = rxPacket(port, rxpacket);
-  if (result == COMM_SUCCESS)
+  do {
+    result = rxPacket(port, rxpacket);
+  } while (result == COMM_SUCCESS && rxpacket[PKT_ID] != id);
+
+  if (result == COMM_SUCCESS && rxpacket[PKT_ID] == id)
   {
     if (error != 0)
     {
@@ -477,10 +504,10 @@ int Protocol1PacketHandler::read1ByteTx(PortHandler *port, uint8_t id, uint16_t 
 {
   return readTx(port, id, address, 1);
 }
-int Protocol1PacketHandler::read1ByteRx(PortHandler *port, uint8_t *data, uint8_t *error)
+int Protocol1PacketHandler::read1ByteRx(PortHandler *port, uint8_t id, uint8_t *data, uint8_t *error)
 {
   uint8_t data_read[1] = {0};
-  int result = readRx(port, 1, data_read, error);
+  int result = readRx(port, id, 1, data_read, error);
   if (result == COMM_SUCCESS)
     *data = data_read[0];
   return result;
@@ -498,10 +525,10 @@ int Protocol1PacketHandler::read2ByteTx(PortHandler *port, uint8_t id, uint16_t 
 {
   return readTx(port, id, address, 2);
 }
-int Protocol1PacketHandler::read2ByteRx(PortHandler *port, uint16_t *data, uint8_t *error)
+int Protocol1PacketHandler::read2ByteRx(PortHandler *port, uint8_t id, uint16_t *data, uint8_t *error)
 {
   uint8_t data_read[2] = {0};
-  int result = readRx(port, 2, data_read, error);
+  int result = readRx(port, id, 2, data_read, error);
   if (result == COMM_SUCCESS)
     *data = DXL_MAKEWORD(data_read[0], data_read[1]);
   return result;
@@ -519,10 +546,10 @@ int Protocol1PacketHandler::read4ByteTx(PortHandler *port, uint8_t id, uint16_t 
 {
   return readTx(port, id, address, 4);
 }
-int Protocol1PacketHandler::read4ByteRx(PortHandler *port, uint32_t *data, uint8_t *error)
+int Protocol1PacketHandler::read4ByteRx(PortHandler *port, uint8_t id, uint32_t *data, uint8_t *error)
 {
   uint8_t data_read[4] = {0};
-  int result = readRx(port, 4, data_read, error);
+  int result = readRx(port, id, 4, data_read, error);
   if (result == COMM_SUCCESS)
     *data = DXL_MAKEDWORD(DXL_MAKEWORD(data_read[0], data_read[1]), DXL_MAKEWORD(data_read[2], data_read[3]));
   return result;

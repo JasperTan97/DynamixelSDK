@@ -37,7 +37,7 @@
 % Available Dynamixel model on this example : All models using Protocol 2.0
 % This example is designed for using a Dynamixel PRO 54-200, and an USB2DYNAMIXEL.
 % To use another Dynamixel model, such as X series, see their details in E-Manual(support.robotis.com) and edit below variables yourself.
-% Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 3 (Baudrate : 1000000 [1M])
+% Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 57600)
 %
 
 clc;
@@ -53,6 +53,8 @@ elseif strcmp(computer, 'GLNX86')
   lib_name = 'libdxl_x86_c';
 elseif strcmp(computer, 'GLNXA64')
   lib_name = 'libdxl_x64_c';
+elseif strcmp(computer, 'MACI64')
+  lib_name = 'libdxl_mac_c';
 end
 
 % Load Libraries
@@ -64,7 +66,7 @@ end
 PROTOCOL_VERSION                = 2.0;          % See which protocol version is used in the Dynamixel
 
 % Default setting
-BAUDRATE                        = 1000000;
+BAUDRATE                        = 57600;
 DEVICENAME                      = 'COM1';       % Check which port is being used on your controller
                                                 % ex) Windows: 'COM1'   Linux: '/dev/ttyUSB0'
 
@@ -106,8 +108,9 @@ end
 
 % Try to broadcast ping the Dynamixel
 broadcastPing(port_num, PROTOCOL_VERSION);
-if getLastTxRxResult(port_num, PROTOCOL_VERSION) ~= COMM_SUCCESS
-    printTxRxResult(PROTOCOL_VERSION, getLastTxRxResult(port_num, PROTOCOL_VERSION));
+dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION);
+if dxl_comm_result ~= COMM_SUCCESS
+    fprintf('%s\n', getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
 end
 
 fprintf('Detected Dynamixel : \n');
