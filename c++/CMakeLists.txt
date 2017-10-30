@@ -46,25 +46,11 @@ add_library(dynamixel_sdk
   src/dynamixel_sdk/port_handler.cpp
 )
 
-#if(APPLE)
-#  target_sources(dynamixel_sdk PRIVATE src/dynamixel_sdk/port_handler_mac.cpp)
-#else()
-#  target_sources(dynamixel_sdk PRIVATE src/dynamixel_sdk/port_handler_linux.cpp)
-#endif()
-
 if(APPLE)
   set_property(TARGET dynamixel_sdk APPEND PROPERTY SOURCES src/dynamixel_sdk/port_handler_mac.cpp)
 else()
   set_property(TARGET dynamixel_sdk APPEND PROPERTY SOURCES src/dynamixel_sdk/port_handler_linux.cpp)
 endif()
-
-#if(APPLE)
-#  target_sources(dynamixel_sdk PRIVATE src/dynamixel_sdk/port_handler_mac.cpp)
-#else()
-#set_property(dynamixel_sdk PRIVATE
-#  src/dynamixel_sdk/port_handler_linux.cpp
-#)
-#endif()
 
 add_dependencies(dynamixel_sdk ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(dynamixel_sdk ${catkin_LIBRARIES})
