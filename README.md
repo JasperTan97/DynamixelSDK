@@ -1,6 +1,5 @@
-![](https://raw.githubusercontent.com/ROBOTIS-GIT/ROBOTIS-Documents/master/wiki-images/DynamixelSDK/Home/DYNAMIXEL_SDK_Logo.jpg)
-![](https://raw.githubusercontent.com/ROBOTIS-GIT/ROBOTIS-Documents/master/wiki-images/DynamixelSDK/Home/DXL_SDK_image.jpg)
 ![](https://raw.githubusercontent.com/ROBOTIS-GIT/ROBOTIS-Documents/master/wiki-images/DynamixelSDK/Home/DYNAMIXEL_SDK.jpg)
+![](https://raw.githubusercontent.com/ROBOTIS-GIT/ROBOTIS-Documents/master/wiki-images/DynamixelSDK/Home/DXL_SDK_image.jpg)
 
 ### Software Release
 --------------------------------------------------------------------------
