@@ -128,7 +128,7 @@ void closePortMac(int port_num)
 
 void clearPortMac(int port_num)
 {
-  tcflush(portData[port_num].socket_fd, TCIOFLUSH);
+  tcflush(portData[port_num].socket_fd, TCIFLUSH);
 }
 
 void setPortNameMac(int port_num, const char *port_name)
