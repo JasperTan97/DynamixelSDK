@@ -43,7 +43,8 @@
 
 #include "port_handler_mac.h"
 
-#define LATENCY_TIMER   8  // msec (USB latency timer)
+#define LATENCY_TIMER   16  // msec (USB latency timer)
+                            // You should adjust the latency timer value. 
 
 using namespace dynamixel;
 
@@ -72,7 +73,7 @@ void PortHandlerMac::closePort()
 
 void PortHandlerMac::clearPort()
 {
-  tcflush(socket_fd_, TCIOFLUSH);
+  tcflush(socket_fd_, TCIFLUSH);
 }
 
 void PortHandlerMac::setPortName(const char *port_name)
@@ -151,9 +152,19 @@ bool PortHandlerMac::isPacketTimeout()
 
 double PortHandlerMac::getCurrentTime()
 {
-	struct timespec tv;
-	clock_gettime( CLOCK_REALTIME, &tv);
-	return ((double)tv.tv_sec*1000.0 + (double)tv.tv_nsec*0.001*0.001);
+  struct timespec tv;
+#ifdef __MACH__ // OS X does not have clock_gettime, so here uses clock_get_time
+  clock_serv_t cclock;
+  mach_timespec_t mts;
+  host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+  clock_get_time(cclock, &mts);
+  mach_port_deallocate(mach_task_self(), cclock);
+  tv.tv_sec = mts.tv_sec;
+  tv.tv_nsec = mts.tv_nsec;
+#else
+  clock_gettime(CLOCK_REALTIME, &tv);
+#endif
+  return ((double)tv.tv_sec * 1000.0 + (double)tv.tv_nsec * 0.001 * 0.001);
 }
 
 double PortHandlerMac::getTimeSinceStart()

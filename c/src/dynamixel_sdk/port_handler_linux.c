@@ -45,7 +45,7 @@
 
 #include "port_handler_linux.h"
 
-#define LATENCY_TIMER   2  // msec (USB latency timer)
+#define LATENCY_TIMER   4  // msec (USB latency timer)
                            // You should adjust the latency timer value. From the version Ubuntu 16.04.2, the default latency timer of the usb serial is '16 msec'.
                            // Note: the small number the latency timer has, the faster the communication will be done. You can check it by:
                            // $ cat /sys/bus/usb-serial/devices/ttyUSB0/latency_timer
@@ -65,6 +65,8 @@
                            //
                            // or if you have another good idea that can be an alternatives,
                            // please give us advice via github issue https://github.com/ROBOTIS-GIT/DynamixelSDK/issues
+
+                           // AND, when you are going to use sync / bulk read, the latency timer should be loosen
 
 typedef struct
 {
@@ -148,7 +150,7 @@ void closePortLinux(int port_num)
 
 void clearPortLinux(int port_num)
 {
-  tcflush(portData[port_num].socket_fd, TCIOFLUSH);
+  tcflush(portData[port_num].socket_fd, TCIFLUSH);
 }
 
 void setPortNameLinux(int port_num, const char *port_name)
@@ -228,7 +230,7 @@ double getCurrentTimeLinux()
 {
   struct timespec tv;
   clock_gettime(CLOCK_REALTIME, &tv);
-  return ((double)tv.tv_sec*1000.0 + (double)tv.tv_nsec*0.001*0.001);
+  return ((double)tv.tv_sec * 1000.0 + (double)tv.tv_nsec * 0.001 * 0.001);
 }
 
 double getTimeSinceStartLinux(int port_num)
