@@ -4,6 +4,7 @@ Changelog for package dynamixel_sdk
 
 3.5.4 (2017--)
 -----------
+* Fixes : Support getting of time on MacOSX/XCode versions that doesn't support (CLOCK_REALTIME issue) #141 #144
 * Changes : DynamixelSDK Ubuntu Linux usb ftdi latency timer fix issue - changes the default latency timer from 16 msec to 2 msec (now the latency timer should be adjusted by yourself... see port_handler_linux source code to see details) #116
 * Contributors: Leon
 
