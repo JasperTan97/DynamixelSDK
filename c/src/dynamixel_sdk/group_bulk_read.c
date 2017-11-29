@@ -86,7 +86,9 @@ int groupBulkRead(int port_num, int protocol_version)
   {
     for (group_num = 0; group_num < g_used_group_num; group_num++)
     {
-      if (groupData[group_num].is_param_changed != True)
+      if (groupData[group_num].is_param_changed != True
+          && groupData[group_num].port_num == port_num
+          && groupData[group_num].protocol_version == protocol_version)
         break;
     }
   }

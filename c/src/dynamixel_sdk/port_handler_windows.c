@@ -25,6 +25,14 @@
 #include "port_handler_windows.h"
 
 #define LATENCY_TIMER  16 // msec (USB latency timer)
+                          // You should adjust the latency timer value. In Windows, the default latency timer of the usb serial is '16 msec'.
+                          // When you are going to use sync / bulk read, the latency timer should be loosen.
+                          // the lower latency timer value, the faster communication speed.
+
+                          // Note:
+                          // You can either checking or changing its value by:
+                          // [Device Manager] -> [Port (COM & LPT)] -> the port you use but starts with COMx-> mouse right click -> properties
+                          // -> [port settings] -> [details] -> change response time from 16 to the value you need
 
 typedef struct
 {

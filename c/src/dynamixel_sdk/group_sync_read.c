@@ -86,7 +86,11 @@ int groupSyncRead(int port_num, int protocol_version, uint16_t start_address, ui
   {
     for (group_num = 0; group_num < g_used_group_num; group_num++)
     {
-      if (groupData[group_num].is_param_changed != True)
+      if (groupData[group_num].is_param_changed != True
+          && groupData[group_num].port_num == port_num
+          && groupData[group_num].protocol_version == protocol_version
+          && groupData[group_num].start_address == start_address
+          && groupData[group_num].data_length == data_length)
         break;
     }
   }
@@ -101,7 +105,7 @@ int groupSyncRead(int port_num, int protocol_version, uint16_t start_address, ui
   groupData[group_num].protocol_version = protocol_version;
   groupData[group_num].data_list_length = 0;
   groupData[group_num].last_result = False;
-  groupData[group_num].is_param_changed = False;
+  groupData[group_num].is_param_changed = True;
   groupData[group_num].start_address = start_address;
   groupData[group_num].data_length = data_length;
   groupData[group_num].data_list = 0;
