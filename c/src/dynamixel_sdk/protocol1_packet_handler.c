@@ -248,7 +248,7 @@ void rxPacket1(int port_num)
       {
         if (packetData[port_num].rx_packet[PKT_ID] > 0xFD ||                   // unavailable ID
             packetData[port_num].rx_packet[PKT_LENGTH] > RXPACKET_MAX_LEN ||   // unavailable Length
-            packetData[port_num].rx_packet[PKT_ERROR] >= 0x64)                 // unavailable Error
+            packetData[port_num].rx_packet[PKT_ERROR] > 0x7F)                  // unavailable Error
         {
           // remove the first byte in the packet
           for (s = 0; s < rx_length - 1; s++)

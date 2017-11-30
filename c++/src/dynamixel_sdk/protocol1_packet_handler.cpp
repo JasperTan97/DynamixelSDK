@@ -204,8 +204,8 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
       if (idx == 0)   // found at the beginning of the packet
       {
         if (rxpacket[PKT_ID] > 0xFD ||                  // unavailable ID
-           rxpacket[PKT_LENGTH] > RXPACKET_MAX_LEN ||   // unavailable Length
-           rxpacket[PKT_ERROR] >= 0x64)                 // unavailable Error
+            rxpacket[PKT_LENGTH] > RXPACKET_MAX_LEN ||  // unavailable Length
+            rxpacket[PKT_ERROR] > 0x7F)                 // unavailable Error
         {
             // remove the first byte in the packet
             for (uint16_t s = 0; s < rx_length - 1; s++)
