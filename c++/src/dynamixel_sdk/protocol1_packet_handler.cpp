@@ -163,7 +163,7 @@ int Protocol1PacketHandler::txPacket(PortHandler *port, uint8_t *txpacket)
   txpacket[PKT_HEADER1]   = 0xFF;
 
   // add a checksum to the packet
-  for (int idx = 2; idx < total_packet_length - 1; idx++)   // except header, checksum
+  for (uint16_t idx = 2; idx < total_packet_length - 1; idx++)   // except header, checksum
     checksum += txpacket[idx];
   txpacket[total_packet_length - 1] = ~checksum;
 
@@ -208,7 +208,7 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
            rxpacket[PKT_ERROR] >= 0x64)                 // unavailable Error
         {
             // remove the first byte in the packet
-            for (uint8_t s = 0; s < rx_length - 1; s++)
+            for (uint16_t s = 0; s < rx_length - 1; s++)
               rxpacket[s] = rxpacket[1 + s];
             //memcpy(&rxpacket[0], &rxpacket[idx], rx_length - idx);
             rx_length -= 1;
@@ -244,7 +244,7 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
         }
 
         // calculate checksum
-        for (int i = 2; i < wait_length - 1; i++)   // except header, checksum
+        for (uint16_t i = 2; i < wait_length - 1; i++)   // except header, checksum
           checksum += rxpacket[i];
         checksum = ~checksum;
 
@@ -262,7 +262,7 @@ int Protocol1PacketHandler::rxPacket(PortHandler *port, uint8_t *rxpacket)
       else
       {
         // remove unnecessary packets
-        for (uint8_t s = 0; s < rx_length - idx; s++)
+        for (uint16_t s = 0; s < rx_length - idx; s++)
           rxpacket[s] = rxpacket[idx + s];
         //memcpy(&rxpacket[0], &rxpacket[idx], rx_length - idx);
         rx_length -= idx;
@@ -439,7 +439,7 @@ int Protocol1PacketHandler::readRx(PortHandler *port, uint8_t id, uint16_t lengt
     {
       *error = (uint8_t)rxpacket[PKT_ERROR];
     }
-    for (uint8_t s = 0; s < length; s++)
+    for (uint16_t s = 0; s < length; s++)
     {
       data[s] = rxpacket[PKT_PARAMETER0 + s];
     }
@@ -474,7 +474,7 @@ int Protocol1PacketHandler::readTxRx(PortHandler *port, uint8_t id, uint16_t add
     {
       *error = (uint8_t)rxpacket[PKT_ERROR];
     }
-    for (uint8_t s = 0; s < length; s++)
+    for (uint16_t s = 0; s < length; s++)
     {
       data[s] = rxpacket[PKT_PARAMETER0 + s];
     }
@@ -561,7 +561,7 @@ int Protocol1PacketHandler::writeTxOnly(PortHandler *port, uint8_t id, uint16_t 
   txpacket[PKT_INSTRUCTION]   = INST_WRITE;
   txpacket[PKT_PARAMETER0]    = (uint8_t)address;
 
-  for (uint8_t s = 0; s < length; s++)
+  for (uint16_t s = 0; s < length; s++)
     txpacket[PKT_PARAMETER0+1+s] = data[s];
   //memcpy(&txpacket[PKT_PARAMETER0+1], data, length);
 
@@ -586,7 +586,7 @@ int Protocol1PacketHandler::writeTxRx(PortHandler *port, uint8_t id, uint16_t ad
   txpacket[PKT_INSTRUCTION]   = INST_WRITE;
   txpacket[PKT_PARAMETER0]    = (uint8_t)address;
 
-  for (uint8_t s = 0; s < length; s++)
+  for (uint16_t s = 0; s < length; s++)
     txpacket[PKT_PARAMETER0+1+s] = data[s];
   //memcpy(&txpacket[PKT_PARAMETER0+1], data, length);
 
@@ -642,7 +642,7 @@ int Protocol1PacketHandler::regWriteTxOnly(PortHandler *port, uint8_t id, uint16
   txpacket[PKT_INSTRUCTION]   = INST_REG_WRITE;
   txpacket[PKT_PARAMETER0]    = (uint8_t)address;
 
-  for (uint8_t s = 0; s < length; s++)
+  for (uint16_t s = 0; s < length; s++)
     txpacket[PKT_PARAMETER0+1+s] = data[s];
   //memcpy(&txpacket[PKT_PARAMETER0+1], data, length);
 
@@ -667,7 +667,7 @@ int Protocol1PacketHandler::regWriteTxRx(PortHandler *port, uint8_t id, uint16_t
   txpacket[PKT_INSTRUCTION]   = INST_REG_WRITE;
   txpacket[PKT_PARAMETER0]    = (uint8_t)address;
 
-  for (uint8_t s = 0; s < length; s++)
+  for (uint16_t s = 0; s < length; s++)
     txpacket[PKT_PARAMETER0+1+s] = data[s];
   //memcpy(&txpacket[PKT_PARAMETER0+1], data, length);
 
@@ -697,7 +697,7 @@ int Protocol1PacketHandler::syncWriteTxOnly(PortHandler *port, uint16_t start_ad
   txpacket[PKT_PARAMETER0+0]  = start_address;
   txpacket[PKT_PARAMETER0+1]  = data_length;
 
-  for (uint8_t s = 0; s < param_length; s++)
+  for (uint16_t s = 0; s < param_length; s++)
     txpacket[PKT_PARAMETER0+2+s] = param[s];
   //memcpy(&txpacket[PKT_PARAMETER0+2], param, param_length);
 
@@ -721,7 +721,7 @@ int Protocol1PacketHandler::bulkReadTx(PortHandler *port, uint8_t *param, uint16
   txpacket[PKT_INSTRUCTION]   = INST_BULK_READ;
   txpacket[PKT_PARAMETER0+0]  = 0x00;
 
-  for (uint8_t s = 0; s < param_length; s++)
+  for (uint16_t s = 0; s < param_length; s++)
     txpacket[PKT_PARAMETER0+1+s] = param[s];
   //memcpy(&txpacket[PKT_PARAMETER0+1], param, param_length);
 
@@ -729,7 +729,7 @@ int Protocol1PacketHandler::bulkReadTx(PortHandler *port, uint8_t *param, uint16
   if (result == COMM_SUCCESS)
   {
     int wait_length = 0;
-    for (int i = 0; i < param_length; i += 3)
+    for (uint16_t i = 0; i < param_length; i += 3)
       wait_length += param[i] + 7;
     port->setPacketTimeout((uint16_t)wait_length);
   }

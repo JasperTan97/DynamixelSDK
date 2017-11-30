@@ -171,7 +171,7 @@ uint32_t getDataRead1(int port_num, uint16_t data_length, uint16_t data_pos)
 
 void txPacket1(int port_num)
 {
-  int idx;
+  uint16_t idx;
 
   uint8_t checksum = 0;
   uint8_t total_packet_length = packetData[port_num].tx_packet[PKT_LENGTH] + 4; // 4: HEADER0 HEADER1 ID LENGTH
@@ -218,7 +218,7 @@ void txPacket1(int port_num)
 
 void rxPacket1(int port_num)
 {
-  uint8_t idx, s;
+  uint16_t idx, s;
   int i;
   uint8_t checksum;
   uint8_t rx_length;
@@ -469,7 +469,7 @@ void readTx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 
 void readRx1(int port_num, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -489,7 +489,7 @@ void readRx1(int port_num, uint16_t length)
 
 void readTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
   packetData[port_num].tx_packet = (uint8_t *)realloc(packetData[port_num].tx_packet, 8);
@@ -600,7 +600,7 @@ uint32_t read4ByteTxRx1(int port_num, uint8_t id, uint16_t address)
 
 void writeTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -622,7 +622,7 @@ void writeTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 
 void writeTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -691,7 +691,7 @@ void write4ByteTxRx1(int port_num, uint8_t id, uint16_t address, uint32_t data)
 
 void regWriteTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -707,13 +707,14 @@ void regWriteTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length
     packetData[port_num].tx_packet[PKT_PARAMETER0 + 1 + s] = packetData[port_num].data_write[s];
   }
 
-   txPacket1(port_num);
+  txPacket1(port_num);
+  
   g_is_using[port_num] = False;
 }
 
 void regWriteTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -742,7 +743,7 @@ void syncReadTx1(int port_num, uint16_t start_address, uint16_t data_length, uin
 
 void syncWriteTxOnly1(int port_num, uint16_t start_address, uint16_t data_length, uint16_t param_length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -764,9 +765,9 @@ void syncWriteTxOnly1(int port_num, uint16_t start_address, uint16_t data_length
 
 void bulkReadTx1(int port_num, uint16_t param_length)
 {
-  uint8_t s;
-
+  uint16_t s;
   int i;
+
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
   packetData[port_num].tx_packet = (uint8_t *)realloc(packetData[port_num].tx_packet, param_length + 7);  // 7: HEADER0 HEADER1 ID LEN INST 0x00 ... CHKSUM
