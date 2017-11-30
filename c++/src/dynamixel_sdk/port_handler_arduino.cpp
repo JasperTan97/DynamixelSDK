@@ -27,7 +27,7 @@
 #define DYNAMIXEL_SERIAL  Serial3
 #endif
 
-#define LATENCY_TIMER     4  // msec (USB latency timer)
+#define LATENCY_TIMER     16  // msec (USB latency timer)
 
 using namespace dynamixel;
 

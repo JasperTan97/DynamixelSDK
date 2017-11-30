@@ -40,6 +40,10 @@
                             // When you are going to use sync / bulk read, the latency timer should be loosen.
                             // the lower latency timer value, the faster communication speed.
 
+                            // Note:
+                            // You can either change its value by following:
+                            // http://www.ftdichip.com/Support/Documents/TechnicalNotes/TN_105%20Adding%20Support%20for%20New%20FTDI%20Devices%20to%20Mac%20Driver.pdf
+
 typedef struct
 {
   int     socket_fd;
