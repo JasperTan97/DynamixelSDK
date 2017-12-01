@@ -5,7 +5,7 @@ Changelog for package dynamixel_sdk
 3.5.4 (2017-12-01)
 -----------
 * Added : Deprecated is now being shown by attributes #67 #107
-* Fixes : DynamixelSDK ROS Indigo Issue - target_sources func in the CMake
+* Fixes : DynamixelSDK ROS Indigo Issue - target_sources func in CMake
 * Fixes : Bug in protocol1_packet_handler.cpp, line 222 checking the returned Error Mask #120
 * Fixes : Packet Handlers - array param uint8_t to uint16_t to avoid closure loop when the packet is too long to be in uint8_t appropriately
 * Fixes : Group Syncwrite using multiple ports in c library issue solved (test code is also in this issue bulletin) #124
