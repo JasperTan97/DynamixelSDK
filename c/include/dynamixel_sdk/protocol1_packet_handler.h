@@ -23,9 +23,9 @@
 #include "packet_handler.h"
 
 WINDECLSPEC const char *getTxRxResult1      (int result);
-WINDECLSPEC void        printTxRxResult1    (int result);
+DEPRECATED WINDECLSPEC void        printTxRxResult1    (int result);
 WINDECLSPEC const char *getRxPacketError1   (uint8_t error);
-WINDECLSPEC void        printRxPacketError1 (uint8_t error);
+DEPRECATED WINDECLSPEC void        printRxPacketError1 (uint8_t error);
 
 WINDECLSPEC int         getLastTxRxResult1  (int port_num);
 WINDECLSPEC uint8_t     getLastRxPacketError1   (int port_num);

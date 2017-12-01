@@ -142,7 +142,7 @@ namespace sync_write
       }
       else
       {
-        Console.WriteLine("Dynamixel{0} has been successfully connected ", DXL1_ID);
+        Console.WriteLine("Dynamixel{0} has been successfully connected ", DXL2_ID);
       }
 
       // Add parameter storage for Dynamixel#1 present position value

@@ -105,7 +105,7 @@ class WINDECLSPEC PacketHandler
   /// @param result Communication result which might be gotten by the tx rx functions
   /// @todo This function is deprecated (removed in DynamixelSDK ver. 3.6.1)
   ////////////////////////////////////////////////////////////////////////////////
-  virtual void printTxRxResult          (int result) __attribute__ ((deprecated)) = 0;
+  DEPRECATED virtual void printTxRxResult          (int result) = 0;
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that gets description of hardware error
@@ -119,7 +119,7 @@ class WINDECLSPEC PacketHandler
   /// @param error Dynamixel hardware error which might be gotten by the tx rx functions
   /// @todo This function is deprecated (removed in DynamixelSDK ver. 3.6.1)
   ////////////////////////////////////////////////////////////////////////////////
-  virtual void printRxPacketError       (uint8_t error) __attribute__ ((deprecated)) = 0;
+  DEPRECATED virtual void printRxPacketError       (uint8_t error) = 0;
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that transmits the instruction packet txpacket via PortHandler port.
