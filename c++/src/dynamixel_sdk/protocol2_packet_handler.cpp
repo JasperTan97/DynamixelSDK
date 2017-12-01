@@ -711,7 +711,7 @@ int Protocol2PacketHandler::readTxRx(PortHandler *port, uint8_t id, uint16_t add
   {
     if (error != 0)
       *error = (uint8_t)rxpacket[PKT_ERROR];
-    
+
     for (uint16_t s = 0; s < length; s++)
     {
       data[s] = rxpacket[PKT_PARAMETER0 + 1 + s];
@@ -914,7 +914,7 @@ int Protocol2PacketHandler::regWriteTxRx(PortHandler *port, uint8_t id, uint16_t
   txpacket[PKT_PARAMETER0+0]  = (uint8_t)DXL_LOBYTE(address);
   txpacket[PKT_PARAMETER0+1]  = (uint8_t)DXL_HIBYTE(address);
 
-  for (uint8_t s = 0; s < length; s++)
+  for (uint16_t s = 0; s < length; s++)
     txpacket[PKT_PARAMETER0+2+s] = data[s];
   //memcpy(&txpacket[PKT_PARAMETER0+2], data, length);
 
