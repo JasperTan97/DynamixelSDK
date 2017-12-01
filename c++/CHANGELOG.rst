@@ -2,7 +2,7 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.5.4 (2017--)
+3.5.4 (2017-12-01)
 -----------
 * Added : Deprecated is now being shown by attributes #67 #107
 * Fixes : DynamixelSDK ROS Indigo Issue - target_sources func in CMake
