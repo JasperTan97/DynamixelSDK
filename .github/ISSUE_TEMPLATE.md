@@ -1,18 +1,59 @@
-Please fill out the questionaire to give you the best support service.  
+ISSUE TEMPLATE ver. 1.1.1
 
-- Which DYNAMIXEL is it?
 
-  [　-　]  ( ex: MX-64AT , XM430-350R , PRO H54-100-S500-R , ...)
 
-- Which CONTROLLER is it?
 
-  [　　　] ( ex: OpenCM , OpenCR , Arduino Uno , PC via USB2Dynamixel , ... )
 
-- Which VERSION of DynamixelSDK is it?
 
-  ([NOTE] DynamixelSDK Q&A is not available anymore if it is older than ver. 3.0.0, but feedback us)
 
-  [　　　] ( ex: 3.4.2 , dxl_sdk_win32_v2_02.zip , ... )
+
+BE CAREFUL!! FOLLOW THE RULES AS FOLLOWS, OR YOUR ISSUE WILL BE `WON'T FIX` ANYWAY
+
+
+
+
+
+
+
+
+
+STEP 1. Check what you are suffering from :
+
+- I'm using `DynamixelSDK ver. 3.5.4`
+
+  - [3.4.1], [3.5.2], etc.
+
+- I'm using `C++` Language
+
+  - [C] / [C++] / [C#] / [Python] / [Java] / [MATLAB] / [LABVIEW] / [ROS] / [Arduino]
+
+- I'm using `USB2Dynamixel2` serial converter
+
+  - [USB2Dynamixel] / [USB2Dynamixel2] or [OpenCM904] / [OpenCR] / [CM700s] / [CM500s] or other ROBOTIS product only
+
+- I'm using `XM430-W210-R`
+
+  - [MX-28], [AX-12W], [H54-200W], etc.
+
+- and I'm having an `issue` like what
+
+  - 'My motor doesn't work', etc.
+
+
+STEP 2. Write `Title` as `[3.5.4][C++][USB2Dynamixel2][XM430-W210-R] Issue : My motor doesn't work`
+
+- Now, if you think :
+
+  - Hey, I'm using RoboPlus2.0, and having an issue, but how can I write that kind of `Title`?
+
+  - Hey, I'm using USB2AX serial converter, and having an issue, but how can I write that kind of `Title`?
+
+  - or more that is not listed on above.
+
+- , You should write your `issue` on http://en.robotis.com/BlueAD/board.php?bbs_id=old_qna
+
+
+STEP 3. Delete all written here, and describe what your problem is
 
 - Any PICTURES or VIDEOS?
 
