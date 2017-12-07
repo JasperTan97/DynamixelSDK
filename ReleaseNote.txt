@@ -1,4 +1,14 @@
 ==============================================
+    Dynamixel SDK 3.5.5 (Protocol 1.0/2.0)
+==============================================
+
+- --.--.----
+
+* Added : CONTRIBUTING.md added
+* Changes : ISSUE_TEMPLATE.md modified
+* Fixes : DynamixelSDK MATLAB 2017 - new typedef (int8_t / int16_t / int32_t) applied in robotis_def.h
+
+==============================================
     Dynamixel SDK 3.5.4 (Protocol 1.0/2.0)
 ==============================================
 

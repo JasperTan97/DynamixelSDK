@@ -2,6 +2,12 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.5.5 (****-**-**)
+-----------
+* Added : CONTRIBUTING.md added
+* Changes : ISSUE_TEMPLATE.md modified
+* Fixes : DynamixelSDK MATLAB 2017 - new typedef (int8_t / int16_t / int32_t) applied in robotis_def.h
+
 3.5.4 (2017-12-01)
 -----------
 * Added : Deprecated is now being shown by attributes #67 #107
