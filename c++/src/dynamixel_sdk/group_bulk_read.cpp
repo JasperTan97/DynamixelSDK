@@ -90,6 +90,7 @@ bool GroupBulkRead::addParam(uint8_t id, uint16_t start_address, uint16_t data_l
   length_list_[id]    = data_length;
   address_list_[id]   = start_address;
   data_list_[id]      = new uint8_t[data_length];
+  error_list_[id]     = new uint8_t[1];
 
   is_param_changed_   = true;
   return true;
@@ -105,7 +106,9 @@ void GroupBulkRead::removeParam(uint8_t id)
   address_list_.erase(id);
   length_list_.erase(id);
   delete[] data_list_[id];
+  delete[] error_list_[id];
   data_list_.erase(id);
+  error_list_.erase(id);
 
   is_param_changed_   = true;
 }
@@ -116,12 +119,16 @@ void GroupBulkRead::clearParam()
     return;
 
   for (unsigned int i = 0; i < id_list_.size(); i++)
+  {
     delete[] data_list_[id_list_[i]];
+    delete[] error_list_[id_list_[i]];
+  }
 
   id_list_.clear();
   address_list_.clear();
   length_list_.clear();
   data_list_.clear();
+  error_list_.clear();
   if (param_ != 0)
     delete[] param_;
   param_ = 0;
@@ -159,7 +166,7 @@ int GroupBulkRead::rxPacket()
   {
     uint8_t id = id_list_[i];
 
-    result = ph_->readRx(port_, id, length_list_[id], data_list_[id]);
+    result = ph_->readRx(port_, id, length_list_[id], data_list_[id], error_list_[id]);
     if (result != COMM_SUCCESS)
       return result;
   }
@@ -217,5 +224,22 @@ uint32_t GroupBulkRead::getData(uint8_t id, uint16_t address, uint16_t data_leng
 
     default:
       return 0;
+  }
+}
+
+bool GroupBulkRead::getError(uint8_t id, uint8_t* error)
+{
+  // TODO : check protocol version, last_result_, data_list
+  // if (last_result_ == false || error_list_.find(id) == error_list_.end())
+
+  error[0] = error_list_[id][0];
+
+  if (error[0] != 0)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }

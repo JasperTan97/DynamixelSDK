@@ -69,6 +69,7 @@ bool GroupSyncRead::addParam(uint8_t id)
 
   id_list_.push_back(id);
   data_list_[id] = new uint8_t[data_length_];
+  error_list_[id] = new uint8_t[1];
 
   is_param_changed_   = true;
   return true;
@@ -84,7 +85,9 @@ void GroupSyncRead::removeParam(uint8_t id)
 
   id_list_.erase(it);
   delete[] data_list_[id];
+  delete[] error_list_[id];
   data_list_.erase(id);
+  error_list_.erase(id);
 
   is_param_changed_   = true;
 }
@@ -94,10 +97,14 @@ void GroupSyncRead::clearParam()
     return;
 
   for (unsigned int i = 0; i < id_list_.size(); i++)
+  {
     delete[] data_list_[id_list_[i]];
+    delete[] error_list_[id_list_[i]];
+  }
 
   id_list_.clear();
   data_list_.clear();
+  error_list_.clear();
   if (param_ != 0)
     delete[] param_;
   param_ = 0;
@@ -131,7 +138,7 @@ int GroupSyncRead::rxPacket()
   {
     uint8_t id = id_list_[i];
 
-    result = ph_->readRx(port_, id, data_length_, data_list_[id]);
+    result = ph_->readRx(port_, id, data_length_, data_list_[id], error_list_[id]);
     if (result != COMM_SUCCESS)
       return result;
   }
@@ -186,5 +193,22 @@ uint32_t GroupSyncRead::getData(uint8_t id, uint16_t address, uint16_t data_leng
 
     default:
       return 0;
+  }
+}
+
+bool GroupSyncRead::getError(uint8_t id, uint8_t* error)
+{
+  // TODO : check protocol version, last_result_, data_list
+  // if (ph_->getProtocolVersion() == 1.0 || last_result_ == false || error_list_.find(id) == error_list_.end())
+
+  error[0] = error_list_[id][0];
+
+  if (error[0] != 0)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }

@@ -44,6 +44,7 @@ class WINDECLSPEC GroupBulkRead
   std::map<uint8_t, uint16_t>     address_list_;  // <id, start_address>
   std::map<uint8_t, uint16_t>     length_list_;   // <id, data_length>
   std::map<uint8_t, uint8_t *>    data_list_;     // <id, data>
+  std::map<uint8_t, uint8_t *>    error_list_;    // <id, error>
 
   bool            last_result_;
   bool            is_param_changed_;
@@ -148,6 +149,16 @@ class WINDECLSPEC GroupBulkRead
   /// @return data value
   ////////////////////////////////////////////////////////////////////////////////
   uint32_t    getData     (uint8_t id, uint16_t address, uint16_t data_length);
+
+  ////////////////////////////////////////////////////////////////////////////////
+  /// @brief The function that gets the error which might be received by GroupBulkRead::rxPacket or GroupBulkRead::txRxPacket
+  /// @param id Dynamixel ID
+  /// @error error of Dynamixel
+  /// @return true
+  /// @return   when Dynamixel returned specific error byte
+  /// @return or false 
+  ////////////////////////////////////////////////////////////////////////////////
+  bool        getError    (uint8_t id, uint8_t* error);
 };
 
 }

@@ -41,7 +41,8 @@ class WINDECLSPEC GroupSyncRead
   PacketHandler  *ph_;
 
   std::vector<uint8_t>            id_list_;
-  std::map<uint8_t, uint8_t* >    data_list_; // <id, data>
+  std::map<uint8_t, uint8_t *>    data_list_;  // <id, data>
+  std::map<uint8_t, uint8_t *>    error_list_; // <id, error>
 
   bool            last_result_;
   bool            is_param_changed_;
@@ -152,6 +153,16 @@ class WINDECLSPEC GroupSyncRead
   /// @return data value
   ////////////////////////////////////////////////////////////////////////////////
   uint32_t    getData     (uint8_t id, uint16_t address, uint16_t data_length);
+
+  ////////////////////////////////////////////////////////////////////////////////
+  /// @brief The function that gets the error which might be received by GroupSyncRead::rxPacket or GroupSyncRead::txRxPacket
+  /// @param id Dynamixel ID
+  /// @error error of Dynamixel
+  /// @return true
+  /// @return   when Dynamixel returned specific error byte
+  /// @return or false 
+  ////////////////////////////////////////////////////////////////////////////////
+  bool        getError    (uint8_t id, uint8_t* error);
 };
 
 }

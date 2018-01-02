@@ -252,7 +252,18 @@ int main()
     {
       // Syncread present position
       dxl_comm_result = groupSyncRead.txRxPacket();
-      if (dxl_comm_result != COMM_SUCCESS) printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
+      if (dxl_comm_result != COMM_SUCCESS)
+      {
+        printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
+      }
+      else if (groupSyncRead.getError(DXL1_ID, &dxl_error))
+      {
+        printf("[ID:%03d] %s\n", DXL1_ID, packetHandler->getRxPacketError(dxl_error));
+      }
+      else if (groupSyncRead.getError(DXL2_ID, &dxl_error))
+      {
+        printf("[ID:%03d] %s\n", DXL2_ID, packetHandler->getRxPacketError(dxl_error));
+      }
 
       // Check if groupsyncread data of Dynamixel#1 is available
       dxl_getdata_result = groupSyncRead.isAvailable(DXL1_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION);
