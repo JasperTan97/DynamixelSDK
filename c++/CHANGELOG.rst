@@ -2,6 +2,17 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.5.4 (2017-12-01)
+-----------
+* Added : Deprecated is now being shown by attributes #67 #107
+* Fixes : DynamixelSDK ROS Indigo Issue - target_sources func in CMake
+* Fixes : Bug in protocol1_packet_handler.cpp, line 222 checking the returned Error Mask #120
+* Fixes : Packet Handlers - array param uint8_t to uint16_t to avoid closure loop when the packet is too long to be in uint8_t appropriately
+* Fixes : Group Syncwrite using multiple ports in c library issue solved (test code is also in this issue bulletin) #124
+* Fixes : Support getting of time on MacOSX/XCode versions that doesn't support (CLOCK_REALTIME issue) #141 #144
+* Changes : DynamixelSDK Ubuntu Linux usb ftdi latency timer fix issue - changes the default latency timer as 16 ms in all OS, but some about how to change the latency timer was commented in the codes (now the latency timer should be adjusted by yourself... see port_handler_linux source code to see details) #116
+* Contributors: Leon
+
 3.5.3 (2017-10-30)
 -----------
 * Fixes : DynamixelSDK ROS Kinetic Issue - ARM - Debian Jessie solved by replacing target_sources func in CMake to set_property #136

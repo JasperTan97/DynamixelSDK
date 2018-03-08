@@ -1,31 +1,17 @@
 /*******************************************************************************
-* Copyright (c) 2016, ROBOTIS CO., LTD.
-* All rights reserved.
+* Copyright 2017 ROBOTIS CO., LTD.
 *
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions are met:
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
 *
-* * Redistributions of source code must retain the above copyright notice, this
-*   list of conditions and the following disclaimer.
+*     http://www.apache.org/licenses/LICENSE-2.0
 *
-* * Redistributions in binary form must reproduce the above copyright notice,
-*   this list of conditions and the following disclaimer in the documentation
-*   and/or other materials provided with the distribution.
-*
-* * Neither the name of ROBOTIS nor the names of its
-*   contributors may be used to endorse or promote products derived from
-*   this software without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
 *******************************************************************************/
 
 /* Author: Ryu Woon Jung (Leon) */
@@ -185,7 +171,7 @@ uint32_t getDataRead1(int port_num, uint16_t data_length, uint16_t data_pos)
 
 void txPacket1(int port_num)
 {
-  int idx;
+  uint16_t idx;
 
   uint8_t checksum = 0;
   uint8_t total_packet_length = packetData[port_num].tx_packet[PKT_LENGTH] + 4; // 4: HEADER0 HEADER1 ID LENGTH
@@ -232,7 +218,7 @@ void txPacket1(int port_num)
 
 void rxPacket1(int port_num)
 {
-  uint8_t idx, s;
+  uint16_t idx, s;
   int i;
   uint8_t checksum;
   uint8_t rx_length;
@@ -262,7 +248,7 @@ void rxPacket1(int port_num)
       {
         if (packetData[port_num].rx_packet[PKT_ID] > 0xFD ||                   // unavailable ID
             packetData[port_num].rx_packet[PKT_LENGTH] > RXPACKET_MAX_LEN ||   // unavailable Length
-            packetData[port_num].rx_packet[PKT_ERROR] >= 0x64)                 // unavailable Error
+            packetData[port_num].rx_packet[PKT_ERROR] > 0x7F)                  // unavailable Error
         {
           // remove the first byte in the packet
           for (s = 0; s < rx_length - 1; s++)
@@ -483,7 +469,7 @@ void readTx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 
 void readRx1(int port_num, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -503,7 +489,7 @@ void readRx1(int port_num, uint16_t length)
 
 void readTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
   packetData[port_num].tx_packet = (uint8_t *)realloc(packetData[port_num].tx_packet, 8);
@@ -614,7 +600,7 @@ uint32_t read4ByteTxRx1(int port_num, uint8_t id, uint16_t address)
 
 void writeTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -636,7 +622,7 @@ void writeTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 
 void writeTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -705,7 +691,7 @@ void write4ByteTxRx1(int port_num, uint8_t id, uint16_t address, uint32_t data)
 
 void regWriteTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -721,13 +707,14 @@ void regWriteTxOnly1(int port_num, uint8_t id, uint16_t address, uint16_t length
     packetData[port_num].tx_packet[PKT_PARAMETER0 + 1 + s] = packetData[port_num].data_write[s];
   }
 
-   txPacket1(port_num);
+  txPacket1(port_num);
+  
   g_is_using[port_num] = False;
 }
 
 void regWriteTxRx1(int port_num, uint8_t id, uint16_t address, uint16_t length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -756,7 +743,7 @@ void syncReadTx1(int port_num, uint16_t start_address, uint16_t data_length, uin
 
 void syncWriteTxOnly1(int port_num, uint16_t start_address, uint16_t data_length, uint16_t param_length)
 {
-  uint8_t s;
+  uint16_t s;
 
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
@@ -778,9 +765,9 @@ void syncWriteTxOnly1(int port_num, uint16_t start_address, uint16_t data_length
 
 void bulkReadTx1(int port_num, uint16_t param_length)
 {
-  uint8_t s;
-
+  uint16_t s;
   int i;
+
   packetData[port_num].communication_result = COMM_TX_FAIL;
 
   packetData[port_num].tx_packet = (uint8_t *)realloc(packetData[port_num].tx_packet, param_length + 7);  // 7: HEADER0 HEADER1 ID LEN INST 0x00 ... CHKSUM
