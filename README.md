@@ -33,16 +33,16 @@
 ##### ¹ C++ ver. Library is not optimized in binding other languages. Please use C ver. Library instead.  
 ---------------------------------------------------------------------------
 
-* [Quick Start Video](https://github.com/ROBOTIS-GIT/DynamixelSDK/wiki/Quick-Start-Video) may make you run your Dynamixel in 20 minutes.
+* [Quick Start Video](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/quick_start_video/#quick-start-video) may make you run your Dynamixel in 20 minutes.
 
-[![](https://github.com/ROBOTIS-GIT/ROBOTIS-Documents/blob/master/wiki-images/DynamixelSDK/Quick%20Start/Episode%201-Introduction%20to%20the%20Dynamixel%20SDK%2C%20the%20Dynamixel%20SDK%20Wiki%2C%20and%20the%20Issues%20Section.png)](https://github.com/ROBOTIS-GIT/DynamixelSDK/wiki/Quick-Start-Video)
+[![](https://github.com/ROBOTIS-GIT/ROBOTIS-Documents/blob/master/wiki-images/DynamixelSDK/Quick%20Start/Episode%201-Introduction%20to%20the%20Dynamixel%20SDK%2C%20the%20Dynamixel%20SDK%20Wiki%2C%20and%20the%20Issues%20Section.png)](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/quick_start_video/#quick-start-video)
 
-* #### Here we opened [FAQ board](https://github.com/ROBOTIS-GIT/DynamixelSDK/wiki/FAQ). You may get your keys faster!
+* #### Here we opened [FAQ board](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/frequently_asked_questionsfaq/#frequently-asked-questionsfaq). You may get your keys faster!
 
 * #### But any questions related with DynamixelSDK are always welcomed. Just let me know at: [ISSUES](https://github.com/ROBOTIS-GIT/DynamixelSDK/issues)
 
 * #### For the other questions, including Hardware-wise problems on your Dynamixels, please contact to support@robotis.com
 
-* #### See 'How to use' in [Dynamixel SDK Manual](https://github.com/ROBOTIS-GIT/DynamixelSDK/wiki)
+* #### See 'How to use' in [Dynamixel SDK Manual](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/)
 
-* #### Visit [ROBOTIS E-Manual](http://support.robotis.com/) and have details of ROBOTIS products
+* #### Visit [ROBOTIS E-Manual](http://emanual.robotis.com/) and have details of ROBOTIS products
