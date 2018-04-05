@@ -31,7 +31,9 @@ branches:
   only:
     - master
     - develop
+    - indigo-devel
     - kinetic-devel
+    - melodic-devel
 install:
   - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
 script:
