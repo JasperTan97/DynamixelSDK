@@ -19,7 +19,7 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-from robotis_def import *
+from .robotis_def import *
 
 class GroupBulkWrite:
     def __init__(self, port, ph):
@@ -41,14 +41,14 @@ class GroupBulkWrite:
         for id in self.data_list:
             if not self.data_list[id]:
                 return
-            
+
             self.param.append(id)
             self.param.append(DXL_LOBYTE(self.data_list[id][1]))
             self.param.append(DXL_HIBYTE(self.data_list[id][1]))
             self.param.append(DXL_LOBYTE(self.data_list[id][2]))
             self.param.append(DXL_HIBYTE(self.data_list[id][2]))
 
-            self.param.extend(self.data_list[id][0])           
+            self.param.extend(self.data_list[id][0])
 
     def addParam(self, id, start_address, data_length, data):
         if self.ph.getProtocolVersion() == 1.0:
@@ -56,7 +56,7 @@ class GroupBulkWrite:
 
         if id in self.data_list: # id already exist
             return False
-        
+
         if len(data) > data_length: # input data is longer than set
             return False
 
@@ -71,11 +71,11 @@ class GroupBulkWrite:
 
         if not id in self.data_list: # NOT exist
             return
-        
+
         del self.data_list[id]
 
         self.is_param_changed = True
-    
+
     def changeParam(self, id, start_address, data_length, data):
         if self.ph.getProtocolVersion() == 1.0:
             return False
@@ -101,7 +101,7 @@ class GroupBulkWrite:
     def txPacket(self):
         if self.ph.getProtocolVersion() == 1.0 or len(self.data_list.keys()) == 0:
             return COMM_NOT_AVAILABLE
-        
+
         if self.is_param_changed == True or len(self.param) == 0:
             self.makeParam()
 

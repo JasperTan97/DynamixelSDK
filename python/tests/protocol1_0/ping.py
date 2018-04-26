@@ -69,20 +69,20 @@ packetHandler = PacketHandler(PROTOCOL_VERSION)
 
 # Open port
 if portHandler.openPort():
-    print "Succeeded to open the port"
+    print("Succeeded to open the port")
 else:
-    print "Failed to open the port"
-    print "Press any key to terminate..."
+    print("Failed to open the port")
+    print("Press any key to terminate...")
     getch()
     quit()
 
 
 # Set port baudrate
 if portHandler.setBaudRate(BAUDRATE):
-    print "Succeeded to change the baudrate"
+    print("Succeeded to change the baudrate")
 else:
-    print "Failed to change the baudrate"
-    print "Press any key to terminate..."
+    print("Failed to change the baudrate")
+    print("Press any key to terminate...")
     getch()
     quit()
 
@@ -90,11 +90,11 @@ else:
 # Get Dynamixel model number
 dxl_model_number, dxl_comm_result, dxl_error = packetHandler.ping(portHandler, DXL_ID)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 else:
-    print "[ID:%03d] ping Succeeded. Dynamixel model number : %d" % (DXL_ID, dxl_model_number)
+    print("[ID:%03d] ping Succeeded. Dynamixel model number : %d" % (DXL_ID, dxl_model_number))
 
 # Close port
 portHandler.closePort()

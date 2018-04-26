@@ -19,7 +19,7 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-from robotis_def import *
+from .robotis_def import *
 
 class GroupSyncRead:
     def __init__(self, port, ph, start_address, data_length):
@@ -53,7 +53,7 @@ class GroupSyncRead:
 
         if id in self.data_dict: # id already exist
             return False
-        
+
         self.data_dict[id] = [] # [0] * self.data_length
 
         self.is_param_changed = True
@@ -65,11 +65,11 @@ class GroupSyncRead:
 
         if not id in self.data_dict: # NOT exist
             return
-        
+
         del self.data_dict[id]
 
         self.is_param_changed = True
-    
+
     def clearParam(self):
         if self.ph.getProtocolVersion() == 1.0:
             return
@@ -79,7 +79,7 @@ class GroupSyncRead:
     def txPacket(self):
         if self.ph.getProtocolVersion() == 1.0 or len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
-        
+
         if self.is_param_changed == True or not self.param:
             self.makeParam()
 
@@ -109,7 +109,7 @@ class GroupSyncRead:
     def txRxPacket(self):
         if self.ph.getProtocolVersion() == 1.0:
             return COMM_NOT_AVAILABLE
-        
+
         result = COMM_TX_FAIL
 
         result = self.txPacket()
@@ -126,7 +126,7 @@ class GroupSyncRead:
             return False
 
         return True
-    
+
     def getData(self, id, address, data_length):
         if self.isAvailable(id, address, data_length) == False:
             return 0

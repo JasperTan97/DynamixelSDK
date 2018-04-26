@@ -22,17 +22,17 @@
 import platform
 
 if platform.system() == 'Linux':
-    from port_handler_linux import *
+    from .port_handler_linux import *
 
     class PortHandler(PortHandlerLinux):
         pass
 elif platform.system() == 'Windows':
-    from port_handler_windows import *
+    from .port_handler_windows import *
 
     class PortHandler(PortHandlerWindows):
         pass
 elif platform.system() == 'Darwin':
-    from port_handler_mac import *
+    from .port_handler_mac import *
 
     class PortHandler(PortHandlerMac):
         pass

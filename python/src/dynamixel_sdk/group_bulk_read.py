@@ -19,7 +19,7 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-from robotis_def import *
+from .robotis_def import *
 
 PARAM_NUM_DATA      = 0
 PARAM_NUM_ADDRESS   = 1
@@ -45,20 +45,20 @@ class GroupBulkRead:
 
         for id in self.data_dict:
             if self.ph.getProtocolVersion() == 1.0:
-                self.param.append(self.data_dict[id][2])                # LEN                
-                self.param.append(id)                                   # ID    
-                self.param.append(self.data_dict[id][1])                # ADDR 
+                self.param.append(self.data_dict[id][2])                # LEN
+                self.param.append(id)                                   # ID
+                self.param.append(self.data_dict[id][1])                # ADDR
             else:
-                self.param.append(id)                                   # ID                
-                self.param.append(DXL_LOBYTE(self.data_dict[id][1]))    # ADDR_L    
-                self.param.append(DXL_HIBYTE(self.data_dict[id][1]))    # ADDR_H    
-                self.param.append(DXL_LOBYTE(self.data_dict[id][2]))    # LEN_L    
-                self.param.append(DXL_HIBYTE(self.data_dict[id][2]))    # LEN_H  
+                self.param.append(id)                                   # ID
+                self.param.append(DXL_LOBYTE(self.data_dict[id][1]))    # ADDR_L
+                self.param.append(DXL_HIBYTE(self.data_dict[id][1]))    # ADDR_H
+                self.param.append(DXL_LOBYTE(self.data_dict[id][2]))    # LEN_L
+                self.param.append(DXL_HIBYTE(self.data_dict[id][2]))    # LEN_H
 
     def addParam(self, id, start_address, data_length):
         if id in self.data_dict: # id already exist
             return False
-        
+
         data = [] # [0] * data_length
         self.data_dict[id] = [data, start_address, data_length]
 
@@ -68,11 +68,11 @@ class GroupBulkRead:
     def removeParam(self, id):
         if not id in self.data_dict: # NOT exist
             return
-        
+
         del self.data_dict[id]
 
         self.is_param_changed = True
-    
+
     def clearParam(self):
         self.data_dict.clear()
         return
@@ -80,7 +80,7 @@ class GroupBulkRead:
     def txPacket(self):
         if len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
-        
+
         if self.is_param_changed == True or not self.param:
             self.makeParam()
 
@@ -107,7 +107,7 @@ class GroupBulkRead:
 
         return result
 
-    def txRxPacket(self):        
+    def txRxPacket(self):
         result = COMM_TX_FAIL
 
         result = self.txPacket()
@@ -126,7 +126,7 @@ class GroupBulkRead:
             return False
 
         return True
-    
+
     def getData(self, id, address, data_length):
         if self.isAvailable(id, address, data_length) == False:
             return 0

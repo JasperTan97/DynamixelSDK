@@ -22,12 +22,12 @@
 import time
 import serial
 
-LATENCY_TIMER = 4 #16
+LATENCY_TIMER = 16
 DEFAULT_BAUDRATE = 1000000
 
 class PortHandlerLinux(object):
     def __init__(self, port_name):
-        self.socket_fd = 0.0
+        self.is_open = False
         self.baudrate = DEFAULT_BAUDRATE
         self.packet_start_time = 0.0
         self.packet_timeout = 0.0
@@ -39,9 +39,10 @@ class PortHandlerLinux(object):
 
     def openPort(self):
         return self.setBaudRate(self.baudrate)
-    
+
     def closePort(self):
         self.ser.close()
+        self.is_open = False
 
     def clearPort(self):
         self.ser.flush()
@@ -54,9 +55,6 @@ class PortHandlerLinux(object):
 
     def setBaudRate(self, baudrate):
         baud = self.getCFlagBaud(baudrate)
-
-        # When the port is already open, it will be closed and reopened with the new setting.
-        # self.closePort()
 
         if baud <= 0:
             # self.setupPort(38400)
@@ -90,13 +88,11 @@ class PortHandlerLinux(object):
         if self.getTimeSinceStart() > self.packet_timeout:
             self.packet_timeout = 0
             return True
-        
+
         return False
 
     def getCurrentTime(self):
-        millis = round(time.time() * 1000000000) / 1000000.0
-        # print "%.6f" % millis
-        return millis
+        return round(time.time() * 1000000000) / 1000000.0
 
     def getTimeSinceStart(self):
         time = self.getCurrentTime() - self.packet_start_time
@@ -106,14 +102,19 @@ class PortHandlerLinux(object):
         return time
 
     def setupPort(self, cflag_baud):
+        if self.is_open:
+            self.closePort()
+
         self.ser = serial.Serial(
             port = self.port_name,
             baudrate = self.baudrate,
             # parity = serial.PARITY_ODD,
             # stopbits = serial.STOPBITS_TWO,
-            bytesize = serial.EIGHTBITS, #bytesize = serial.SEVENBITS
+            bytesize = serial.EIGHTBITS,
             timeout = 0
         )
+
+        self.is_open = True
 
         self.ser.reset_input_buffer()
 

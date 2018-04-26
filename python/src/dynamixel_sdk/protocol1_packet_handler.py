@@ -19,7 +19,7 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-from robotis_def import *
+from .robotis_def import *
 
 TXPACKET_MAX_LEN        = 250
 RXPACKET_MAX_LEN        = 250
@@ -154,7 +154,7 @@ class Protocol1PacketHandler(object):
                         del rxpacket[0]
                         rx_length -= 1
                         continue
-                    
+
                     # re-calculate the exact length of the rx packet
                     if wait_length != (rxpacket[PKT_LENGTH] + PKT_LENGTH + 1):
                         wait_length = rxpacket[PKT_LENGTH] + PKT_LENGTH + 1
@@ -165,14 +165,12 @@ class Protocol1PacketHandler(object):
                         if port.isPacketTimeout():
                             if rx_length == 0:
                                 result = COMM_RX_TIMEOUT
-                                print "COMM_RX_TIMEOUT 1"
                             else:
                                 result = COMM_RX_CORRUPT
-                                print "COMM_RX_CORRUPT 1"
                             break
                         else:
                             continue
-                    
+
                     # calculate checksum
                     for i in range(2, wait_length - 1): # except header, checksum
                         checksum += rxpacket[i]
@@ -183,26 +181,20 @@ class Protocol1PacketHandler(object):
                         result = COMM_SUCCESS
                     else:
                         result = COMM_RX_CORRUPT
-                        print "COMM_RX_CORRUPT 2"
-
-                        print("checksum / rxpacket : ", checksum, rxpacket[wait_length - 1])
-
                     break
 
                 else:
                     #remove unnecessary packets
                     del rxpacket[0 : idx]
                     rx_length -= idx
-                
+
             else:
                 # check timeout
                 if port.isPacketTimeout():
                     if rx_length == 0:
                         result = COMM_RX_TIMEOUT
-                        print "COMM_RX_TIMEOUT 3"
                     else:
                         result = COMM_RX_CORRUPT
-                        print "COMM_RX_CORRUPT 3"
                     break
 
         port.is_using = False
@@ -234,7 +226,7 @@ class Protocol1PacketHandler(object):
             port.setPacketTimeout(txpacket[PKT_PARAMETER0 + 1] + 6)
         else:
             port.setPacketTimeout(6) # HEADER0 HEADER1 ID LENGTH ERROR CHECKSUM
-  
+
         # rx packet
         while True:
             _rxpacket, result = self.rxPacket(port, rxpacket)
@@ -247,8 +239,8 @@ class Protocol1PacketHandler(object):
             error = rxpacket[PKT_ERROR]
 
         return rxpacket, result, error
-        
-    def ping(self, port, dxl_id):
+
+      def ping(self, port, dxl_id):
         result = COMM_TX_FAIL
         model_number=0
         error=0
@@ -312,7 +304,7 @@ class Protocol1PacketHandler(object):
         txpacket[PKT_LENGTH]        = 4
         txpacket[PKT_INSTRUCTION]   = INST_READ
         txpacket[PKT_PARAMETER0+0]  = address
-        txpacket[PKT_PARAMETER0+1]  = length  
+        txpacket[PKT_PARAMETER0+1]  = length
 
         result = self.txPacket(port, txpacket)
 
@@ -326,7 +318,7 @@ class Protocol1PacketHandler(object):
         result                      = COMM_TX_FAIL
         error=0
         rxpacket                    = []
-        
+
         del data[:]
 
         while True:
@@ -340,7 +332,7 @@ class Protocol1PacketHandler(object):
                 error = rxpacket[PKT_ERROR]
 
             data.extend(rxpacket[PKT_PARAMETER0 : PKT_PARAMETER0 + length])
-        
+
         return data, result, error
 
     def readTxRx(self, port, dxl_id, address, length, data=[]):
@@ -363,7 +355,7 @@ class Protocol1PacketHandler(object):
         if result == COMM_SUCCESS:
             if error != 0:
                 error = rxpacket[PKT_ERROR]
-            
+
             data.extend(rxpacket[PKT_PARAMETER0 : PKT_PARAMETER0 + length])
 
         return data, result, error
@@ -419,7 +411,7 @@ class Protocol1PacketHandler(object):
         txpacket[PKT_INSTRUCTION]   = INST_WRITE
         txpacket[PKT_PARAMETER0]    = address
 
-        
+
         txpacket[PKT_PARAMETER0 + 1 : PKT_PARAMETER0 + 1 + length] = data[0 : length]
 
         result = self.txPacket(port, txpacket)
@@ -428,11 +420,11 @@ class Protocol1PacketHandler(object):
         return result
 
     def writeTxRx(self, port, dxl_id, address, length, data):
+
         result                      = COMM_TX_FAIL
 
         txpacket                    = [0] * (length + 7)
         rxpacket                    = []
-        
         txpacket[PKT_ID]            = dxl_id
         txpacket[PKT_LENGTH]        = length + 3
         txpacket[PKT_INSTRUCTION]   = INST_WRITE
@@ -512,7 +504,7 @@ class Protocol1PacketHandler(object):
     def syncWriteTxOnly(self, port, start_address, data_length, param, param_length):
         result                      = COMM_TX_FAIL
 
-        txpacket                    = [0] * (param_length + 8) 
+        txpacket                    = [0] * (param_length + 8)
         # 8: HEADER0 HEADER1 ID LEN INST START_ADDR DATA_LEN ... CHKSUM
 
         txpacket[PKT_ID]            = BROADCAST_ID
@@ -520,7 +512,7 @@ class Protocol1PacketHandler(object):
         txpacket[PKT_INSTRUCTION]   = INST_SYNC_WRITE
         txpacket[PKT_PARAMETER0+0]  = start_address
         txpacket[PKT_PARAMETER0+1]  = data_length
-        
+
         txpacket[PKT_PARAMETER0 + 2 : PKT_PARAMETER0 + 2 + param_length] = param[0 : param_length]
 
         result = self.txRxPacket(port, txpacket)

@@ -84,75 +84,75 @@ packetHandler = PacketHandler(PROTOCOL_VERSION)
 
 # Open port
 if portHandler.openPort():
-    print "Succeeded to open the port"
+    print("Succeeded to open the port")
 else:
-    print "Failed to open the port"
-    print "Press any key to terminate..."
+    print("Failed to open the port")
+    print("Press any key to terminate...")
     getch()
     quit()
 
 
 # Set port baudrate
 if portHandler.setBaudRate(BAUDRATE):
-    print "Succeeded to change the baudrate"
+    print("Succeeded to change the baudrate")
 else:
-    print "Failed to change the baudrate"
-    print "Press any key to terminate..."
+    print("Failed to change the baudrate")
+    print("Press any key to terminate...")
     getch()
     quit()
 
 # Read present baudrate of the controller
-print "Now the controller baudrate is : %d" % portHandler.getBaudRate()
+print("Now the controller baudrate is : %d" % portHandler.getBaudRate())
 
 # Try factoryreset
-print "[ID:%03d] Try factoryreset : " % DXL_ID
+print("[ID:%03d] Try factoryreset : " % DXL_ID)
 
 dxl_comm_result, dxl_error = packetHandler.factoryReset(portHandler, DXL_ID, OPERATION_MODE)
 if dxl_comm_result != COMM_SUCCESS:
-    print "Aborted"
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("Aborted")
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
     quit()
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 
 # Wait for reset
-print "Wait for reset..."
+print("Wait for reset...")
 sleep(2.0)
-print "[ID:%03d] factoryReset Success!" % DXL_ID
+print("[ID:%03d] factoryReset Success!" % DXL_ID)
 
 # Set controller baudrate to Dynamixel default baudrate
 if portHandler.setBaudRate(FACTORYRST_DEFAULTBAUDRATE):
-    print "Succeeded to change the controller baudrate to : %d" % FACTORYRST_DEFAULTBAUDRATE
+    print("Succeeded to change the controller baudrate to : %d" % FACTORYRST_DEFAULTBAUDRATE)
 else:
-    print "Failed to change the controller baudrate"
-    print "Press any key to terminate..."    
+    print("Failed to change the controller baudrate")
+    print("Press any key to terminate...")
     quit()
 
 
 # Read Dynamixel baudnum
 dxl_baudnum_read, dxl_comm_result, dxl_error = packetHandler.read1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_BAUDRATE)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 else:
-    print "[ID:%03d] DXL baudnum is now : %d" % (DXL_ID, dxl_baudnum_read)
+    print("[ID:%03d] DXL baudnum is now : %d" % (DXL_ID, dxl_baudnum_read))
 
 # Write new baudnum
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_BAUDRATE, NEW_BAUDNUM)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 else:
-    print "[ID:%03d] Set Dynamixel baudnum to : %d" % (DXL_ID, NEW_BAUDNUM)
+    print("[ID:%03d] Set Dynamixel baudnum to : %d" % (DXL_ID, NEW_BAUDNUM))
 
 # Set port baudrate to BAUDRATE
 if portHandler.setBaudRate(BAUDRATE):
-    print "Succeeded to change the controller baudrate to : %d" % BAUDRATE
+    print("Succeeded to change the controller baudrate to : %d" % BAUDRATE)
 else:
-    print "Failed to change the controller baudrate"
-    print "Press any key to terminate..."
+    print("Failed to change the controller baudrate")
+    print("Press any key to terminate...")
     quit()
 
 sleep(0.2)
@@ -160,11 +160,11 @@ sleep(0.2)
 # Read Dynamixel baudnum
 dxl_baudnum_read, dxl_comm_result, dxl_error = packetHandler.read1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_BAUDRATE)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 else:
-    print "[ID:%03d] Dynamixel Baudnum is now : %d" % (DXL_ID, dxl_baudnum_read)
+    print("[ID:%03d] Dynamixel Baudnum is now : %d" % (DXL_ID, dxl_baudnum_read))
 
 # Close port
 portHandler.closePort()
