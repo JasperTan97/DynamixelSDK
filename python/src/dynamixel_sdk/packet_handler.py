@@ -19,8 +19,6 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-# from protocol1_packet_handler import *
-# from protocol2_packet_handler import *
 from .protocol1_packet_handler import *
 from .protocol2_packet_handler import *
 

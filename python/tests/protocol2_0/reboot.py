@@ -69,37 +69,37 @@ packetHandler = PacketHandler(PROTOCOL_VERSION)
 
 # Open port
 if portHandler.openPort():
-    print "Succeeded to open the port"
+    print("Succeeded to open the port")
 else:
-    print "Failed to open the port"
-    print "Press any key to terminate..."
+    print("Failed to open the port")
+    print("Press any key to terminate...")
     getch()
     quit()
 
 
 # Set port baudrate
 if portHandler.setBaudRate(BAUDRATE):
-    print "Succeeded to change the baudrate"
+    print("Succeeded to change the baudrate")
 else:
-    print "Failed to change the baudrate"
-    print "Press any key to terminate..."
+    print("Failed to change the baudrate")
+    print("Press any key to terminate...")
     getch()
     quit()
 
 # Trigger
-print "Press any key to reboot"
+print("Press any key to reboot")
 getch()
 
-print "See the Dynamixel LED flickering"
+print("See the Dynamixel LED flickering")
 # Try reboot
 # Dynamixel LED will flicker while it reboots
 dxl_comm_result, dxl_error = packetHandler.reboot(portHandler, DXL_ID)
 if dxl_comm_result != COMM_SUCCESS:
-    print(packetHandler.getTxRxResult(dxl_comm_result))
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print(packetHandler.getRxPacketError(dxl_error))
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 
-print "[ID:%03d] reboot Succeeded\n" % DXL_ID
+print("[ID:%03d] reboot Succeeded\n" % DXL_ID)
 
 
 # Close port

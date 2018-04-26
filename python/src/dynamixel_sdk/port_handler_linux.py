@@ -27,7 +27,7 @@ DEFAULT_BAUDRATE = 1000000
 
 class PortHandlerLinux(object):
     def __init__(self, port_name):
-        self.socket_fd = 0.0
+        self.is_open = False
         self.baudrate = DEFAULT_BAUDRATE
         self.packet_start_time = 0.0
         self.packet_timeout = 0.0
@@ -41,6 +41,7 @@ class PortHandlerLinux(object):
 
     def closePort(self):
         self.ser.close()
+        self.is_open = False
 
     def clearPort(self):
         self.ser.flush()
@@ -100,6 +101,9 @@ class PortHandlerLinux(object):
         return time
 
     def setupPort(self, cflag_baud):
+        if self.is_open:
+            self.closePort()
+
         self.ser = serial.Serial(
             port = self.port_name,
             baudrate = self.baudrate,
@@ -108,6 +112,8 @@ class PortHandlerLinux(object):
             bytesize = serial.EIGHTBITS,
             timeout = 0
         )
+
+        self.is_open = True
 
         self.ser.reset_input_buffer()
 

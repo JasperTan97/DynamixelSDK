@@ -68,15 +68,12 @@ class PortHandlerWindows(object):
         return self.ser.in_waiting
 
     def readPort(self, length):
-        read_bytes = []
+        # read_bytes = []
         read_bytes = self.ser.readline()
-        # read_bytes.extend([ord(ch) for ch in self.ser.read(length)])
-        # print("A : %d" % len(read_bytes))
         return read_bytes
 
     def writePort(self, packet):
         res = self.ser.write(packet)
-        # print("B: %s" % packet)
         return res
 
     def setPacketTimeout(self, packet_length):

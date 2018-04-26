@@ -93,20 +93,20 @@ groupBulkRead = GroupBulkRead(portHandler, packetHandler)
 
 # Open port
 if portHandler.openPort():
-    print "Succeeded to open the port"
+    print("Succeeded to open the port")
 else:
-    print "Failed to open the port"
-    print "Press any key to terminate..."
+    print("Failed to open the port")
+    print("Press any key to terminate...")
     getch()
     quit()
 
 
 # Set port baudrate
 if portHandler.setBaudRate(BAUDRATE):
-    print "Succeeded to change the baudrate"
+    print("Succeeded to change the baudrate")
 else:
-    print "Failed to change the baudrate"
-    print "Press any key to terminate..."
+    print("Failed to change the baudrate")
+    print("Press any key to terminate...")
     getch()
     quit()
 
@@ -114,51 +114,51 @@ else:
 # Enable Dynamixel#1 Torque
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 else:
-    print "Dynamixel#%d has been successfully connected" % DXL1_ID
+    print("Dynamixel#%d has been successfully connected" % DXL1_ID)
 
 # Enable Dynamixel#1 Torque
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 else:
-    print "Dynamixel#%d has been successfully connected" % DXL2_ID
+    print("Dynamixel#%d has been successfully connected" % DXL2_ID)
 
 # Add parameter storage for Dynamixel#1 present position
 dxl_addparam_result = groupBulkRead.addParam(DXL1_ID, ADDR_MX_PRESENT_POSITION, LEN_MX_PRESENT_POSITION)
 if dxl_addparam_result != True:
-    print "[ID:%03d] groupBulkRead addparam failed" % DXL1_ID
+    print("[ID:%03d] groupBulkRead addparam failed" % DXL1_ID)
     quit()
 
 # Add parameter storage for Dynamixel#2 moving value
 dxl_addparam_result = groupBulkRead.addParam(DXL2_ID, ADDR_MX_MOVING, LEN_MX_MOVING)
 if dxl_addparam_result != True:
-    print "[ID:%03d] groupBulkRead addparam failed" % DXL2_ID
+    print("[ID:%03d] groupBulkRead addparam failed" % DXL2_ID)
     quit()
 
 while 1:
-    print "Press any key to continue! (or press ESC to quit!)"
+    print("Press any key to continue! (or press ESC to quit!)")
     if getch() == chr(0x1b):
         break
 
     # Write Dynamixel#1 goal position
     dxl_comm_result, dxl_error = packetHandler.write4ByteTxRx(portHandler, DXL1_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index])
     if dxl_comm_result != COMM_SUCCESS:
-        print packetHandler.getTxRxResult(dxl_comm_result)
+        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
     elif dxl_error != 0:
-        print packetHandler.getRxPacketError(dxl_error)
+        print("%s" % packetHandler.getRxPacketError(dxl_error))
 
     # Write Dynamixel#2 goal position
     dxl_comm_result, dxl_error = packetHandler.write4ByteTxRx(portHandler, DXL2_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index])
     if dxl_comm_result != COMM_SUCCESS:
-        print packetHandler.getTxRxResult(dxl_comm_result)
+        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
     elif dxl_error != 0:
-        print packetHandler.getRxPacketError(dxl_error)
+        print("%s" % packetHandler.getRxPacketError(dxl_error))
         
     while 1:
         # Bulkread present position and moving status
@@ -169,13 +169,13 @@ while 1:
         # Check if groupbulkread data of Dynamixel#1 is available
         dxl_getdata_result = groupBulkRead.isAvailable(DXL1_ID, ADDR_MX_PRESENT_POSITION, LEN_MX_PRESENT_POSITION)
         if dxl_getdata_result != True:
-            print "[ID:%03d] groupBulkRead getdata failed" % DXL1_ID
+            print("[ID:%03d] groupBulkRead getdata failed" % DXL1_ID)
             quit()
 
         # Check if groupbulkread data of Dynamixel#2 is available
         dxl_getdata_result = groupBulkRead.isAvailable(DXL2_ID, ADDR_MX_MOVING, LEN_MX_MOVING)
         if dxl_getdata_result != True:
-            print "[ID:%03d] groupBulkRead getdata failed" % DXL2_ID
+            print("[ID:%03d] groupBulkRead getdata failed" % DXL2_ID)
             quit()
 
         # Get Dynamixel#1 present position value
@@ -184,7 +184,7 @@ while 1:
         # Get Dynamixel#2 moving value
         dxl2_moving_value = groupBulkRead.getData(DXL2_ID, ADDR_MX_MOVING, LEN_MX_MOVING)
 
-        print "[ID:%03d] Present Position : %d \t [ID:%03d] Is Moving: %d" % (DXL1_ID, dxl1_present_position, DXL2_ID, dxl2_moving_value)
+        print("[ID:%03d] Present Position : %d \t [ID:%03d] Is Moving: %d" % (DXL1_ID, dxl1_present_position, DXL2_ID, dxl2_moving_value))
 
         if not (abs(dxl_goal_position[index] - dxl1_present_position) > DXL_MOVING_STATUS_THRESHOLD):
             break
@@ -201,16 +201,16 @@ groupBulkRead.clearParam()
 # Disable Dynamixel#1 Torque
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 
 # Disable Dynamixel#2 Torque
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
 if dxl_comm_result != COMM_SUCCESS:
-    print packetHandler.getTxRxResult(dxl_comm_result)
+    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
-    print packetHandler.getRxPacketError(dxl_error)
+    print("%s" % packetHandler.getRxPacketError(dxl_error))
 
 # Close port
 portHandler.closePort()

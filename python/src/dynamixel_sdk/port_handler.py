@@ -21,22 +21,6 @@
 
 import platform
 
-# if platform.system() == 'Linux':
-#     from port_handler_linux import *
-#
-#     class PortHandler(PortHandlerLinux):
-#         pass
-# elif platform.system() == 'Windows':
-#     from port_handler_windows import *
-#
-#     class PortHandler(PortHandlerWindows):
-#         pass
-# elif platform.system() == 'Darwin':
-#     from port_handler_mac import *
-#
-#     class PortHandler(PortHandlerMac):
-#         pass
-
 if platform.system() == 'Linux':
     from .port_handler_linux import *
 
@@ -52,19 +36,3 @@ elif platform.system() == 'Darwin':
 
     class PortHandler(PortHandlerMac):
         pass
-
-# if platform.system() == 'Linux':
-#     from . import port_handler_linux
-#
-#     class PortHandler(PortHandlerLinux):
-#         pass
-# elif platform.system() == 'Windows':
-#     from . import port_handler_windows
-#
-#     class PortHandler(port_handler_windows.PortHandlerWindows):
-#         pass
-# elif platform.system() == 'Darwin':
-#     from . import port_handler_mac
-#
-#     class PortHandler(PortHandlerMac):
-#         pass
