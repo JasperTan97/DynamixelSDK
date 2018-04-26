@@ -22,12 +22,12 @@
 import time
 import serial
 
-LATENCY_TIMER = 16
+LATENCY_TIMER = 1
 DEFAULT_BAUDRATE = 1000000
 
 class PortHandlerWindows(object):
     def __init__(self, port_name):
-        self.socket_fd = 0.0
+        self.is_open = False
         self.baudrate = DEFAULT_BAUDRATE
         self.packet_start_time = 0.0
         self.packet_timeout = 0.0
@@ -38,9 +38,10 @@ class PortHandlerWindows(object):
 
     def openPort(self):
         return self.setBaudRate(self.baudrate)
-    
+
     def closePort(self):
         self.ser.close()
+        self.is_open = False
 
     def clearPort(self):
         self.ser.flush()
@@ -54,63 +55,29 @@ class PortHandlerWindows(object):
     def setBaudRate(self, baudrate):
         baud = self.getCFlagBaud(baudrate)
 
-        self.closePort()
-
         if baud <= 0:
-            setupPort(38400)
-            self.baudrate = baudrate
-            return setCustomBaudrate(baudrate)
+            return False
         else:
             self.baudrate = baudrate
-            return setupPort(baud)
-        
-        # TODO:more simplify
+            return self.setupPort(baud)
 
     def getBaudRate(self):
         return self.baudrate
 
     def getBytesAvailable(self):
-        pass
+        return self.ser.in_waiting
 
-        # TODO: fill
+    def readPort(self, length):
+        read_bytes = []
+        read_bytes = self.ser.readline()
+        # read_bytes.extend([ord(ch) for ch in self.ser.read(length)])
+        # print("A : %d" % len(read_bytes))
+        return read_bytes
 
-    def readPort(self, packet, length):
-        pass
-
-        # TODO: fill
-    
     def writePort(self, packet):
-        ser.write(packet)
-
-
-# ser.isOpen()
-
-# print 'Enter your commands below.\r\nInsert "exit" to leave the application.'
-
-# input=1
-# while 1 :
-#     # get keyboard input
-#     input = raw_input(">> ")
-#         # Python 3 users
-#         # input = input(">> ")
-#     if input == 'exit':
-#         ser.close()
-#         exit()
-#     else:
-#         # send the character to the device
-#         # (note that I happend a \r\n carriage return and line feed to the characters - this is requested by my device)
-#         ser.write(input)
-#         # out = ''
-#         # # let's wait one second before reading output (let's give device time to answer)
-#         # time.sleep(1)
-#         # while ser.inWaiting() > 0:
-#         #     out += ser.read(1)
-
-#         # if out != '':
-#         #     print ">>" + out
-
-
-
+        res = self.ser.write(packet)
+        # print("B: %s" % packet)
+        return res
 
     def setPacketTimeout(self, packet_length):
         self.packet_start_time = self.getCurrentTime()
@@ -121,16 +88,14 @@ class PortHandlerWindows(object):
         self.packet_timeout = msec
 
     def isPacketTimeout(self):
-        if self.getTimeSinceStart() > packet_timeout:
+        if self.getTimeSinceStart() > self.packet_timeout:
             self.packet_timeout = 0
             return True
-        
+
         return False
 
     def getCurrentTime(self):
-        pass
-
-        #TODO : fill
+        return round(time.time() * 1000000000) / 1000000.0
 
     def getTimeSinceStart(self):
         time = self.getCurrentTime() - self.packet_start_time
@@ -140,62 +105,62 @@ class PortHandlerWindows(object):
         return time
 
     def setupPort(self, cflag_baud):
-        
-        # TODO: Error exception
+        if self.is_open:
+            self.closePort()
 
         self.ser = serial.Serial(
-            port = self.port_name, #'/dev/ttyUSB0',
-            baudrate = self.baudrate, # 1000000,
-            parity = serial.PARITY_ODD,
-            stopbits = serial.STOPBITS_TWO,
-            bytesize = serial.SEVENBITS
+            port = self.port_name,
+            baudrate = self.baudrate,
+            # parity = serial.PARITY_ODD,
+            # stopbits = serial.STOPBITS_TWO,
+            bytesize = serial.EIGHTBITS,
+            timeout = 0
         )
+
+        self.is_open = True
+
+        self.ser.reset_input_buffer()
 
         self.tx_time_per_byte = (1000.0 / self.baudrate) * 10.0
 
         return True
 
-    def setCustomBaudrate(self, speed):
-        pass
-
-        #TODO: fill
-
     def getCFlagBaud(self, baudrate):
-        if baudrate is 9600:
+        if baudrate == 9600:
             return 9600
-        elif baudrate is 19200:
+        elif baudrate == 19200:
             return 19200
-        elif baudrate is 38400:
+        elif baudrate == 38400:
             return 38400
-        elif baudrate is 57600:
+        elif baudrate == 57600:
             return 57600
-        elif baudrate is 115200:
+        elif baudrate == 115200:
             return 115200
-        elif baudrate is 230400:
+        elif baudrate == 230400:
             return 230400
-        elif baudrate is 460800:
+        elif baudrate == 460800:
             return 460800
-        elif baudrate is 500000:
+        elif baudrate == 500000:
             return 500000
-        elif baudrate is 576000:
+        elif baudrate == 576000:
             return 576000
-        elif baudrate is 921600:
+        elif baudrate == 921600:
             return 921600
-        elif baudrate is 1000000:
+        elif baudrate == 1000000:
             return 1000000
-        elif baudrate is 1152000:
+        elif baudrate == 1152000:
             return 1152000
-        elif baudrate is 1500000:
+        elif baudrate == 1500000:
             return 1500000
-        elif baudrate is 2000000:
+        elif baudrate == 2000000:
             return 2000000
-        elif baudrate is 2500000:
+        elif baudrate == 2500000:
             return 2500000
-        elif baudrate is 3000000:
+        elif baudrate == 3000000:
             return 3000000
-        elif baudrate is 3500000:
+        elif baudrate == 3500000:
             return 3500000
-        elif baudrate is 4000000:
+        elif baudrate == 4000000:
             return 4000000
         else:
             return -1

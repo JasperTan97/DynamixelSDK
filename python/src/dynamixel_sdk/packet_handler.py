@@ -19,8 +19,10 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-from protocol1_packet_handler import *
-from protocol2_packet_handler import *
+# from protocol1_packet_handler import *
+# from protocol2_packet_handler import *
+from .protocol1_packet_handler import *
+from .protocol2_packet_handler import *
 
 def PacketHandler(protocol_version):
     if protocol_version == 1.0:

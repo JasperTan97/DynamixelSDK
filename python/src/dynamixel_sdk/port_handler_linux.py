@@ -22,7 +22,7 @@
 import time
 import serial
 
-LATENCY_TIMER = 4 #16
+LATENCY_TIMER = 16
 DEFAULT_BAUDRATE = 1000000
 
 class PortHandlerLinux(object):
@@ -38,7 +38,7 @@ class PortHandlerLinux(object):
 
     def openPort(self):
         return self.setBaudRate(self.baudrate)
-    
+
     def closePort(self):
         self.ser.close()
 
@@ -54,12 +54,7 @@ class PortHandlerLinux(object):
     def setBaudRate(self, baudrate):
         baud = self.getCFlagBaud(baudrate)
 
-        # When the port is already open, it will be closed and reopened with the new setting.
-        # self.closePort()
-
         if baud <= 0:
-            # self.setupPort(38400)
-            # self.baudrate = baudrate
             return False
         else:
             self.baudrate = baudrate
@@ -72,21 +67,11 @@ class PortHandlerLinux(object):
         return self.ser.in_waiting
 
     def readPort(self, length):
-        # read_bytes = self.ser.read(length)
         read_bytes = []
-
         read_bytes.extend([ord(ch) for ch in self.ser.read(length)])
-        # for i in range(0, len(read_bytes)):
-        #     read_bytes[i] = int.frombytes(read_bytes[i], byteorder = 'little')
-
-        # for i in read_bytes:
-            # print i
         return read_bytes
 
     def writePort(self, packet):
-        # for i in packet:
-        #     print i
-
         return self.ser.write(packet)
 
     def setPacketTimeout(self, packet_length):
@@ -101,13 +86,11 @@ class PortHandlerLinux(object):
         if self.getTimeSinceStart() > self.packet_timeout:
             self.packet_timeout = 0
             return True
-        
+
         return False
 
     def getCurrentTime(self):
-        millis = round(time.time() * 1000000000) / 1000000.0
-        # print "%.6f" % millis
-        return millis
+        return round(time.time() * 1000000000) / 1000000.0
 
     def getTimeSinceStart(self):
         time = self.getCurrentTime() - self.packet_start_time
@@ -122,8 +105,8 @@ class PortHandlerLinux(object):
             baudrate = self.baudrate,
             # parity = serial.PARITY_ODD,
             # stopbits = serial.STOPBITS_TWO,
-            bytesize = serial.EIGHTBITS #bytesize = serial.SEVENBITS
-            , timeout = 0
+            bytesize = serial.EIGHTBITS,
+            timeout = 0
         )
 
         self.ser.reset_input_buffer()

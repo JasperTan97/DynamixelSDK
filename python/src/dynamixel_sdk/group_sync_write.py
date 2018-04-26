@@ -19,7 +19,7 @@
 
 # Author: Ryu Woon Jung (Leon)
 
-from robotis_def import *
+from .robotis_def import *
 
 class GroupSyncWrite:
     def __init__(self, port, ph, start_address, data_length):
@@ -50,7 +50,7 @@ class GroupSyncWrite:
     def addParam(self, id, data):
         if (id in self.data_dict): # id already exist
             return False
-        
+
         if len(data) > self.data_length: # input data is longer than set
             return False
 
@@ -62,11 +62,11 @@ class GroupSyncWrite:
     def removeParam(self, id):
         if not id in self.data_dict: # NOT exist
             return
-        
+
         del self.data_dict[id]
 
         self.is_param_changed = True
-    
+
     def changeParam(self, id, data):
         if not id in self.data_dict: # NOT exist
             return False
@@ -85,7 +85,7 @@ class GroupSyncWrite:
     def txPacket(self):
         if len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
-        
+
         if self.is_param_changed == True or not self.param:
             self.makeParam()
 
