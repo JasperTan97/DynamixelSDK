@@ -204,7 +204,7 @@ while 1:
     if index == 0:
         index = 1
     else:
-        index = 0    
+        index = 0
 
 # Clear syncread parameter storage
 groupSyncRead.clearParam()

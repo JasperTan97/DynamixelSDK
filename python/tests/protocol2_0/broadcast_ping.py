@@ -90,7 +90,7 @@ dxl_data_list, dxl_comm_result = packetHandler.broadcastPing(portHandler)
 if dxl_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 
-print "Detected Dynamixel :"
+print("Detected Dynamixel :")
 for dxl_id in dxl_data_list:
     print("[ID:%03d] model version : %d | firmware version : %d" % (dxl_id, dxl_data_list.get(dxl_id)[0], dxl_data_list.get(dxl_id)[1]))
 

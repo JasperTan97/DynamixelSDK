@@ -180,7 +180,7 @@ while 1:
     if index == 0:
         index = 1
     else:
-        index = 0    
+        index = 0
 
 
 # Disable Dynamixel#1 Torque

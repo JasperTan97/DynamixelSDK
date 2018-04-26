@@ -187,7 +187,7 @@ if dxl_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 elif dxl_error != 0:
     print("%s" % packetHandler.getRxPacketError(dxl_error))
-    
+
 # Enable Dynamixel Torque
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_ENABLE)
 if dxl_comm_result != COMM_SUCCESS:
@@ -220,7 +220,7 @@ while 1:
     # Syncwrite all
     dxl_comm_result = groupSyncWrite.txPacket()
     if dxl_comm_result != COMM_SUCCESS:
-        print packetHandler.getTxRxResult(dxl_comm_result)
+        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 
     # Clear syncwrite parameter storage
     groupSyncWrite.clearParam()
@@ -229,7 +229,7 @@ while 1:
         # Syncread present position from indirectdata2
         dxl_comm_result = groupSyncRead.txRxPacket()
         if dxl_comm_result != COMM_SUCCESS:
-            print packetHandler.getTxRxResult(dxl_comm_result)
+            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 
         # Check if groupsyncread data of Dynamixel present position value is available
         dxl_getdata_result = groupSyncRead.isAvailable(DXL_ID, ADDR_PRO_INDIRECTDATA_FOR_READ, LEN_PRO_PRESENT_POSITION)
@@ -258,7 +258,7 @@ while 1:
     if index == 0:
         index = 1
     else:
-        index = 0    
+        index = 0
 
 # Clear syncread parameter storage
 groupSyncRead.clearParam()

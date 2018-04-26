@@ -159,12 +159,12 @@ while 1:
         print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
     elif dxl_error != 0:
         print("%s" % packetHandler.getRxPacketError(dxl_error))
-        
+
     while 1:
         # Bulkread present position and moving status
         dxl_comm_result = groupBulkRead.txRxPacket()
         if dxl_comm_result != COMM_SUCCESS:
-            print packetHandler.getTxRxResult(dxl_comm_result)
+            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 
         # Check if groupbulkread data of Dynamixel#1 is available
         dxl_getdata_result = groupBulkRead.isAvailable(DXL1_ID, ADDR_MX_PRESENT_POSITION, LEN_MX_PRESENT_POSITION)
@@ -193,7 +193,7 @@ while 1:
     if index == 0:
         index = 1
     else:
-        index = 0    
+        index = 0
 
 # Clear bulkread parameter storage
 groupBulkRead.clearParam()

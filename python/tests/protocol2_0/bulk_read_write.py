@@ -164,11 +164,11 @@ while 1:
     if dxl_addparam_result != True:
         print("[ID:%03d] groupBulkWrite addparam failed" % DXL2_ID)
         quit()
-    
+
     # Bulkwrite goal position and LED value
     dxl_comm_result = groupBulkWrite.txPacket()
     if dxl_comm_result != COMM_SUCCESS:
-        print packetHandler.getTxRxResult(dxl_comm_result)
+        print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 
     # Clear bulkwrite parameter storage
     groupBulkWrite.clearParam()
@@ -177,7 +177,7 @@ while 1:
         # Bulkread present position and LED status
         dxl_comm_result = groupBulkRead.txRxPacket()
         if dxl_comm_result != COMM_SUCCESS:
-            print packetHandler.getTxRxResult(dxl_comm_result)
+            print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
 
         # Check if groupbulkread data of Dynamixel#1 is available
         dxl_getdata_result = groupBulkRead.isAvailable(DXL1_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION)
@@ -206,7 +206,7 @@ while 1:
     if index == 0:
         index = 1
     else:
-        index = 0    
+        index = 0
 
 # Clear bulkread parameter storage
 groupBulkRead.clearParam()
