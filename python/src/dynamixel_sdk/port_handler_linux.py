@@ -34,7 +34,8 @@ class PortHandlerLinux(object):
         self.tx_time_per_byte = 0.0
 
         self.is_using = False
-        self.setPortName(port_name)
+        self.port_name = port_name
+        self.ser = None
 
     def openPort(self):
         return self.setBaudRate(self.baudrate)
@@ -56,7 +57,9 @@ class PortHandlerLinux(object):
         baud = self.getCFlagBaud(baudrate)
 
         if baud <= 0:
-            return False
+            # self.setupPort(38400)
+            # self.baudrate = baudrate
+            return False #TODO: setCustomBaudrate(baudrate)
         else:
             self.baudrate = baudrate
             return self.setupPort(baud)
@@ -68,18 +71,16 @@ class PortHandlerLinux(object):
         return self.ser.in_waiting
 
     def readPort(self, length):
-        read_bytes = []
-        read_bytes.extend([ord(ch) for ch in self.ser.read(length)])
-        return read_bytes
+        return [ord(ch) for ch in self.ser.read(length)]
 
     def writePort(self, packet):
         return self.ser.write(packet)
 
     def setPacketTimeout(self, packet_length):
         self.packet_start_time = self.getCurrentTime()
-        self.packet_timeout = (self.tx_time_per_byte * self.packet_length) + (LATENCY_TIMER * 2.0) + 2.0
+        self.packet_timeout = (self.tx_time_per_byte * packet_length) + (LATENCY_TIMER * 2.0) + 2.0
 
-    def setPacketTimeout(self, msec):
+    def setPacketTimeoutMillis(self, msec):
         self.packet_start_time = self.getCurrentTime()
         self.packet_timeout = msec
 
@@ -96,7 +97,7 @@ class PortHandlerLinux(object):
     def getTimeSinceStart(self):
         time = self.getCurrentTime() - self.packet_start_time
         if time < 0.0:
-            packet_start_time = self.getCurrentTime()
+            self.packet_start_time = self.getCurrentTime()
 
         return time
 
@@ -122,41 +123,7 @@ class PortHandlerLinux(object):
         return True
 
     def getCFlagBaud(self, baudrate):
-        if baudrate == 9600:
-            return 9600
-        elif baudrate == 19200:
-            return 19200
-        elif baudrate == 38400:
-            return 38400
-        elif baudrate == 57600:
-            return 57600
-        elif baudrate == 115200:
-            return 115200
-        elif baudrate == 230400:
-            return 230400
-        elif baudrate == 460800:
-            return 460800
-        elif baudrate == 500000:
-            return 500000
-        elif baudrate == 576000:
-            return 576000
-        elif baudrate == 921600:
-            return 921600
-        elif baudrate == 1000000:
-            return 1000000
-        elif baudrate == 1152000:
-            return 1152000
-        elif baudrate == 1500000:
-            return 1500000
-        elif baudrate == 2000000:
-            return 2000000
-        elif baudrate == 2500000:
-            return 2500000
-        elif baudrate == 3000000:
-            return 3000000
-        elif baudrate == 3500000:
-            return 3500000
-        elif baudrate == 4000000:
-            return 4000000
+        if baudrate in [9600, 19200, 38400, 57600, 115200, 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 2000000, 2500000, 3000000, 3500000, 4000000]:
+            return baudrate
         else:
             return -1
