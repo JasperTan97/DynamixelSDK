@@ -21,26 +21,26 @@
 
 from .robotis_def import *
 
-TXPACKET_MAX_LEN        = 250
-RXPACKET_MAX_LEN        = 250
+TXPACKET_MAX_LEN = 250
+RXPACKET_MAX_LEN = 250
 
 # for Protocol 1.0 Packet
-PKT_HEADER0             = 0
-PKT_HEADER1             = 1
-PKT_ID                  = 2
-PKT_LENGTH              = 3
-PKT_INSTRUCTION         = 4
-PKT_ERROR               = 4
-PKT_PARAMETER0          = 5
+PKT_HEADER0 = 0
+PKT_HEADER1 = 1
+PKT_ID = 2
+PKT_LENGTH = 3
+PKT_INSTRUCTION = 4
+PKT_ERROR = 4
+PKT_PARAMETER0 = 5
 
 # Protocol 1.0 Error bit
-ERRBIT_VOLTAGE          = 1       # Supplied voltage is out of the range (operating volatage set in the control table)
-ERRBIT_ANGLE            = 2       # Goal position is written out of the range (from CW angle limit to CCW angle limit)
-ERRBIT_OVERHEAT         = 4       # Temperature is out of the range (operating temperature set in the control table)
-ERRBIT_RANGE            = 8       # Command(setting value) is out of the range for use.
-ERRBIT_CHECKSUM         = 16      # Instruction packet checksum is incorrect.
-ERRBIT_OVERLOAD         = 32      # The current load cannot be controlled by the set torque.
-ERRBIT_INSTRUCTION      = 64      # Undefined instruction or delivering the action command without the reg_write command.
+ERRBIT_VOLTAGE = 1          # Supplied voltage is out of the range (operating volatage set in the control table)
+ERRBIT_ANGLE = 2            # Goal position is written out of the range (from CW angle limit to CCW angle limit)
+ERRBIT_OVERHEAT = 4         # Temperature is out of the range (operating temperature set in the control table)
+ERRBIT_RANGE = 8            # Command(setting value) is out of the range for use.
+ERRBIT_CHECKSUM = 16        # Instruction packet checksum is incorrect.
+ERRBIT_OVERLOAD = 32        # The current load cannot be controlled by the set torque.
+ERRBIT_INSTRUCTION = 64     # Undefined instruction or delivering the action command without the reg_write command.
 
 class Protocol1PacketHandler(object):
     def getProtocolVersion(self):
@@ -127,10 +127,10 @@ class Protocol1PacketHandler(object):
     def rxPacket(self, port):
         rxpacket = []
 
-        result          = COMM_TX_FAIL
-        checksum        = 0
-        rx_length       = 0
-        wait_length     = 6 # minimum length (HEADER0 HEADER1 ID LENGTH ERROR CHKSUM)
+        result = COMM_TX_FAIL
+        checksum = 0
+        rx_length = 0
+        wait_length = 6 # minimum length (HEADER0 HEADER1 ID LENGTH ERROR CHKSUM)
 
         while True:
             rxpacket.extend(port.readPort(wait_length - rx_length))
@@ -262,11 +262,11 @@ class Protocol1PacketHandler(object):
         return data_list, COMM_NOT_AVAILABLE
 
     def action(self, port, dxl_id):
-        txpacket                    = [0] * 6
+        txpacket = [0] * 6
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]      = 2
-        txpacket[PKT_INSTRUCTION]   = INST_ACTION
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = 2
+        txpacket[PKT_INSTRUCTION] = INST_ACTION
 
         _, result, _ = self.txRxPacket(port, txpacket)
 
@@ -276,28 +276,28 @@ class Protocol1PacketHandler(object):
         return COMM_NOT_AVAILABLE, 0
 
     def factoryReset(self, port, dxl_id):
-        txpacket                    = [0] * 6
+        txpacket = [0] * 6
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = 2
-        txpacket[PKT_INSTRUCTION]   = INST_FACTORY_RESET
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = 2
+        txpacket[PKT_INSTRUCTION] = INST_FACTORY_RESET
 
         _, result, error = self.txRxPacket(port, txpacket)
         return result, error
 
     def readTx(self, port, dxl_id, address, length):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * 8
+        txpacket = [0] * 8
 
         if dxl_id >= BROADCAST_ID:
             return COMM_NOT_AVAILABLE
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = 4
-        txpacket[PKT_INSTRUCTION]   = INST_READ
-        txpacket[PKT_PARAMETER0+0]  = address
-        txpacket[PKT_PARAMETER0+1]  = length
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH]  = 4
+        txpacket[PKT_INSTRUCTION] = INST_READ
+        txpacket[PKT_PARAMETER0+0] = address
+        txpacket[PKT_PARAMETER0+1] = length
 
         result = self.txPacket(port, txpacket)
 
@@ -308,10 +308,10 @@ class Protocol1PacketHandler(object):
         return result
 
     def readRx(self, port, dxl_id, length):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
         error = 0
-        rxpacket                    = None
 
+        rxpacket = None
         data = []
 
         while True:
@@ -328,21 +328,21 @@ class Protocol1PacketHandler(object):
         return data, result, error
 
     def readTxRx(self, port, dxl_id, address, length):
-        result      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
         error = 0
-        txpacket    = [0] * 8
-        rxpacket = None
 
+        txpacket = [0] * 8
+        rxpacket = None
         data = []
 
         if dxl_id >= BROADCAST_ID:
             return data, COMM_NOT_AVAILABLE, error
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = 4
-        txpacket[PKT_INSTRUCTION]   = INST_READ
-        txpacket[PKT_PARAMETER0+0]  = address
-        txpacket[PKT_PARAMETER0+1]  = length
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = 4
+        txpacket[PKT_INSTRUCTION] = INST_READ
+        txpacket[PKT_PARAMETER0+0] = address
+        txpacket[PKT_PARAMETER0+1] = length
 
         rxpacket, result, error = self.txRxPacket(port, txpacket)
         if result == COMM_SUCCESS:
@@ -394,15 +394,14 @@ class Protocol1PacketHandler(object):
         return data_read, result, error
 
     def writeTxOnly(self, port, dxl_id, address, length, data):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * (length + 7)
+        txpacket = [0] * (length + 7)
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = length + 3
-        txpacket[PKT_INSTRUCTION]   = INST_WRITE
-        txpacket[PKT_PARAMETER0]    = address
-
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = length + 3
+        txpacket[PKT_INSTRUCTION] = INST_WRITE
+        txpacket[PKT_PARAMETER0] = address
 
         txpacket[PKT_PARAMETER0 + 1 : PKT_PARAMETER0 + 1 + length] = data[0 : length]
 
@@ -412,15 +411,15 @@ class Protocol1PacketHandler(object):
         return result
 
     def writeTxRx(self, port, dxl_id, address, length, data):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * (length + 7)
-        rxpacket                    = None
+        txpacket = [0] * (length + 7)
+        rxpacket = None
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = length + 3
-        txpacket[PKT_INSTRUCTION]   = INST_WRITE
-        txpacket[PKT_PARAMETER0]    = address
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = length + 3
+        txpacket[PKT_INSTRUCTION] = INST_WRITE
+        txpacket[PKT_PARAMETER0] = address
 
         txpacket[PKT_PARAMETER0 + 1 : PKT_PARAMETER0 + 1 + length] = data[0 : length]
         rxpacket, result, error = self.txRxPacket(port, txpacket)
@@ -458,14 +457,14 @@ class Protocol1PacketHandler(object):
         return self.writeTxRx(port, dxl_id, address, 4, data_write)
 
     def regWriteTxOnly(self, port, dxl_id, address, length, data):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * (length + 6)
+        txpacket = [0] * (length + 6)
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = length + 3
-        txpacket[PKT_INSTRUCTION]   = INST_REG_WRITE
-        txpacket[PKT_PARAMETER0]    = address
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = length + 3
+        txpacket[PKT_INSTRUCTION] = INST_REG_WRITE
+        txpacket[PKT_PARAMETER0] = address
 
         txpacket[PKT_PARAMETER0 + 1 : PKT_PARAMETER0 + 1 + length] = data[0 : length]
 
@@ -475,14 +474,14 @@ class Protocol1PacketHandler(object):
         return result
 
     def regWriteTxRx(self, port, dxl_id, address, length, data):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * (length + 6)
+        txpacket = [0] * (length + 6)
 
-        txpacket[PKT_ID]            = dxl_id
-        txpacket[PKT_LENGTH]        = length + 3
-        txpacket[PKT_INSTRUCTION]   = INST_REG_WRITE
-        txpacket[PKT_PARAMETER0]    = address
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH] = length + 3
+        txpacket[PKT_INSTRUCTION] = INST_REG_WRITE
+        txpacket[PKT_PARAMETER0] = address
 
         txpacket[PKT_PARAMETER0 + 1 : PKT_PARAMETER0 + 1 + length] = data[0 : length]
 
@@ -494,16 +493,16 @@ class Protocol1PacketHandler(object):
         return COMM_NOT_AVAILABLE
 
     def syncWriteTxOnly(self, port, start_address, data_length, param, param_length):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * (param_length + 8)
+        txpacket = [0] * (param_length + 8)
         # 8: HEADER0 HEADER1 ID LEN INST START_ADDR DATA_LEN ... CHKSUM
 
-        txpacket[PKT_ID]            = BROADCAST_ID
-        txpacket[PKT_LENGTH]        = param_length + 4 # 4: INST START_ADDR DATA_LEN ... CHKSUM
-        txpacket[PKT_INSTRUCTION]   = INST_SYNC_WRITE
-        txpacket[PKT_PARAMETER0+0]  = start_address
-        txpacket[PKT_PARAMETER0+1]  = data_length
+        txpacket[PKT_ID] = BROADCAST_ID
+        txpacket[PKT_LENGTH] = param_length + 4 # 4: INST START_ADDR DATA_LEN ... CHKSUM
+        txpacket[PKT_INSTRUCTION] = INST_SYNC_WRITE
+        txpacket[PKT_PARAMETER0+0] = start_address
+        txpacket[PKT_PARAMETER0+1] = data_length
 
         txpacket[PKT_PARAMETER0 + 2 : PKT_PARAMETER0 + 2 + param_length] = param[0 : param_length]
 
@@ -512,15 +511,15 @@ class Protocol1PacketHandler(object):
         return result
 
     def bulkReadTx(self, port, param, param_length):
-        result                      = COMM_TX_FAIL
+        result = COMM_TX_FAIL
 
-        txpacket                    = [0] * (param_length + 7)
+        txpacket = [0] * (param_length + 7)
         # 7: HEADER0 HEADER1 ID LEN INST 0x00 ... CHKSUM
 
-        txpacket[PKT_ID]            = BROADCAST_ID
-        txpacket[PKT_LENGTH]        = param_length + 3 # 3: INST 0x00 ... CHKSUM
-        txpacket[PKT_INSTRUCTION]   = INST_BULK_READ
-        txpacket[PKT_PARAMETER0+0]  = 0x00
+        txpacket[PKT_ID] = BROADCAST_ID
+        txpacket[PKT_LENGTH] = param_length + 3 # 3: INST 0x00 ... CHKSUM
+        txpacket[PKT_INSTRUCTION] = INST_BULK_READ
+        txpacket[PKT_PARAMETER0+0] = 0x00
 
         txpacket[PKT_PARAMETER0 + 1: PKT_PARAMETER0 + 1 + param_length] = param[0 : param_length]
 
