@@ -255,6 +255,7 @@ class Protocol1PacketHandler(object):
             if result == COMM_SUCCESS:
                 model_number = DXL_MAKEWORD(data_read[0], data_read[1])
 
+        del rxpacket[:]; del rxpacket
         return model_number, result, error
 
     def broadcastPing(self, port):
@@ -283,6 +284,7 @@ class Protocol1PacketHandler(object):
         txpacket[PKT_INSTRUCTION] = INST_FACTORY_RESET
 
         _, result, error = self.txRxPacket(port, txpacket)
+
         return result, error
 
     def readTx(self, port, dxl_id, address, length):
@@ -325,6 +327,7 @@ class Protocol1PacketHandler(object):
 
             data.extend(rxpacket[PKT_PARAMETER0 : PKT_PARAMETER0 + length])
 
+        del rxpacket[:]; del rxpacket
         return data, result, error
 
     def readTxRx(self, port, dxl_id, address, length):
@@ -350,16 +353,15 @@ class Protocol1PacketHandler(object):
 
             data.extend(rxpacket[PKT_PARAMETER0 : PKT_PARAMETER0 + length])
 
+        del rxpacket[:]; del rxpacket
         return data, result, error
 
     def read1ByteTx(self, port, dxl_id, address):
-        return self.readTx(port, dxl_id, address, 1)
-        
+        return self.readTx(port, dxl_id, address, 1)   
     def read1ByteRx(self, port, dxl_id):
         data, result, error = self.readRx(port, dxl_id, 1)
         data_read = data[0] if (result == COMM_SUCCESS) else 0
-        return data_read, result, error
-        
+        return data_read, result, error  
     def read1ByteTxRx(self, port, dxl_id, address):
         data, result, error = self.readTxRx(port, dxl_id, address, 1)
         data_read = data[0] if (result == COMM_SUCCESS) else 0
@@ -367,12 +369,10 @@ class Protocol1PacketHandler(object):
 
     def read2ByteTx(self, port, dxl_id, address):
         return self.readTx(port, dxl_id, address, 2)
-        
     def read2ByteRx(self, port, dxl_id):
         data, result, error = self.readRx(port, dxl_id, 2)
         data_read = DXL_MAKEWORD(data[0], data[1]) if (result == COMM_SUCCESS) else 0
         return data_read, result, error
-    
     def read2ByteTxRx(self, port, dxl_id, address):
         data, result, error = self.readTxRx(port, dxl_id, address, 2)
         data_read = DXL_MAKEWORD(data[0], data[1]) if (result == COMM_SUCCESS) else 0
@@ -380,13 +380,11 @@ class Protocol1PacketHandler(object):
 
     def read4ByteTx(self, port, dxl_id, address):
         return self.readTx(port, dxl_id, address, 4)
-
     def read4ByteRx(self, port, dxl_id):
         data, result, error = self.readRx(port, dxl_id, 4)
         data_read = DXL_MAKEDWORD(DXL_MAKEWORD(data[0], data[1]),
                                   DXL_MAKEWORD(data[2], data[3])) if (result == COMM_SUCCESS) else 0
         return data_read, result, error
-
     def read4ByteTxRx(self, port, dxl_id, address):
         data, result, error = self.readTxRx(port, dxl_id, address, 4)
         data_read = DXL_MAKEDWORD(DXL_MAKEWORD(data[0], data[1]),
@@ -424,12 +422,12 @@ class Protocol1PacketHandler(object):
         txpacket[PKT_PARAMETER0 + 1 : PKT_PARAMETER0 + 1 + length] = data[0 : length]
         rxpacket, result, error = self.txRxPacket(port, txpacket)
 
+        del rxpacket[:]; del rxpacket
         return result, error
 
     def write1ByteTxOnly(self, port, dxl_id, address, data):
         data_write = [data]
         return self.writeTxOnly(port, dxl_id, address, 1, data_write)
-
     def write1ByteTxRx(self, port, dxl_id, address, data):
         data_write = [data]
         return self.writeTxRx(port, dxl_id, address, 1, data_write)
@@ -437,7 +435,6 @@ class Protocol1PacketHandler(object):
     def write2ByteTxOnly(self, port, dxl_id, address, data):
         data_write = [DXL_LOBYTE(data), DXL_HIBYTE(data)]
         return self.writeTxOnly(port, dxl_id, address, 2, data_write)
-
     def write2ByteTxRx(self, port, dxl_id, address, data):
         data_write = [DXL_LOBYTE(data), DXL_HIBYTE(data)]
         return self.writeTxRx(port, dxl_id, address, 2, data_write)
@@ -448,7 +445,6 @@ class Protocol1PacketHandler(object):
                       DXL_LOBYTE(DXL_HIWORD(data)), 
                       DXL_HIBYTE(DXL_HIWORD(data))]
         return self.writeTxOnly(port, dxl_id, address, 4, data_write)
-
     def write4ByteTxRx(self, port, dxl_id, address, data):
         data_write = [DXL_LOBYTE(DXL_LOWORD(data)), 
                       DXL_HIBYTE(DXL_LOWORD(data)), 
@@ -475,6 +471,7 @@ class Protocol1PacketHandler(object):
 
     def regWriteTxRx(self, port, dxl_id, address, length, data):
         result = COMM_TX_FAIL
+        error = 0
 
         txpacket = [0] * (length + 6)
 
