@@ -98,7 +98,7 @@ class GroupBulkRead:
             return COMM_NOT_AVAILABLE
 
         for id in self.data_dict:
-            self.data_dict[id][PARAM_NUM_DATA], result, _ = self.ph.readRx(self.port, id, self.data_dict[id][PARAM_NUM_LENGTH], self.data_dict[id][PARAM_NUM_DATA])
+            self.data_dict[id][PARAM_NUM_DATA], result, _ = self.ph.readRx(self.port, id, self.data_dict[id][PARAM_NUM_LENGTH])
             if result != COMM_SUCCESS:
                 return result
 

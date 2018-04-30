@@ -97,7 +97,7 @@ class GroupSyncRead:
             return COMM_NOT_AVAILABLE
 
         for id in self.data_dict:
-            self.data_dict[id], result, _ = self.ph.readRx(self.port, id, self.data_length, self.data_dict[id])
+            self.data_dict[id], result, _ = self.ph.readRx(self.port, id, self.data_length)
             if result != COMM_SUCCESS:
                 return result
 
