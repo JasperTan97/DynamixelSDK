@@ -49,32 +49,24 @@ class Protocol1PacketHandler(object):
     def getTxRxResult(self, result):
         if result == COMM_SUCCESS:
             return "[TxRxResult] Communication success!"
-            
-        if result == COMM_PORT_BUSY:
+        elif result == COMM_PORT_BUSY:
             return "[TxRxResult] Port is in use!"
-        
-        if result == COMM_TX_FAIL:
+        elif result == COMM_TX_FAIL:
             return "[TxRxResult] Failed transmit instruction packet!"
-        
-        if result == COMM_RX_FAIL:
+        elif result == COMM_RX_FAIL:
             return "[TxRxResult] Failed get status packet from device!"
-        
-        if result == COMM_TX_ERROR:
+        elif result == COMM_TX_ERROR:
             return "[TxRxResult] Incorrect instruction packet!"
-        
-        if result == COMM_RX_WAITING:
+        elif result == COMM_RX_WAITING:
             return "[TxRxResult] Now receiving status packet!"
-        
-        if result == COMM_RX_TIMEOUT:
+        elif result == COMM_RX_TIMEOUT:
             return "[TxRxResult] There is no status packet!"
-        
-        if result == COMM_RX_CORRUPT:
+        elif result == COMM_RX_CORRUPT:
             return "[TxRxResult] Incorrect status packet!"
-        
-        if result == COMM_NOT_AVAILABLE:
+        elif result == COMM_NOT_AVAILABLE:
             return "[TxRxResult] Protocol does not support this function!"
-
-        return ""
+        else:
+            return ""
 
     def getRxPacketError(self, error):
         if error & ERRBIT_VOLTAGE:
@@ -139,7 +131,7 @@ class Protocol1PacketHandler(object):
         wait_length     = 6 # minimum length (HEADER0 HEADER1 ID LENGTH ERROR CHKSUM)
 
         while True:
-            rxpacket.append(port.readPort(wait_length - rx_length))
+            rxpacket.extend(port.readPort(wait_length - rx_length))
             rx_length = len(rxpacket)
             if rx_length >= wait_length:
                 # find packet header
@@ -229,9 +221,13 @@ class Protocol1PacketHandler(object):
 
         # rx packet
         while True:
-            _rxpacket, result = self.rxPacket(port, rxpacket)
-            del rxpacket[:]
-            rxpacket.extend(_rxpacket[:])
+            rxpacket, result = self.rxPacket(port, rxpacket)
+            # _rxpacket, result = self.rxPacket(port, rxpacket)
+            # del rxpacket[:]
+            # print rxpacket
+            # print _rxpacket
+            # print rxpacket
+            # rxpacket.extend(_rxpacket[:])
             if result != COMM_SUCCESS or txpacket[PKT_ID] == rxpacket[PKT_ID]:
                 break
 
@@ -240,7 +236,7 @@ class Protocol1PacketHandler(object):
 
         return rxpacket, result, error
 
-      def ping(self, port, dxl_id):
+    def ping(self, port, dxl_id):
         result = COMM_TX_FAIL
         model_number=0
         error=0
