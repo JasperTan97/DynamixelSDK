@@ -25,6 +25,7 @@ import serial
 LATENCY_TIMER = 1
 DEFAULT_BAUDRATE = 1000000
 
+
 class PortHandlerWindows(object):
     def __init__(self, port_name):
         self.is_open = False
@@ -34,7 +35,8 @@ class PortHandlerWindows(object):
         self.tx_time_per_byte = 0.0
 
         self.is_using = False
-        self.setPortName(port_name)
+        self.port_name = port_name
+        self.ser = None
 
     def openPort(self):
         return self.setBaudRate(self.baudrate)
@@ -68,9 +70,7 @@ class PortHandlerWindows(object):
         return self.ser.in_waiting
 
     def readPort(self, length):
-        # read_bytes = []
-        read_bytes = self.ser.readline()
-        return read_bytes
+        return [ord(ch) for ch in self.ser.read(length)]
 
     def writePort(self, packet):
         res = self.ser.write(packet)
@@ -78,9 +78,9 @@ class PortHandlerWindows(object):
 
     def setPacketTimeout(self, packet_length):
         self.packet_start_time = self.getCurrentTime()
-        self.packet_timeout = (self.tx_time_per_byte * self.packet_length) + (LATENCY_TIMER * 2.0) + 2.0
+        self.packet_timeout = (self.tx_time_per_byte * packet_length) + (LATENCY_TIMER * 2.0) + 2.0
 
-    def setPacketTimeout(self, msec):
+    def setPacketTimeoutMillis(self, msec):
         self.packet_start_time = self.getCurrentTime()
         self.packet_timeout = msec
 
@@ -95,23 +95,23 @@ class PortHandlerWindows(object):
         return round(time.time() * 1000000000) / 1000000.0
 
     def getTimeSinceStart(self):
-        time = self.getCurrentTime() - self.packet_start_time
-        if time < 0.0:
-            packet_start_time = self.getCurrentTime()
+        time_since = self.getCurrentTime() - self.packet_start_time
+        if time_since < 0.0:
+            self.packet_start_time = self.getCurrentTime()
 
-        return time
+        return time_since
 
     def setupPort(self, cflag_baud):
         if self.is_open:
             self.closePort()
 
         self.ser = serial.Serial(
-            port = self.port_name,
-            baudrate = self.baudrate,
+            port=self.port_name,
+            baudrate=self.baudrate,
             # parity = serial.PARITY_ODD,
             # stopbits = serial.STOPBITS_TWO,
-            bytesize = serial.EIGHTBITS,
-            timeout = 0
+            bytesize=serial.EIGHTBITS,
+            timeout=0
         )
 
         self.is_open = True

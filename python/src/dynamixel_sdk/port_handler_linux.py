@@ -25,6 +25,7 @@ import serial
 LATENCY_TIMER = 16
 DEFAULT_BAUDRATE = 1000000
 
+
 class PortHandlerLinux(object):
     def __init__(self, port_name):
         self.is_open = False
@@ -59,7 +60,7 @@ class PortHandlerLinux(object):
         if baud <= 0:
             # self.setupPort(38400)
             # self.baudrate = baudrate
-            return False #TODO: setCustomBaudrate(baudrate)
+            return False  # TODO: setCustomBaudrate(baudrate)
         else:
             self.baudrate = baudrate
             return self.setupPort(baud)
@@ -95,23 +96,23 @@ class PortHandlerLinux(object):
         return round(time.time() * 1000000000) / 1000000.0
 
     def getTimeSinceStart(self):
-        time = self.getCurrentTime() - self.packet_start_time
-        if time < 0.0:
+        time_since = self.getCurrentTime() - self.packet_start_time
+        if time_since < 0.0:
             self.packet_start_time = self.getCurrentTime()
 
-        return time
+        return time_since
 
     def setupPort(self, cflag_baud):
         if self.is_open:
             self.closePort()
 
         self.ser = serial.Serial(
-            port = self.port_name,
-            baudrate = self.baudrate,
+            port=self.port_name,
+            baudrate=self.baudrate,
             # parity = serial.PARITY_ODD,
             # stopbits = serial.STOPBITS_TWO,
-            bytesize = serial.EIGHTBITS,
-            timeout = 0
+            bytesize=serial.EIGHTBITS,
+            timeout=0
         )
 
         self.is_open = True
@@ -123,7 +124,8 @@ class PortHandlerLinux(object):
         return True
 
     def getCFlagBaud(self, baudrate):
-        if baudrate in [9600, 19200, 38400, 57600, 115200, 230400, 460800, 500000, 576000, 921600, 1000000, 1152000, 2000000, 2500000, 3000000, 3500000, 4000000]:
+        if baudrate in [9600, 19200, 38400, 57600, 115200, 230400, 460800, 500000, 576000, 921600, 1000000, 1152000,
+                        2000000, 2500000, 3000000, 3500000, 4000000]:
             return baudrate
         else:
             return -1

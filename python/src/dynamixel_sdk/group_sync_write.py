@@ -21,6 +21,7 @@
 
 from .robotis_def import *
 
+
 class GroupSyncWrite:
     def __init__(self, port, ph, start_address, data_length):
         self.port = port
@@ -40,41 +41,41 @@ class GroupSyncWrite:
 
         self.param = []
 
-        for id in self.data_dict:
-            if not self.data_dict[id]:
+        for dxl_id in self.data_dict:
+            if not self.data_dict[dxl_id]:
                 return
 
-            self.param.append(id)
-            self.param.extend(self.data_dict[id])
+            self.param.append(dxl_id)
+            self.param.extend(self.data_dict[dxl_id])
 
-    def addParam(self, id, data):
-        if (id in self.data_dict): # id already exist
+    def addParam(self, dxl_id, data):
+        if dxl_id in self.data_dict:  # dxl_id already exist
             return False
 
-        if len(data) > self.data_length: # input data is longer than set
+        if len(data) > self.data_length:  # input data is longer than set
             return False
 
-        self.data_dict[id] = data
+        self.data_dict[dxl_id] = data
 
         self.is_param_changed = True
         return True
 
-    def removeParam(self, id):
-        if not id in self.data_dict: # NOT exist
+    def removeParam(self, dxl_id):
+        if dxl_id not in self.data_dict:  # NOT exist
             return
 
-        del self.data_dict[id]
+        del self.data_dict[dxl_id]
 
         self.is_param_changed = True
 
-    def changeParam(self, id, data):
-        if not id in self.data_dict: # NOT exist
+    def changeParam(self, dxl_id, data):
+        if dxl_id not in self.data_dict:  # NOT exist
             return False
 
-        if len(data) > self.data_length: # input data is longer than set
+        if len(data) > self.data_length:  # input data is longer than set
             return False
 
-        self.data_dict[id] = data
+        self.data_dict[dxl_id] = data
 
         self.is_param_changed = True
         return True
@@ -86,7 +87,8 @@ class GroupSyncWrite:
         if len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
 
-        if self.is_param_changed == True or not self.param:
+        if self.is_param_changed is True or not self.param:
             self.makeParam()
 
-        return self.ph.syncWriteTxOnly(self.port, self.start_address, self.data_length, self.param, len(self.data_dict.keys()) * (1 + self.data_length))
+        return self.ph.syncWriteTxOnly(self.port, self.start_address, self.data_length, self.param,
+                                       len(self.data_dict.keys()) * (1 + self.data_length))
