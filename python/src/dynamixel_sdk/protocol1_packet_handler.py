@@ -116,6 +116,8 @@ class Protocol1PacketHandler(object):
 
         txpacket[total_packet_length - 1] = ~checksum & 0xFF
 
+        #print "[TxPacket] %r" % txpacket
+
         # tx packet
         port.clearPort()
         written_packet_length = port.writePort(txpacket)
@@ -195,6 +197,8 @@ class Protocol1PacketHandler(object):
 
         port.is_using = False
 
+        #print "[RxPacket] %r" % rxpacket
+
         return rxpacket, result
 
     # NOT for BulkRead
@@ -212,8 +216,7 @@ class Protocol1PacketHandler(object):
             result = COMM_NOT_AVAILABLE
 
         # (ID == Broadcast ID) == no need to wait for status packet or not available
-        # (Instruction == action) == no need to wait for status packet
-        if (txpacket[PKT_ID] == BROADCAST_ID) or (txpacket[PKT_INSTRUCTION] == INST_ACTION):
+        if (txpacket[PKT_ID] == BROADCAST_ID):
             port.is_using = False
             return rxpacket, result, error
 
@@ -447,7 +450,7 @@ class Protocol1PacketHandler(object):
         return self.writeTxRx(port, dxl_id, address, 4, data_write)
 
     def regWriteTxOnly(self, port, dxl_id, address, length, data):
-        txpacket = [0] * (length + 6)
+        txpacket = [0] * (length + 7)
 
         txpacket[PKT_ID] = dxl_id
         txpacket[PKT_LENGTH] = length + 3
@@ -462,7 +465,7 @@ class Protocol1PacketHandler(object):
         return result
 
     def regWriteTxRx(self, port, dxl_id, address, length, data):
-        txpacket = [0] * (length + 6)
+        txpacket = [0] * (length + 7)
 
         txpacket[PKT_ID] = dxl_id
         txpacket[PKT_LENGTH] = length + 3
