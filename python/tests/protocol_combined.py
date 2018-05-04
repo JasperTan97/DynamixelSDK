@@ -49,8 +49,8 @@ else:
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
-import dynamixel_sdk 
-# from dynamixel_sdk import dynamixel_sdk                    # Uses Dynamixel SDK library
+
+from dynamixel_sdk import *                    # Uses Dynamixel SDK library
 
 # Control table address for Dynamixel MX
 ADDR_MX_TORQUE_ENABLE       = 64               # Control table address is different in Dynamixel model
