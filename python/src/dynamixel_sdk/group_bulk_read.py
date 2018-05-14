@@ -25,6 +25,7 @@ PARAM_NUM_DATA = 0
 PARAM_NUM_ADDRESS = 1
 PARAM_NUM_LENGTH = 2
 
+
 class GroupBulkRead:
     def __init__(self, port, ph):
         self.port = port
@@ -43,33 +44,33 @@ class GroupBulkRead:
 
         self.param = []
 
-        for id in self.data_dict:
+        for dxl_id in self.data_dict:
             if self.ph.getProtocolVersion() == 1.0:
-                self.param.append(self.data_dict[id][2])                # LEN
-                self.param.append(id)                                   # ID
-                self.param.append(self.data_dict[id][1])                # ADDR
+                self.param.append(self.data_dict[dxl_id][2])  # LEN
+                self.param.append(dxl_id)  # ID
+                self.param.append(self.data_dict[dxl_id][1])  # ADDR
             else:
-                self.param.append(id)                                   # ID
-                self.param.append(DXL_LOBYTE(self.data_dict[id][1]))    # ADDR_L
-                self.param.append(DXL_HIBYTE(self.data_dict[id][1]))    # ADDR_H
-                self.param.append(DXL_LOBYTE(self.data_dict[id][2]))    # LEN_L
-                self.param.append(DXL_HIBYTE(self.data_dict[id][2]))    # LEN_H
+                self.param.append(dxl_id)  # ID
+                self.param.append(DXL_LOBYTE(self.data_dict[dxl_id][1]))  # ADDR_L
+                self.param.append(DXL_HIBYTE(self.data_dict[dxl_id][1]))  # ADDR_H
+                self.param.append(DXL_LOBYTE(self.data_dict[dxl_id][2]))  # LEN_L
+                self.param.append(DXL_HIBYTE(self.data_dict[dxl_id][2]))  # LEN_H
 
-    def addParam(self, id, start_address, data_length):
-        if id in self.data_dict: # id already exist
+    def addParam(self, dxl_id, start_address, data_length):
+        if dxl_id in self.data_dict:  # dxl_id already exist
             return False
 
-        data = [] # [0] * data_length
-        self.data_dict[id] = [data, start_address, data_length]
+        data = []  # [0] * data_length
+        self.data_dict[dxl_id] = [data, start_address, data_length]
 
         self.is_param_changed = True
         return True
 
-    def removeParam(self, id):
-        if not id in self.data_dict: # NOT exist
+    def removeParam(self, dxl_id):
+        if dxl_id not in self.data_dict:  # NOT exist
             return
 
-        del self.data_dict[id]
+        del self.data_dict[dxl_id]
 
         self.is_param_changed = True
 
@@ -81,7 +82,7 @@ class GroupBulkRead:
         if len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
 
-        if self.is_param_changed == True or not self.param:
+        if self.is_param_changed is True or not self.param:
             self.makeParam()
 
         if self.ph.getProtocolVersion() == 1.0:
@@ -97,8 +98,9 @@ class GroupBulkRead:
         if len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
 
-        for id in self.data_dict:
-            self.data_dict[id][PARAM_NUM_DATA], result, _ = self.ph.readRx(self.port, id, self.data_dict[id][PARAM_NUM_LENGTH])
+        for dxl_id in self.data_dict:
+            self.data_dict[dxl_id][PARAM_NUM_DATA], result, _ = self.ph.readRx(self.port, dxl_id,
+                                                                               self.data_dict[dxl_id][PARAM_NUM_LENGTH])
             if result != COMM_SUCCESS:
                 return result
 
@@ -108,36 +110,38 @@ class GroupBulkRead:
         return result
 
     def txRxPacket(self):
-        result = COMM_TX_FAIL
-
         result = self.txPacket()
         if result != COMM_SUCCESS:
             return result
 
         return self.rxPacket()
 
-    def isAvailable(self, id, address, data_length):
-        if self.last_result == False or not id in self.data_dict:
+    def isAvailable(self, dxl_id, address, data_length):
+        if self.last_result is False or dxl_id not in self.data_dict:
             return False
 
-        start_addr = self.data_dict[id][PARAM_NUM_ADDRESS]
+        start_addr = self.data_dict[dxl_id][PARAM_NUM_ADDRESS]
 
-        if (address < start_addr) or (start_addr + self.data_dict[id][PARAM_NUM_LENGTH] - data_length < address):
+        if (address < start_addr) or (start_addr + self.data_dict[dxl_id][PARAM_NUM_LENGTH] - data_length < address):
             return False
 
         return True
 
-    def getData(self, id, address, data_length):
-        if self.isAvailable(id, address, data_length) == False:
+    def getData(self, dxl_id, address, data_length):
+        if not self.isAvailable(dxl_id, address, data_length):
             return 0
 
-        start_addr = self.data_dict[id][PARAM_NUM_ADDRESS]
+        start_addr = self.data_dict[dxl_id][PARAM_NUM_ADDRESS]
 
         if data_length == 1:
-            return self.data_dict[id][PARAM_NUM_DATA][address - start_addr]
+            return self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr]
         elif data_length == 2:
-            return DXL_MAKEWORD(self.data_dict[id][PARAM_NUM_DATA][address - start_addr], self.data_dict[id][PARAM_NUM_DATA][address - start_addr + 1])
+            return DXL_MAKEWORD(self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr],
+                                self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr + 1])
         elif data_length == 4:
-            return DXL_MAKEDWORD(DXL_MAKEWORD(self.data_dict[id][PARAM_NUM_DATA][address - start_addr + 0], self.data_dict[id][PARAM_NUM_DATA][address - start_addr + 1]), DXL_MAKEWORD(self.data_dict[id][PARAM_NUM_DATA][address - start_addr + 2], self.data_dict[id][PARAM_NUM_DATA][address - start_addr + 3]))
+            return DXL_MAKEDWORD(DXL_MAKEWORD(self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr + 0],
+                                              self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr + 1]),
+                                 DXL_MAKEWORD(self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr + 2],
+                                              self.data_dict[dxl_id][PARAM_NUM_DATA][address - start_addr + 3]))
         else:
             return 0

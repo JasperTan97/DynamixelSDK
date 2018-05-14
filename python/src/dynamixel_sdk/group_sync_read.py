@@ -21,6 +21,7 @@
 
 from .robotis_def import *
 
+
 class GroupSyncRead:
     def __init__(self, port, ph, start_address, data_length):
         self.port = port
@@ -39,34 +40,34 @@ class GroupSyncRead:
         if self.ph.getProtocolVersion() == 1.0:
             return
 
-        if not self.data_dict: #len(self.data_dict.keys()) == 0:
+        if not self.data_dict:  # len(self.data_dict.keys()) == 0:
             return
 
         self.param = []
 
-        for id in self.data_dict:
-            self.param.append(id)
+        for dxl_id in self.data_dict:
+            self.param.append(dxl_id)
 
-    def addParam(self, id):
+    def addParam(self, dxl_id):
         if self.ph.getProtocolVersion() == 1.0:
             return False
 
-        if id in self.data_dict: # id already exist
+        if dxl_id in self.data_dict:  # dxl_id already exist
             return False
 
-        self.data_dict[id] = [] # [0] * self.data_length
+        self.data_dict[dxl_id] = []  # [0] * self.data_length
 
         self.is_param_changed = True
         return True
 
-    def removeParam(self, id):
+    def removeParam(self, dxl_id):
         if self.ph.getProtocolVersion() == 1.0:
             return
 
-        if not id in self.data_dict: # NOT exist
+        if dxl_id not in self.data_dict:  # NOT exist
             return
 
-        del self.data_dict[id]
+        del self.data_dict[dxl_id]
 
         self.is_param_changed = True
 
@@ -80,10 +81,11 @@ class GroupSyncRead:
         if self.ph.getProtocolVersion() == 1.0 or len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
 
-        if self.is_param_changed == True or not self.param:
+        if self.is_param_changed is True or not self.param:
             self.makeParam()
 
-        return self.ph.syncReadTx(self.port, self.start_address, self.data_length, self.param, len(self.data_dict.keys()) * 1)
+        return self.ph.syncReadTx(self.port, self.start_address, self.data_length, self.param,
+                                  len(self.data_dict.keys()) * 1)
 
     def rxPacket(self):
         self.last_result = False
@@ -96,8 +98,8 @@ class GroupSyncRead:
         if len(self.data_dict.keys()) == 0:
             return COMM_NOT_AVAILABLE
 
-        for id in self.data_dict:
-            self.data_dict[id], result, _ = self.ph.readRx(self.port, id, self.data_length)
+        for dxl_id in self.data_dict:
+            self.data_dict[dxl_id], result, _ = self.ph.readRx(self.port, dxl_id, self.data_length)
             if result != COMM_SUCCESS:
                 return result
 
@@ -110,16 +112,14 @@ class GroupSyncRead:
         if self.ph.getProtocolVersion() == 1.0:
             return COMM_NOT_AVAILABLE
 
-        result = COMM_TX_FAIL
-
         result = self.txPacket()
         if result != COMM_SUCCESS:
             return result
 
         return self.rxPacket()
 
-    def isAvailable(self, id, address, data_length):
-        if self.ph.getProtocolVersion() == 1.0 or self.last_result == False or not id in self.data_dict:
+    def isAvailable(self, dxl_id, address, data_length):
+        if self.ph.getProtocolVersion() == 1.0 or self.last_result is False or dxl_id not in self.data_dict:
             return False
 
         if (address < self.start_address) or (self.start_address + self.data_length - data_length < address):
@@ -127,15 +127,19 @@ class GroupSyncRead:
 
         return True
 
-    def getData(self, id, address, data_length):
-        if self.isAvailable(id, address, data_length) == False:
+    def getData(self, dxl_id, address, data_length):
+        if not self.isAvailable(dxl_id, address, data_length):
             return 0
 
         if data_length == 1:
-            return self.data_dict[id][address - self.start_address]
+            return self.data_dict[dxl_id][address - self.start_address]
         elif data_length == 2:
-            return DXL_MAKEWORD(self.data_dict[id][address - self.start_address], self.data_dict[id][address - self.start_address + 1])
+            return DXL_MAKEWORD(self.data_dict[dxl_id][address - self.start_address],
+                                self.data_dict[dxl_id][address - self.start_address + 1])
         elif data_length == 4:
-            return DXL_MAKEDWORD(DXL_MAKEWORD(self.data_dict[id][address - self.start_address + 0], self.data_dict[id][address - self.start_address + 1]), DXL_MAKEWORD(self.data_dict[id][address - self.start_address + 2], self.data_dict[id][address - self.start_address + 3]))
+            return DXL_MAKEDWORD(DXL_MAKEWORD(self.data_dict[dxl_id][address - self.start_address + 0],
+                                              self.data_dict[dxl_id][address - self.start_address + 1]),
+                                 DXL_MAKEWORD(self.data_dict[dxl_id][address - self.start_address + 2],
+                                              self.data_dict[dxl_id][address - self.start_address + 3]))
         else:
             return 0
