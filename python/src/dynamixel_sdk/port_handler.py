@@ -21,6 +21,7 @@
 
 import time
 import serial
+import sys
 
 LATENCY_TIMER = 16
 DEFAULT_BAUDRATE = 1000000
@@ -72,7 +73,10 @@ class PortHandler(object):
         return self.ser.in_waiting
 
     def readPort(self, length):
-        return [ord(ch) for ch in self.ser.read(length)]
+        if (sys.version_info > (3, 0)):
+            return self.ser.read(length)
+        else:
+            return [ord(ch) for ch in self.ser.read(length)]
 
     def writePort(self, packet):
         return self.ser.write(packet)

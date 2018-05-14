@@ -13,5 +13,5 @@ setup(
     url='https://github.com/ROBOTIS-GIT/DynamixelSDK',
     author='Leon Jung',
     author_email='rwjung@robotis.com',
-    install_requires=['pyserial'] + (["msvcrt"] if platform.system() == 'Windows' else [])
+    install_requires=['pyserial'] # + (["msvcrt"] if platform.system() == 'Windows' else [])
 )
