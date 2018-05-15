@@ -85,12 +85,6 @@ const char *getTxRxResult1(int result)
   }
 }
 
-void printTxRxResult1(int result)
-{
-  printf("This function is deprecated. Use getTxRxResult instead\n");
-  printf("%s\n", getTxRxResult1(result));
-}
-
 const char *getRxPacketError1(uint8_t error)
 {
   if (error & ERRBIT_VOLTAGE)
@@ -115,12 +109,6 @@ const char *getRxPacketError1(uint8_t error)
     return "[RxPacketError] Instruction code error!";
 
   return "";
-}
-
-void printRxPacketError1(uint8_t error)
-{
-  printf("This function is deprecated. Use getRxPacketError instead\n");
-  printf("%s\n", getRxPacketError1(error));
 }
 
 int getLastTxRxResult1(int port_num)

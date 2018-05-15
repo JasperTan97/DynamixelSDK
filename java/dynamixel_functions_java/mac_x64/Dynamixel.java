@@ -44,9 +44,7 @@ interface LibFunction extends Library
   // PacketHandler functions
   public void    packetHandler           ();
 
-  public void    printTxRxResult         (int protocol_version, int result);
   public String  getTxRxResult           (int protocol_version, int result);
-  public void    printRxPacketError      (int protocol_version, byte error);
   public String  getRxPacketError        (int protocol_version, byte error);
 
   public int     getLastTxRxResult       (int port_num, int protocol_version);

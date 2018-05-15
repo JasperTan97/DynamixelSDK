@@ -91,12 +91,6 @@ const char *getTxRxResult2(int result)
   }
 }
 
-void printTxRxResult2(int result)
-{
-  printf("This function is deprecated. Use getTxRxResult instead\n");
-  printf("%s\n", getTxRxResult2(result));
-}
-
 const char *getRxPacketError2(uint8_t error)
 {
   int not_alert_error;
@@ -134,12 +128,6 @@ const char *getRxPacketError2(uint8_t error)
     default:
       return "[RxPacketError] Unknown error code!";
   }
-}
-
-void printRxPacketError2(uint8_t error)
-{
-  printf("This function is deprecated. Use getRxPacketError instead\n");
-  printf("%s\n", getRxPacketError2(error));
 }
 
 int getLastTxRxResult2(int port_num)
