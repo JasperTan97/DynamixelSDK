@@ -11,7 +11,7 @@ Changelog for package dynamixel_sdk
 * Changes : Deprecated functions removed
 * Fixes : DynamixelSDK MATLAB 2017 - new typedef (int8_t / int16_t / int32_t) applied in robotis_def.h #161 #179
 * Fixes : Added missing header file for reset and factory_reset examples #167
-
+* Contributors: Leon
 
 3.5.4 (2017-12-01)
 -----------
