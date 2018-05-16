@@ -99,17 +99,6 @@ const char *Protocol2PacketHandler::getTxRxResult(int result)
   }
 }
 
-void Protocol2PacketHandler::printTxRxResult(int result)
-{
-#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
-  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.println(getTxRxResult(result));
-#else
-  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
-  printf("%s\n", getTxRxResult(result));
-#endif
-}
-
 const char *Protocol2PacketHandler::getRxPacketError(uint8_t error)
 {
   if (error & ERRBIT_ALERT)
@@ -146,17 +135,6 @@ const char *Protocol2PacketHandler::getRxPacketError(uint8_t error)
     default:
       return "[RxPacketError] Unknown error code!";
   }
-}
-
-void Protocol2PacketHandler::printRxPacketError(uint8_t error)
-{
-#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
-  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.println(getRxPacketError(error));
-#else
-  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
-  printf("%s\n", getRxPacketError(error));
-#endif
 }
 
 unsigned short Protocol2PacketHandler::updateCRC(uint16_t crc_accum, uint8_t *data_blk_ptr, uint16_t data_blk_size)
@@ -711,7 +689,7 @@ int Protocol2PacketHandler::readTxRx(PortHandler *port, uint8_t id, uint16_t add
   {
     if (error != 0)
       *error = (uint8_t)rxpacket[PKT_ERROR];
-    
+
     for (uint16_t s = 0; s < length; s++)
     {
       data[s] = rxpacket[PKT_PARAMETER0 + 1 + s];
@@ -914,7 +892,7 @@ int Protocol2PacketHandler::regWriteTxRx(PortHandler *port, uint8_t id, uint16_t
   txpacket[PKT_PARAMETER0+0]  = (uint8_t)DXL_LOBYTE(address);
   txpacket[PKT_PARAMETER0+1]  = (uint8_t)DXL_HIBYTE(address);
 
-  for (uint8_t s = 0; s < length; s++)
+  for (uint16_t s = 0; s < length; s++)
     txpacket[PKT_PARAMETER0+2+s] = data[s];
   //memcpy(&txpacket[PKT_PARAMETER0+2], data, length);
 

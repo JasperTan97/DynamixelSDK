@@ -15,8 +15,8 @@
 | Dynamixel SDK Version | 1.X | 2.X | 3.X ([Download](https://github.com/ROBOTIS-GIT/DynamixelSDK/releases)) |
 | ------------- | ------------- | ------------- | ------------- |
 | Release date | 2010.05.16 | 2015.02.10 | 2016.03.08 |
-| Latest version released |||3.5.4|
-| |||(2017.12.01)|
+| Latest version released |||3.6.0|
+| |||(18.03.16)|
 | OS | Linux | Windows | Linux + Windows + Mac |
 | Available Dynamixel models | All models | All models | All models |
 |||||
@@ -34,11 +34,11 @@
 | | | MATLAB| MATLAB |
 | | | LabVIEW| LabVIEW |
 | | | VB| |
-| | | | Python |
 | | | | Java |
 | (C++ ver. Library binded)¹| C++|  | C++|
 | | | | ROS |
 | | | | Arduino |
+| (Python ver. Library binded)| Python|  | Python|
 
 ##### ¹ C++ ver. Library is not optimized in binding other languages. Please use C ver. Library instead.  
 ---------------------------------------------------------------------------

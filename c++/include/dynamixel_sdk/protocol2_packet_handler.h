@@ -65,25 +65,11 @@ class WINDECLSPEC Protocol2PacketHandler : public PacketHandler
   const char *getTxRxResult     (int result);
 
   ////////////////////////////////////////////////////////////////////////////////
-  /// @brief The function that prints out description of communication result
-  /// @param result Communication result which might be gotten by the tx rx functions
-  /// @todo This function is deprecated (removed in DynamixelSDK ver. 3.6.1)
-  ////////////////////////////////////////////////////////////////////////////////
-  DEPRECATED void printTxRxResult          (int result);
-
-  ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that gets description of hardware error
   /// @param error Dynamixel hardware error which might be gotten by the tx rx functions
   /// @return description of hardware error in const char* (string)
   ////////////////////////////////////////////////////////////////////////////////
   const char *getRxPacketError  (uint8_t error);
-
-  ////////////////////////////////////////////////////////////////////////////////
-  /// @brief The function that prints out description of hardware error
-  /// @param error Dynamixel hardware error which might be gotten by the tx rx functions
-  /// @todo This function is deprecated (removed in DynamixelSDK ver. 3.6.1)
-  ////////////////////////////////////////////////////////////////////////////////
-  DEPRECATED void printRxPacketError       (uint8_t error);
 
   ////////////////////////////////////////////////////////////////////////////////
   /// @brief The function that transmits the instruction packet txpacket via PortHandler port.

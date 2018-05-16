@@ -93,17 +93,6 @@ const char *Protocol1PacketHandler::getTxRxResult(int result)
   }
 }
 
-void Protocol1PacketHandler::printTxRxResult(int result)
-{
-#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
-  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.println(getTxRxResult(result));
-#else
-  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
-  printf("%s\n", getTxRxResult(result));
-#endif
-}
-
 const char *Protocol1PacketHandler::getRxPacketError(uint8_t error)
 {
   if (error & ERRBIT_VOLTAGE)
@@ -128,17 +117,6 @@ const char *Protocol1PacketHandler::getRxPacketError(uint8_t error)
     return "[RxPacketError] Instruction code error!";
 
   return "";
-}
-
-void Protocol1PacketHandler::printRxPacketError(uint8_t error)
-{
-#if defined(ARDUINO) || defined(__OPENCR__) || defined(__OPENCM904__)
-  Serial.println("This function is deprecated. Use 'Serial.print()' and 'getRxPacketError()' instead");
-  Serial.println(getRxPacketError(error));
-#else
-  printf("This function is deprecated. Use 'printf()' and 'getRxPacketError()' instead\n");
-  printf("%s\n", getRxPacketError(error));
-#endif
 }
 
 int Protocol1PacketHandler::txPacket(PortHandler *port, uint8_t *txpacket)

@@ -78,9 +78,7 @@ PacketData *packetData;
 WINDECLSPEC void        packetHandler       ();
 
 WINDECLSPEC const char *getTxRxResult       (int protocol_version, int result);
-DEPRECATED WINDECLSPEC void        printTxRxResult     (int protocol_version, int result);
 WINDECLSPEC const char *getRxPacketError    (int protocol_version, uint8_t error);
-DEPRECATED WINDECLSPEC void        printRxPacketError  (int protocol_version, uint8_t error);
 
 WINDECLSPEC int         getLastTxRxResult   (int port_num, int protocol_version);
 WINDECLSPEC uint8_t     getLastRxPacketError    (int port_num, int protocol_version);
