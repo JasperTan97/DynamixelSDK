@@ -22,6 +22,7 @@
 import time
 import serial
 import sys
+import platform
 
 LATENCY_TIMER = 16
 DEFAULT_BAUDRATE = 1000000
@@ -128,8 +129,14 @@ class PortHandler(object):
         return True
 
     def getCFlagBaud(self, baudrate):
-        if baudrate in [9600, 19200, 38400, 57600, 115200, 230400, 460800, 500000, 576000, 921600, 1000000, 1152000,
-                        2000000, 2500000, 3000000, 3500000, 4000000]:
-            return baudrate
+        if platform.system() == 'Darwin':
+            if baudrate in [9600, 19200, 38400, 57600, 115200]:
+                return baudrate
+            else:
+                return -1
         else:
-            return -1
+            if baudrate in [9600, 19200, 38400, 57600, 115200, 230400, 460800, 500000, 576000, 921600, 1000000, 1152000,
+                            2000000, 2500000, 3000000, 3500000, 4000000]:
+                return baudrate
+            else:
+                return -1            

@@ -2,12 +2,16 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.5.5 (****-**-**)
+3.6.0 (2018-03-16)
 -----------
+* Replaced : DynamixelSDK Python as a native language (Python 2 and 3 for Windows, Linux, Mac OS X) #93 #122 #147 #181 #182 #185
 * Added : CONTRIBUTING.md added
 * Changes : ISSUE_TEMPLATE.md modified
-* Fixes : DynamixelSDK MATLAB 2017 - new typedef (int8_t / int16_t / int32_t) applied in robotis_def.h
 * Changes : C++ version - SyncRead / BulkRead - getError functions added
+* Changes : Deprecated functions removed
+* Fixes : DynamixelSDK MATLAB 2017 - new typedef (int8_t / int16_t / int32_t) applied in robotis_def.h #161 #179
+* Fixes : Added missing header file for reset and factory_reset examples #167
+
 
 3.5.4 (2017-12-01)
 -----------

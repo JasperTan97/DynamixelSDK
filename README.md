@@ -16,7 +16,7 @@
 | ------------- | ------------- | ------------- | ------------- |
 | Release date | 2010.05.16 | 2015.02.10 | 2016.03.08 |
 | Latest version released |||3.6.0|
-| |||(18.03.15)|
+| |||(18.03.16)|
 | OS | Linux | Windows | Linux + Windows + Mac |
 | Available Dynamixel models | All models | All models | All models |
 |||||
