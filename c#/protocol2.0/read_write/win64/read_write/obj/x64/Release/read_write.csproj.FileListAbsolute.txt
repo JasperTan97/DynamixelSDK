@@ -1,7 +1,0 @@
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\bin\x64\Release\read_write.exe.config
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\bin\x64\Release\read_write.exe
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\bin\x64\Release\read_write.pdb
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\obj\x64\Release\read_write.csprojAssemblyReference.cache
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\obj\x64\Release\read_write.csproj.CoreCompileInputs.cache
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\obj\x64\Release\read_write.exe
-D:\DynamixelSDK\c#\protocol2.0\read_write\win64\read_write\obj\x64\Release\read_write.pdb
