@@ -501,7 +501,7 @@ int main(int argc, char *argv[])
         std::vector<unsigned char> vec;
 
         int dxl_comm_result = packetHandler2->broadcastPing(portHandler, vec);
-        if (dxl_comm_result != COMM_SUCCESS) packetHandler2->printTxRxResult(dxl_comm_result);
+        if (dxl_comm_result != COMM_SUCCESS) printf("%s\n", packetHandler2->getTxRxResult(dxl_comm_result));
 
         for (unsigned int i = 0; i < vec.size(); i++)
         {
@@ -652,12 +652,12 @@ int main(int argc, char *argv[])
         int dxl_comm_result = packetHandler2->reboot(portHandler, atoi(param[0]), &dxl_error);
         if (dxl_comm_result == COMM_SUCCESS)
         {
-          if (dxl_error != 0) packetHandler2->printRxPacketError(dxl_error);
+          if (dxl_error != 0) printf("%s\n", packetHandler2->getRxPacketError(dxl_error));
           fprintf(stderr, "\n Success to reboot! \n\n");
         }
         else
         {
-          packetHandler2->printTxRxResult(dxl_comm_result);
+          printf("%s\n", packetHandler2->getTxRxResult(dxl_comm_result));
           fprintf(stderr, "\n Fail to reboot! \n\n");
         }
       }
@@ -674,12 +674,12 @@ int main(int argc, char *argv[])
         if (dxl_comm_result == COMM_SUCCESS)
         {
           if (dxl_error != 0)
-            packetHandler1->printRxPacketError(dxl_error);
+            printf("%s\n", packetHandler1->getRxPacketError(dxl_error));
           fprintf(stderr, "\n Success to reset! \n\n");
         }
         else
         {
-          packetHandler1->printTxRxResult(dxl_comm_result);
+          printf("%s\n", packetHandler1->getTxRxResult(dxl_comm_result));
           fprintf(stderr, "\n Fail to reset! \n\n");
         }
       }
@@ -695,12 +695,12 @@ int main(int argc, char *argv[])
         int dxl_comm_result = packetHandler2->factoryReset(portHandler, atoi(param[0]), atoi(param[1]), &dxl_error);
         if (dxl_comm_result == COMM_SUCCESS)
         {
-          if (dxl_error != 0) packetHandler2->printRxPacketError(dxl_error);
+          if (dxl_error != 0) printf("%s\n", packetHandler2->getRxPacketError(dxl_error));
           fprintf(stderr, "\n Success to reset! \n\n");
         }
         else
         {
-          packetHandler2->printTxRxResult(dxl_comm_result);
+          printf("%s\n", packetHandler2->getTxRxResult(dxl_comm_result));
           fprintf(stderr, "\n Fail to reset! \n\n");
         }
       }

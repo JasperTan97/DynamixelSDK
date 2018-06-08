@@ -173,22 +173,22 @@ public class BulkRead
       dynamixel.write2ByteTxRx(port_num, PROTOCOL_VERSION, DXL1_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index]);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+        printf("%s\n", dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+         printf("%s\n", dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
 
       // Write Dynamixel#2 goal position
       dynamixel.write2ByteTxRx(port_num, PROTOCOL_VERSION, DXL2_ID, ADDR_MX_GOAL_POSITION, dxl_goal_position[index]);
       if ((dxl_comm_result = dynamixel.getLastTxRxResult(port_num, PROTOCOL_VERSION)) != COMM_SUCCESS)
       {
-        dynamixel.printTxRxResult(PROTOCOL_VERSION, dxl_comm_result);
+         printf("%s\n", dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
       }
       else if ((dxl_error = dynamixel.getLastRxPacketError(port_num, PROTOCOL_VERSION)) != 0)
       {
-        dynamixel.printRxPacketError(PROTOCOL_VERSION, dxl_error);
+         printf("%s\n", dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error));
       }
 
       do

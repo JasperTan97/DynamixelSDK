@@ -46,7 +46,7 @@ Changelog for package dynamixel_sdk
 * Changes : Macro for control table value changed to uints
 * Changes : API references will be provided as doxygen (updates in c++ @ 3.5.1)
 * Changes : License changed into Apache License .2.0 (Who are using SDK in previous license can use it as it is)
-* Deprecated : printTxRxResult, printRxPacketError function will be unavailable in Dynamixel SDK 3.6.1
+* Deprecated : getTxRxResult, getRxPacketError function will be unavailable in Dynamixel SDK 3.6.1
 * Contributors: Leon
 
 3.4.7 (2017-07-18)
