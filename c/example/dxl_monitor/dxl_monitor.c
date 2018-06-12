@@ -218,12 +218,12 @@ void writeNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t add
   if ((dxl_comm_result = getLastTxRxResult(port_num, protocol_version)) == COMM_SUCCESS)
   {
     if ((dxl_error = getLastRxPacketError(port_num, protocol_version)) != 0)
-			printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
+			printf("%s\n", getRxPacketError(protocol_version, dxl_error));
     fprintf(stderr, "\n Success to write\n\n");
   }
   else
   {
-    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+    printf("%s\n", getTxRxResult(protocol_version, dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
@@ -253,7 +253,7 @@ void readNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t addr
   if ((dxl_comm_result = getLastTxRxResult(port_num, protocol_version)) == COMM_SUCCESS)
   {
     if ((dxl_error = getLastRxPacketError(port_num, protocol_version)) != 0)
-			printf("%s\n", getRxPacketError(PROTOCOL_VERSION, dxl_error));
+			printf("%s\n", getRxPacketError(protocol_version, dxl_error));
 
     if (length == 1)
     {
@@ -270,7 +270,7 @@ void readNByteTxRx(int port_num, int protocol_version, uint8_t id, uint16_t addr
   }
   else
   {
-    printf("%s\n", getTxRxResult(PROTOCOL_VERSION, dxl_comm_result));
+    printf("%s\n", getTxRxResult(protocol_version, dxl_comm_result));
     fprintf(stderr, "\n Fail to write! \n\n");
   }
 }
@@ -483,7 +483,7 @@ int main(int argc, char *argv[])
 
         broadcastPing(port_num, PROTOCOL_VERSION2);
         if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2)) != COMM_SUCCESS)
-          printTxRxResult(PROTOCOL_VERSION2, dxl_comm_result);
+          printf("%s\n", getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
 
         printf("Detected Dynamixel : \n");
         for (id = 0; id < MAX_ID; id++)
@@ -618,12 +618,12 @@ int main(int argc, char *argv[])
         if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2)) == COMM_SUCCESS)
         {
           if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION2)) != 0)
-            printRxPacketError(PROTOCOL_VERSION2, dxl_error);
+            printf("%s\n", getRxPacketError(PROTOCOL_VERSION2, dxl_error));
           fprintf(stderr, "\n Success to reboot! \n\n");
         }
         else
         {
-          printTxRxResult(PROTOCOL_VERSION2, dxl_comm_result);
+          printf("%s\n", getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
           fprintf(stderr, "\n Fail to reboot! \n\n");
         }
       }
@@ -641,12 +641,12 @@ int main(int argc, char *argv[])
         if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION1)) == COMM_SUCCESS)
         {
           if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION1)) != 0)
-            printRxPacketError(PROTOCOL_VERSION1, dxl_error);
+            printf("%s\n", getRxPacketError(PROTOCOL_VERSION1, dxl_error));
           fprintf(stderr, "\n Success to reset! \n\n");
         }
         else
         {
-          printTxRxResult(PROTOCOL_VERSION1, dxl_comm_result);
+          printf("%s\n", getTxRxResult(PROTOCOL_VERSION1, dxl_comm_result));
           fprintf(stderr, "\n Fail to reset! \n\n");
         }
       }
@@ -664,12 +664,12 @@ int main(int argc, char *argv[])
         if ((dxl_comm_result = getLastTxRxResult(port_num, PROTOCOL_VERSION2)) == COMM_SUCCESS)
         {
           if ((dxl_error = getLastRxPacketError(port_num, PROTOCOL_VERSION2)) != 0)
-            printRxPacketError(PROTOCOL_VERSION2, dxl_error);
+            printf("%s\n", getRxPacketError(PROTOCOL_VERSION2, dxl_error));
           fprintf(stderr, "\n Success to reset! \n\n");
         }
         else
         {
-          printTxRxResult(PROTOCOL_VERSION2, dxl_comm_result);
+          printf("%s\n", getTxRxResult(PROTOCOL_VERSION2, dxl_comm_result));
           fprintf(stderr, "\n Fail to reset! \n\n");
         }
       }
