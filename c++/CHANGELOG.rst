@@ -2,8 +2,15 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.6.1 (2018-06-14)
+------------------
+* removed printTxRxResult(), printRxPacketError() `#193 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/193>`_
+* removed cache files
+* merge pull request `#195 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/195>`_
+* Contributors: Gilbert, Pyo
+
 3.6.0 (2018-03-16)
------------
+------------------
 * Replaced : DynamixelSDK Python as a native language (Python 2 and 3 for Windows, Linux, Mac OS X) #93 #122 #147 #181 #182 #185
 * Added : CONTRIBUTING.md added
 * Changes : ISSUE_TEMPLATE.md modified
@@ -14,7 +21,7 @@ Changelog for package dynamixel_sdk
 * Contributors: Leon
 
 3.5.4 (2017-12-01)
------------
+------------------
 * Added : Deprecated is now being shown by attributes #67 #107
 * Fixes : DynamixelSDK ROS Indigo Issue - target_sources func in CMake
 * Fixes : Bug in protocol1_packet_handler.cpp, line 222 checking the returned Error Mask #120
@@ -25,18 +32,18 @@ Changelog for package dynamixel_sdk
 * Contributors: Leon
 
 3.5.3 (2017-10-30)
------------
+------------------
 * Fixes : DynamixelSDK ROS Kinetic Issue - ARM - Debian Jessie solved by replacing target_sources func in CMake to set_property #136
 * Contributors: Leon
 
 3.5.2 (2017-09-18)
------------
+------------------
 * Recover : Check if the id of rxpacket is the same as the id of txpacket #82
 * Changes : Ping examples now will not show Dynamixel model number when communication is failed
 * Contributors: Leon
 
 3.5.1 (2017-08-18)
------------
+------------------
 * Standardizes folder structure of ROS c++
 * Fixes : Inconvenient way of getting meaning of packet result and error value #67
 * Fixes : Maximum length of port name is expanded to 100 #100
@@ -50,32 +57,32 @@ Changelog for package dynamixel_sdk
 * Contributors: Leon
 
 3.4.7 (2017-07-18)
------------
+------------------
 * hotfix - Bug in Dynamixel group control is solved temporarily
 * Contributors: Leon, Zerom
 
 3.4.6 (2017-07-07)
------------
+------------------
 * hotfix - now DynamixelSDK for protocol1.0 supports read/write 4Byte (for XM series)
 * Contributors: Leon
 
 3.4.5 (2017-05-23)
------------
+------------------
 * added option to check if the id of rxpacket is the same as the id of txpacket.
 * Contributors: Leon, Zerom
 
 3.4.4 (2017-04-26)
------------
+------------------
 * hotfix - return delay time is changed from 4 into 8 due to the Ubuntu update 16.04.2
 * Contributors: Leon
 
 3.4.3 (2017-02-17)
------------
+------------------
 * DynamixelSDK C++ ver. and ROS ver. in Windows platform now can use the port number of over then 10 #45
 * Contributors: Leon
 
 3.4.2 (2017-02-16)
------------
+------------------
 * fprintf output in GrouBulkRead of C++ removed
 * MATLAB library compiler error solving
 * Makefile for build example sources in SBC added
@@ -85,13 +92,13 @@ Changelog for package dynamixel_sdk
 * Contributors: Leon
 
 3.4.1 (2016-08-22)
------------
+------------------
 * added ROS package folder for ROS users
 * modified original header files for ROS package
 * Contributors: Leon
 
 3.4.0 (2016-08-12)
------------
+------------------
 * first public release for Kinetic
 * added package information for wrapping version for ROS
 * added ROS catkin package files.

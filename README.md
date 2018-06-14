@@ -15,8 +15,7 @@
 | Dynamixel SDK Version | 1.X | 2.X | 3.X ([Download](https://github.com/ROBOTIS-GIT/DynamixelSDK/releases)) |
 | ------------- | ------------- | ------------- | ------------- |
 | Release date | 2010.05.16 | 2015.02.10 | 2016.03.08 |
-| Latest version released |||3.6.0|
-| |||(18.03.16)|
+| Latest version released |||**3.6.1** (2018.06.14)|
 | OS | Linux | Windows | Linux + Windows + Mac |
 | Available Dynamixel models | All models | All models | All models |
 |||||
@@ -43,10 +42,7 @@
 ##### ¹ C++ ver. Library is not optimized in binding other languages. Please use C ver. Library instead.  
 ---------------------------------------------------------------------------
 
-* [Quick Start Video](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/quick_start_video/#quick-start-video) may make you run your Dynamixel in 20 minutes.
-
-[![](https://github.com/ROBOTIS-GIT/ROBOTIS-Documents/blob/master/wiki-images/DynamixelSDK/Quick%20Start/Episode%201-Introduction%20to%20the%20Dynamixel%20SDK%2C%20the%20Dynamixel%20SDK%20Wiki%2C%20and%20the%20Issues%20Section.png)](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/quick_start_video/#quick-start-video)
-
+* #### [Quick Start Video](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/quick_start_video/#quick-start-video) may make you run your Dynamixel in 20 minutes.
 * #### See 'How to use' in [Dynamixel SDK e-Manual](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/)
 * #### Visit [ROBOTIS E-Manual](http://emanual.robotis.com/) and have details of ROBOTIS products
 * #### Here we opened [FAQ board](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/frequently_asked_questionsfaq/#frequently-asked-questionsfaq). You may get your keys faster!
