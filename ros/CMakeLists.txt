@@ -7,7 +7,7 @@ project(dynamixel_sdk)
 ################################################################################
 # Find catkin packages and libraries for catkin and system dependencies
 ################################################################################
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy)
 
 ################################################################################
 # Setup for python modules and scripts
@@ -26,6 +26,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp)
 ################################################################################
 catkin_package(
   INCLUDE_DIRS include
+  CATKIN_DEPENDS roscpp rospy
   LIBRARIES dynamixel_sdk
 )
 
@@ -77,6 +78,10 @@ install(TARGETS dynamixel_sdk
 
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS
+ 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ################################################################################
