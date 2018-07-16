@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy)
 ################################################################################
 # Setup for python modules and scripts
 ################################################################################
+catkin_python_setup()
 
 ################################################################################
 # Declare ROS messages, services and actions
@@ -81,7 +82,17 @@ install(DIRECTORY include/${PROJECT_NAME}/
 )
 
 catkin_install_python(PROGRAMS
- 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  nodes/read_write
+  src/${PROJECT_NAME}/group_bulk_read.py
+  src/${PROJECT_NAME}/group_bulk_write.py
+  src/${PROJECT_NAME}/group_sync_read.py
+  src/${PROJECT_NAME}/group_sync_write.py
+  src/${PROJECT_NAME}/packet_handler.py
+  src/${PROJECT_NAME}/port_handler.py
+  src/${PROJECT_NAME}/protocol1_packet_handler.py
+  src/${PROJECT_NAME}/protocol2_packet_handler.py
+  src/${PROJECT_NAME}/robotis_def.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ################################################################################
