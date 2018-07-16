@@ -82,7 +82,6 @@ install(DIRECTORY include/${PROJECT_NAME}/
 )
 
 catkin_install_python(PROGRAMS
-  nodes/read_write
   src/${PROJECT_NAME}/group_bulk_read.py
   src/${PROJECT_NAME}/group_bulk_write.py
   src/${PROJECT_NAME}/group_sync_read.py
