@@ -33,6 +33,7 @@ find_package(rclcpp REQUIRED)
 ################################################################################
 # Declare ament specific configuration to be passed to dependent projects
 ################################################################################
+ament_export_dependencies(rclcpp)
 
 ################################################################################
 # Build
@@ -81,8 +82,8 @@ install(
 )
 
 install(
-  DIRECTORY include/
-  DESTINATION include
+  DIRECTORY include/${PROJECT_NAME}
+  DESTINATION include/${PROJECT_NAME}
 )
 
 #catkin_install_python(PROGRAMS
