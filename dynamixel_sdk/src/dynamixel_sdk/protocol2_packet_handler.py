@@ -21,8 +21,8 @@
 
 from .robotis_def import *
 
-TXPACKET_MAX_LEN = 4 * 1024
-RXPACKET_MAX_LEN = 4 * 1024
+TXPACKET_MAX_LEN = 1 * 1024
+RXPACKET_MAX_LEN = 1 * 1024
 
 # for Protocol 2.0 Packet
 PKT_HEADER0 = 0
@@ -468,6 +468,22 @@ class Protocol2PacketHandler(object):
         txpacket[PKT_LENGTH_L] = 3
         txpacket[PKT_LENGTH_H] = 0
         txpacket[PKT_INSTRUCTION] = INST_REBOOT
+
+        _, result, error = self.txRxPacket(port, txpacket)
+        return result, error
+
+    def clearMultiTurn(self, port, dxl_id):
+        txpacket = [0] * 15
+
+        txpacket[PKT_ID] = dxl_id
+        txpacket[PKT_LENGTH_L] = 8
+        txpacket[PKT_LENGTH_H] = 0
+        txpacket[PKT_INSTRUCTION] = INST_CLEAR
+        txpacket[PKT_PARAMETER0 + 0] = 0x01
+        txpacket[PKT_PARAMETER0 + 1] = 0x44
+        txpacket[PKT_PARAMETER0 + 2] = 0x58
+        txpacket[PKT_PARAMETER0 + 3] = 0x4C
+        txpacket[PKT_PARAMETER0 + 4] = 0x22
 
         _, result, error = self.txRxPacket(port, txpacket)
         return result, error
