@@ -111,6 +111,6 @@ endif()
 ################################################################################
 # Macro for ament package
 ################################################################################
-ament_export_include_directories(include)
+ament_export_include_directories(include/${PROJECT_NAME})
 ament_export_libraries(${PROJECT_NAME})
 ament_package()
