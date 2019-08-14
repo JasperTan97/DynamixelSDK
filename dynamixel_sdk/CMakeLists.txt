@@ -16,7 +16,6 @@ endif()
 # Find ament packages and libraries for ament and system dependencies
 ################################################################################
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
 
 ################################################################################
 # Setup for python modules and scripts
@@ -33,7 +32,6 @@ find_package(rclcpp REQUIRED)
 ################################################################################
 # Declare ament specific configuration to be passed to dependent projects
 ################################################################################
-ament_export_dependencies(rclcpp)
 
 ################################################################################
 # Build
@@ -67,9 +65,6 @@ else()
     src/dynamixel_sdk/port_handler_linux.cpp
   )
 endif()
-
-ament_target_dependencies(${PROJECT_NAME} rclcpp)
-target_link_libraries(${PROJECT_NAME} ${rclcpp_LIBRARIES})
 
 ################################################################################
 # Install
