@@ -54,15 +54,15 @@ endif()
 # Install
 ################################################################################
 install(
-  TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
+  DIRECTORY include/
+  DESTINATION include/
 )
 
 install(
-  DIRECTORY include/${PROJECT_NAME}
-  DESTINATION include/${PROJECT_NAME}
+  TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin/${PROJECT_NAME}
 )
 
 ################################################################################
