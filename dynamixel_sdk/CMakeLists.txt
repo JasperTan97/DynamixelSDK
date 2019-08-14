@@ -25,7 +25,7 @@ include_directories(
 )
 
 if(APPLE)
-  add_library(dynamixel_sdk
+  add_library(dynamixel_sdk SHARED
     src/dynamixel_sdk/packet_handler.cpp
     src/dynamixel_sdk/protocol1_packet_handler.cpp
     src/dynamixel_sdk/protocol2_packet_handler.cpp
@@ -37,7 +37,7 @@ if(APPLE)
     src/dynamixel_sdk/port_handler_mac.cpp
   )
 else()
-  add_library(dynamixel_sdk
+  add_library(dynamixel_sdk SHARED
     src/dynamixel_sdk/packet_handler.cpp
     src/dynamixel_sdk/protocol1_packet_handler.cpp
     src/dynamixel_sdk/protocol2_packet_handler.cpp
