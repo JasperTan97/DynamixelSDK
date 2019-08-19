@@ -2,12 +2,26 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.7.10 (2019-08-19)
+-------------------
+* Supportd ROS 2 Dashing Diademata
+* Contributors: Darby, Pyo
+
+3.7.0 (2019-01-03)
+------------------
+* Added clear instruction `#269 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/269>`_
+* Removed busy waiting for rxPacket()
+* Fixed addStuffing() function (reduced stack memory usage)
+* Fixed memory issues `#268 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/268>`_
+* Fixed the broadcast ping bug in dxl_monitor
+* Contributors: Gilbert, Pyo, Zerom
+
 3.6.2 (2018-07-17)
 ------------------
-* added python modules for ROS to ros folder
-* moved cpp library files for ROS to ros folder 
-* created an ROS package separately `#187 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/187>`_
-* modified the e-Manual address to emanual.robotis.com
+* Added python modules for ROS to ros folder
+* Moved cpp library files for ROS to ros folder
+* Created an ROS package separately `#187 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/187>`_
+* Modified the e-Manual address to emanual.robotis.com
 * Contributors: Pyo
 
 3.6.1 (2018-06-14)
