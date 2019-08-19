@@ -12,10 +12,15 @@ DynamixelSDK supports various programming languages.
 - **Python**: Python module and examples
 (* Dynamic library (*.dll, *.so, and *.dylib files) / .dll: dynamic-link library on Windows / .so: shared object on Linux / .dylib: dynamic library on MacOS)
 
-## ROS Packages for Dynamixel SDK
+## ROS 1 Packages for Dynamixel SDK
 |Version|Indigo + Ubuntu Trusty|Kinetic + Ubuntu Xenial|Melodic + Ubuntu Bionic|
 |:---:|:---:|:---:|:---:|
 |[![GitHub version](https://badge.fury.io/gh/ROBOTIS-GIT%2FDynamixelSDK.svg)](https://badge.fury.io/gh/ROBOTIS-GIT%2FDynamixelSDK)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK.svg?branch=indigo-devel)](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK.svg?branch=melodic-devel)](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK)|
+
+## ROS 2 Packages for Dynamixel SDK
+|Version|Dashing + Ubuntu Bionic|
+|:---:|:---:|
+|[![GitHub version](https://badge.fury.io/gh/ROBOTIS-GIT%2FDynamixelSDK.svg)](https://badge.fury.io/gh/ROBOTIS-GIT%2FDynamixelSDK)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK.svg?branch=dashing-devel)](https://travis-ci.org/ROBOTIS-GIT/DynamixelSDK)|
 
 For more information on ROS Packages for Dynamixel SDK, please refer to the ROS wiki pages below.
 - http://wiki.ros.org/dynamixel_sdk
