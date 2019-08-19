@@ -4,7 +4,7 @@ Changelog for package dynamixel_sdk
 
 3.7.10 (2019-08-19)
 -------------------
-* Supportd ROS 2 Dashing Diademata
+* Supported ROS 2 Dashing Diademata
 * Contributors: Darby, Pyo
 
 3.7.0 (2019-01-03)
