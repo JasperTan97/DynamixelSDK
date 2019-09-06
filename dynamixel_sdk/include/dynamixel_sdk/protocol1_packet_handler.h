@@ -456,7 +456,7 @@ class WINDECLSPEC Protocol1PacketHandler : public PacketHandler
   /// @brief The function that transmits INST_REG_WRITE instruction packet with the data for writing on the Dynamixel register
   /// @description The function makes an instruction packet with INST_REG_WRITE and the data for writing on the Dynamixel register,
   /// @description transmits the packet with Protocol1PacketHandler::txPacket().
-  /// @description The data written in the register will act when INST_ACTION instruction packet is transmitted to the Dynamxel.
+  /// @description The data written in the register will act when INST_ACTION instruction packet is transmitted to the Dynamixel.
   /// @param port PortHandler instance
   /// @param id Dynamixel ID
   /// @param address Address of the data for write
@@ -471,7 +471,7 @@ class WINDECLSPEC Protocol1PacketHandler : public PacketHandler
   /// @description The function makes an instruction packet with INST_REG_WRITE and the data for writing on the Dynamixel register,
   /// @description transmits and receives the packet with Protocol1PacketHandler::txRxPacket(),
   /// @description gets the error from the packet.
-  /// @description The data written in the register will act when INST_ACTION instruction packet is transmitted to the Dynamxel.
+  /// @description The data written in the register will act when INST_ACTION instruction packet is transmitted to the Dynamixel.
   /// @param port PortHandler instance
   /// @param id Dynamixel ID
   /// @param address Address of the data for write

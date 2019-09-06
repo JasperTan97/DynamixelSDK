@@ -2,6 +2,17 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.7.20 (2019-09-06)
+-------------------
+* Fixed buffer overflow bug (rxpacket size)
+* Fixed typo in the package.xml and header files
+* Contributors: Chris Lalancette, Zerom, Pyo
+
+3.7.10 (2019-08-19)
+-------------------
+* Supported ROS 2 Dashing Diademata
+* Contributors: Darby, Pyo
+
 3.7.10 (2019-08-19)
 -------------------
 * Supported ROS 2 Dashing Diademata
