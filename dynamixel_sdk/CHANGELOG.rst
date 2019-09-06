@@ -13,11 +13,6 @@ Changelog for package dynamixel_sdk
 * Supported ROS 2 Dashing Diademata
 * Contributors: Darby, Pyo
 
-3.7.10 (2019-08-19)
--------------------
-* Supported ROS 2 Dashing Diademata
-* Contributors: Darby, Pyo
-
 3.7.0 (2019-01-03)
 ------------------
 * Added clear instruction `#269 <https://github.com/ROBOTIS-GIT/DynamixelSDK/issues/269>`_
