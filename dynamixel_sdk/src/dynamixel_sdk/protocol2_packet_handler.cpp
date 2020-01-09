@@ -506,6 +506,8 @@ int Protocol2PacketHandler::broadcastPing(PortHandler *port, std::vector<uint8_t
   uint8_t txpacket[10]        = {0};
   uint8_t rxpacket[STATUS_LENGTH * MAX_ID] = {0};
 
+  double tx_time_per_byte = (1000.0 / (double)port->getBaudRate()) * 10.0;
+
   txpacket[PKT_ID]            = BROADCAST_ID;
   txpacket[PKT_LENGTH_L]      = 3;
   txpacket[PKT_LENGTH_H]      = 0;
@@ -519,7 +521,8 @@ int Protocol2PacketHandler::broadcastPing(PortHandler *port, std::vector<uint8_t
   }
 
   // set rx timeout
-  port->setPacketTimeout((uint16_t)(wait_length * 30));
+  //port->setPacketTimeout((uint16_t)(wait_length * 30));
+  port->setPacketTimeout(((double)wait_length * tx_time_per_byte) + (3.0 * (double)MAX_ID) + 16.0);
 
   while(1)
   {
