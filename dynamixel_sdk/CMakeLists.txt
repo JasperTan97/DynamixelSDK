@@ -24,28 +24,30 @@ include_directories(
   include/${PROJECT_NAME}
 )
 
+set(DYNAMIXEL_SDK_SOURCES
+  src/dynamixel_sdk/packet_handler.cpp
+  src/dynamixel_sdk/protocol1_packet_handler.cpp
+  src/dynamixel_sdk/protocol2_packet_handler.cpp
+  src/dynamixel_sdk/group_sync_read.cpp
+  src/dynamixel_sdk/group_sync_write.cpp
+  src/dynamixel_sdk/group_bulk_read.cpp
+  src/dynamixel_sdk/group_bulk_write.cpp
+  src/dynamixel_sdk/port_handler.cpp
+)
+
 if(APPLE)
   add_library(dynamixel_sdk SHARED
-    src/dynamixel_sdk/packet_handler.cpp
-    src/dynamixel_sdk/protocol1_packet_handler.cpp
-    src/dynamixel_sdk/protocol2_packet_handler.cpp
-    src/dynamixel_sdk/group_sync_read.cpp
-    src/dynamixel_sdk/group_sync_write.cpp
-    src/dynamixel_sdk/group_bulk_read.cpp
-    src/dynamixel_sdk/group_bulk_write.cpp
-    src/dynamixel_sdk/port_handler.cpp
+    ${DYNAMIXEL_SDK_SOURCES}
     src/dynamixel_sdk/port_handler_mac.cpp
+  )
+elseif(WIN32)
+  add_library(dynamixel_sdk SHARED
+    ${DYNAMIXEL_SDK_SOURCES}
+    src/dynamixel_sdk/port_handler_windows.cpp
   )
 else()
   add_library(dynamixel_sdk SHARED
-    src/dynamixel_sdk/packet_handler.cpp
-    src/dynamixel_sdk/protocol1_packet_handler.cpp
-    src/dynamixel_sdk/protocol2_packet_handler.cpp
-    src/dynamixel_sdk/group_sync_read.cpp
-    src/dynamixel_sdk/group_sync_write.cpp
-    src/dynamixel_sdk/group_bulk_read.cpp
-    src/dynamixel_sdk/group_bulk_write.cpp
-    src/dynamixel_sdk/port_handler.cpp
+    ${DYNAMIXEL_SDK_SOURCES}
     src/dynamixel_sdk/port_handler_linux.cpp
   )
 endif()
@@ -62,7 +64,7 @@ install(
   TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin/${PROJECT_NAME}
+  RUNTIME DESTINATION bin
 )
 
 ################################################################################
