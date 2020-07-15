@@ -2,11 +2,12 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.7.3 (2020-07-13)
+3.7.31 (2020-07-13)
 ------------------
 * ROS 2 Eloquent Elusor supported
 * ROS 2 Foxy Fitzroy supported
-* Contributors: Will Son
+* 3x faster getError member function of GroupSync&BulkRead Class #388
+* Contributors: developer0hye, Zerom, Will Son
 
 3.7.20 (2019-09-06)
 -------------------
