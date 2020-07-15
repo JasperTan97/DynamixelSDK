@@ -2,7 +2,7 @@
 Changelog for package dynamixel_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.7.31 (2020-07-13)
+3.7.30 (2020-07-13)
 ------------------
 * ROS 2 Eloquent Elusor supported
 * ROS 2 Foxy Fitzroy supported
