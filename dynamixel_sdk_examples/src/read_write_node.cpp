@@ -115,7 +115,7 @@ ReadWriteNode::ReadWriteNode()
         portHandler,
         (uint8_t) request->id,
         ADDR_PRESENT_POSITION,
-        reinterpret_cast<uint32_t *>&present_position,
+        reinterpret_cast<uint32_t *>(&present_position),
         &dxl_error
       );
 
