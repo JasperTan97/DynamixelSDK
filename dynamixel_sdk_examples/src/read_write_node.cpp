@@ -13,18 +13,18 @@
 // limitations under the License.
 
 /*******************************************************************************
- * This example is written for DYNAMIXEL X(excluding XL-320) and MX(2.0) series with U2D2.
- * For other series, please refer to the product eManual and modify the Control Table addresses and other definitions.
- * To test this example, please follow the commands below.
- *
- * Open terminal #1
- * $ ros2 run dynamixel_sdk_examples read_write_node
- *
- * Open terminal #2 (run one of below commands at a time)
- * $ ros2 topic pub -1 /set_position dynamixel_sdk_custom_interfaces/SetPosition "{id: 1, position: 1000}"
- * $ ros2 service call /get_position dynamixel_sdk_custom_interfaces/srv/GetPosition "id: 1"
- *
- * Author: Will Son
+// This example is written for DYNAMIXEL X(excluding XL-320) and MX(2.0) series with U2D2.
+// For other series, please refer to the product eManual and modify the Control Table addresses and other definitions.
+// To test this example, please follow the commands below.
+//
+// Open terminal #1
+// $ ros2 run dynamixel_sdk_examples read_write_node
+//
+// Open terminal #2 (run one of below commands at a time)
+// $ ros2 topic pub -1 /set_position dynamixel_sdk_custom_interfaces/SetPosition "{id: 1, position: 1000}"
+// $ ros2 service call /get_position dynamixel_sdk_custom_interfaces/srv/GetPosition "id: 1"
+//
+// Author: Will Son
 *******************************************************************************/
 
 #include <cstdio>
