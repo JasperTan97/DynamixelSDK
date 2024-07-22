@@ -21,8 +21,8 @@
 // $ ros2 run dynamixel_sdk_examples read_write_node
 //
 // Open terminal #2 (run one of below commands at a time)
-// $ ros2 topic pub -1 /set_position dynamixel_sdk_custom_interfaces/SetPosition "{id: 1, position: 1000}"
-// $ ros2 service call /get_position dynamixel_sdk_custom_interfaces/srv/GetPosition "id: 1"
+// $ ros2 topic pub -1 /set_velocity dynamixel_sdk_custom_interfaces/SetVelocity "{id: 1, velocity: 1000}"
+// $ ros2 service call /get_velocity dynamixel_sdk_custom_interfaces/srv/GetVelocity "id: 1"
 //
 // Author: Will Son
 *******************************************************************************/
@@ -32,8 +32,8 @@
 #include <string>
 
 #include "dynamixel_sdk/dynamixel_sdk.h"
-#include "dynamixel_sdk_custom_interfaces/msg/set_position.hpp"
-#include "dynamixel_sdk_custom_interfaces/srv/get_position.hpp"
+#include "dynamixel_sdk_custom_interfaces/msg/set_velocity.hpp"
+#include "dynamixel_sdk_custom_interfaces/srv/get_velocity.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rcutils/cmdline_parser.h"
 
@@ -41,9 +41,10 @@
 
 // Control table address for X series (except XL-320)
 #define ADDR_OPERATING_MODE 11
+#define OPERATING_MODE 1 // 1 velocity 3 position
 #define ADDR_TORQUE_ENABLE 64
-#define ADDR_GOAL_POSITION 116
-#define ADDR_PRESENT_POSITION 132
+#define ADDR_GOAL_VELOCITY 104 // 104 velocity 116 position
+#define ADDR_PRESENT_VELOCITY 128
 
 // Protocol version
 #define PROTOCOL_VERSION 2.0  // Default Protocol version of DYNAMIXEL X series.
@@ -56,7 +57,7 @@ dynamixel::PortHandler * portHandler;
 dynamixel::PacketHandler * packetHandler;
 
 uint8_t dxl_error = 0;
-uint32_t goal_position = 0;
+uint32_t goal_velocity = 0;
 int dxl_comm_result = COMM_TX_FAIL;
 
 ReadWriteNode::ReadWriteNode()
@@ -71,26 +72,26 @@ ReadWriteNode::ReadWriteNode()
   const auto QOS_RKL10V =
     rclcpp::QoS(rclcpp::KeepLast(qos_depth)).reliable().durability_volatile();
 
-  set_position_subscriber_ =
-    this->create_subscription<SetPosition>(
-    "set_position",
+  set_velocity_subscriber_ =
+    this->create_subscription<SetVelocity>(
+    "set_velocity",
     QOS_RKL10V,
-    [this](const SetPosition::SharedPtr msg) -> void
+    [this](const SetVelocity::SharedPtr msg) -> void
     {
       uint8_t dxl_error = 0;
 
-      // Position Value of X series is 4 byte data.
-      // For AX & MX(1.0) use 2 byte data(uint16_t) for the Position Value.
-      uint32_t goal_position = (unsigned int)msg->position;  // Convert int32 -> uint32
+      // Velocity Value of X series is 4 byte data.
+      // For AX & MX(1.0) use 2 byte data(uint16_t) for the Velocity Value.
+      uint32_t goal_velocity = (unsigned int)msg->velocity;  // Convert int32 -> uint32
 
-      // Write Goal Position (length : 4 bytes)
+      // Write Goal Velocity (length : 4 bytes)
       // When writing 2 byte data to AX / MX(1.0), use write2ByteTxRx() instead.
       dxl_comm_result =
       packetHandler->write4ByteTxRx(
         portHandler,
         (uint8_t) msg->id,
-        ADDR_GOAL_POSITION,
-        goal_position,
+        ADDR_GOAL_VELOCITY,
+        goal_velocity,
         &dxl_error
       );
 
@@ -99,37 +100,37 @@ ReadWriteNode::ReadWriteNode()
       } else if (dxl_error != 0) {
         RCLCPP_INFO(this->get_logger(), "%s", packetHandler->getRxPacketError(dxl_error));
       } else {
-        RCLCPP_INFO(this->get_logger(), "Set [ID: %d] [Goal Position: %d]", msg->id, msg->position);
+        RCLCPP_INFO(this->get_logger(), "Set [ID: %d] [Goal Velocity: %d]", msg->id, msg->velocity);
       }
     }
     );
 
-  auto get_present_position =
+  auto get_present_velocity =
     [this](
-    const std::shared_ptr<GetPosition::Request> request,
-    std::shared_ptr<GetPosition::Response> response) -> void
+    const std::shared_ptr<GetVelocity::Request> request,
+    std::shared_ptr<GetVelocity::Response> response) -> void
     {
-      // Read Present Position (length : 4 bytes) and Convert uint32 -> int32
+      // Read Present Velocity (length : 4 bytes) and Convert uint32 -> int32
       // When reading 2 byte data from AX / MX(1.0), use read2ByteTxRx() instead.
       dxl_comm_result = packetHandler->read4ByteTxRx(
         portHandler,
         (uint8_t) request->id,
-        ADDR_PRESENT_POSITION,
-        reinterpret_cast<uint32_t *>(&present_position),
+        ADDR_PRESENT_VELOCITY,
+        reinterpret_cast<uint32_t *>(&present_velocity),
         &dxl_error
       );
 
       RCLCPP_INFO(
         this->get_logger(),
-        "Get [ID: %d] [Present Position: %d]",
+        "Get [ID: %d] [Present Velocity: %d]",
         request->id,
-        present_position
+        present_velocity
       );
 
-      response->position = present_position;
+      response->velocity = present_velocity;
     };
 
-  get_position_server_ = create_service<GetPosition>("get_position", get_present_position);
+  get_velocity_server_ = create_service<GetVelocity>("get_velocity", get_present_velocity);
 }
 
 ReadWriteNode::~ReadWriteNode()
@@ -138,19 +139,19 @@ ReadWriteNode::~ReadWriteNode()
 
 void setupDynamixel(uint8_t dxl_id)
 {
-  // Use Position Control Mode
+  // Use Velocity Control Mode
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler,
     dxl_id,
     ADDR_OPERATING_MODE,
-    3,
+    OPERATING_MODE,
     &dxl_error
   );
 
   if (dxl_comm_result != COMM_SUCCESS) {
-    RCLCPP_ERROR(rclcpp::get_logger("read_write_node"), "Failed to set Position Control Mode.");
+    RCLCPP_ERROR(rclcpp::get_logger("read_write_node"), "Failed to set Velocity Control Mode.");
   } else {
-    RCLCPP_INFO(rclcpp::get_logger("read_write_node"), "Succeeded to set Position Control Mode.");
+    RCLCPP_INFO(rclcpp::get_logger("read_write_node"), "Succeeded to set Velocity Control Mode.");
   }
 
   // Enable Torque of DYNAMIXEL
